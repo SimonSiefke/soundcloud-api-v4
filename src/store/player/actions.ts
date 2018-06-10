@@ -48,7 +48,7 @@ export async function play(
     console.log(rootState.tracks.playingIndex)
     if (
       rootState.tracks.playingIndex !== track.index &&
-      rootState.tracks.tracks[rootState.tracks.playingIndex] !== null
+      rootState.tracks.tracks[rootState.tracks.playingIndex].player !== null
     ) {
       commit(
         'pauseTrack',
