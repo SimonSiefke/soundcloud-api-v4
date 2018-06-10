@@ -41,7 +41,23 @@
       "@vue/typescript"
     ],
     "rules": {
-      "semi":["error", "never"]
+      "semi": [
+        "error",
+        "never"
+      ],
+      "no-console": "off",
+      "strict": "off",
+      "import/prefer-default-export": "off",
+      "import/no-unresolved": "off",
+      "no-restricted-globals": "off",
+      "no-param-reassign": "off",
+      "no-plusplus": "off",
+      "camelcase": "off",
+      "no-alert": "off",
+      "default-case": "off",
+      "global-require": "off",
+      "max-len": "off",
+      "no-restricted-syntax": "off"
     }
   },
   "postcss": {

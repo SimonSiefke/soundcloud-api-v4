@@ -2,9 +2,9 @@ import Soundcloud from 'soundcloud'
 import { getCurrentTrack } from '@/utils'
 import { Track, State } from '@/types'
 
-export async function updatePlayer (
+export async function updatePlayer(
   { state, commit }: { state: State; commit: any },
-  track: Track
+  track: Track,
 ) {
   try {
     const newPlayer = await Soundcloud.stream(`/tracks/${track.id}`)
@@ -18,9 +18,9 @@ export async function updatePlayer (
     alert('something went wrong')
   }
 }
-export function pause (
+export function pause(
   { state, commit }: { state: State; commit: any },
-  track: Track = getCurrentTrack(state)
+  track: Track = getCurrentTrack(state),
 ) {
   console.log(track)
   if (track !== undefined) {
@@ -30,19 +30,19 @@ export function pause (
 
 // Actions that depend on other actions
 
-export async function play (
+export async function play(
   {
     state,
     rootState,
     commit,
-    dispatch
+    dispatch,
   }: {
   state: State
   rootState: any
   commit: any
   dispatch: any
   },
-  track: Track = getCurrentTrack(state)
+  track: Track = getCurrentTrack(state),
 ) {
   if (track !== undefined) {
     console.log(rootState.tracks.playingIndex)
@@ -52,7 +52,7 @@ export async function play (
     ) {
       commit(
         'pauseTrack',
-        rootState.tracks.tracks[rootState.tracks.playingIndex]
+        rootState.tracks.tracks[rootState.tracks.playingIndex],
       )
       // TODO: refactor this mess
       // console.log(rootState.tracks.recentlyPlayedTracks)
@@ -93,9 +93,9 @@ export async function play (
 /**
  * toggles between play and pause
  */
-export function togglePlay (
+export function togglePlay(
   { state, dispatch }: { state: State; dispatch: any },
-  track: Track = getCurrentTrack(state)
+  track: Track = getCurrentTrack(state),
 ) {
   console.log(track)
   if (track !== undefined) {
@@ -108,9 +108,9 @@ export function togglePlay (
 }
 
 /** if a song ends, we need to update our state */
-export function addEventListenersForPlayer (
+export function addEventListenersForPlayer(
   { state, commit }: { state: State; commit: any },
-  track: Track
+  track: Track,
 ) {
   track.player!.on('state-change', (newPlayerState: string) => {
     switch (newPlayerState) {
