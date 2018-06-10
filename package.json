@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:e2e": "vue-cli-service test:e2e"
+    "test": "vue-cli-service test:e2e"
   },
   "dependencies": {
     "register-service-worker": "^1.0.0",
+    "soundcloud": "^3.3.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
@@ -26,7 +27,8 @@
     "lint-staged": "^6.0.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "vue-template-compiler": "^2.5.16"
+    "vue-template-compiler": "^2.5.16",
+    "webpack-bundle-analyzer": "^2.13.1"
   },
   "eslintConfig": {
     "root": true,
@@ -38,7 +40,9 @@
       "@vue/airbnb",
       "@vue/typescript"
     ],
-    "rules": {}
+    "rules": {
+      "semi":["error", "never"]
+    }
   },
   "postcss": {
     "plugins": {

@@ -1,0 +1,45 @@
+import { Track } from '@/types'
+import Soundcloud from 'soundcloud'
+
+/**
+ * retrieve necessary information about the tracks,
+ * e.g. streamingUrl, track covers, track artists
+ */
+export async function Api_GetTracks (
+  options: object = {}
+): Promise<{ [key: string]: any }> {
+  const defaultRequestOptions = {
+    limit: 60, // max number of tracks per request
+    linked_partitioning: 1, // send 1 link with the next bulk of tracks
+    q: 'odesza' // query parameter
+  }
+  const mergedOptions = { ...defaultRequestOptions, ...options }
+  const rawData = await Soundcloud.get('/tracks', mergedOptions)
+
+  if (rawData) {
+    const newTracks = rawData.collection.map(
+      (track: any, index: number): Track => ({
+        id: track.id,
+        cover: track.artwork_url
+          ? track.artwork_url.replace('large', 'crop')
+          : '',
+        name: track.title,
+        duration: track.duration,
+        love: track.likes_count,
+        link: track.permalink_url,
+        genre: track.genre,
+        userAvatar: track.user.avatar_url,
+        userLink: track.user.permalink_url,
+        userName: track.user.username,
+        playing: false,
+        player: null,
+        index,
+        loading: false
+      })
+    )
+    const nextTracksLink = rawData.next_href
+    return { newTracks, nextTracksLink }
+  } else {
+    throw new Error('could not request tracks')
+  }
+}

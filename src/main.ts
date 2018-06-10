@@ -1,10 +1,14 @@
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
-import store from './store';
+import store from './store/index';
+import '@/assets/style/global.css';
+import '@/assets/fonts/clear-sans.css';
 import './registerServiceWorker';
 
 Vue.config.productionTip = false;
+Vue.config.devtools = true;
+Vue.config.performance = true;
 
 new Vue({
   router,
