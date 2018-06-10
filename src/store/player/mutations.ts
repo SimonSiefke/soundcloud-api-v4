@@ -1,7 +1,6 @@
 import { State, Track, Player } from '@/types'
 
 export function playTrack(state: State, track: Track) {
-  console.log(track)
   track.player!.play() // track.player will not be null
   track.playing = true
 }

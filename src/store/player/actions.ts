@@ -8,7 +8,6 @@ export async function updatePlayer(
 ) {
   try {
     const newPlayer = await Soundcloud.stream(`/tracks/${track.id}`)
-    console.log('updated player')
     commit('setPlayer', { track, newPlayer })
   } catch (error) {
     if (error.status === 404) {
@@ -22,13 +21,10 @@ export function pause(
   { state, commit }: { state: State; commit: any },
   track: Track = getCurrentTrack(state),
 ) {
-  console.log(track)
   if (track !== undefined) {
     commit('pauseTrack', track)
   }
 }
-
-// Actions that depend on other actions
 
 export async function play(
   {
@@ -45,7 +41,6 @@ export async function play(
   track: Track = getCurrentTrack(state),
 ) {
   if (track !== undefined) {
-    console.log(rootState.tracks.playingIndex)
     if (
       rootState.tracks.playingIndex !== track.index &&
       rootState.tracks.tracks[rootState.tracks.playingIndex].player !== null
@@ -54,27 +49,6 @@ export async function play(
         'pauseTrack',
         rootState.tracks.tracks[rootState.tracks.playingIndex],
       )
-      // TODO: refactor this mess
-      // console.log(rootState.tracks.recentlyPlayedTracks)
-
-      // console.log(rootState.tracks.tracks[rootState.tracks.playingIndex].id)
-
-      // if (
-      //   rootState.tracks.recentlyPlayedTracks[
-      //     rootState.tracks.recentlyPlayedTracks.length - 1
-      //   ] !== null
-      // ) {
-      //   const resetTrack = rootState.tracks.tracks.find(
-      //     (track: Track) =>
-      //       track.id ===
-      //       rootState.tracks.recentlyPlayedTracks[
-      //         rootState.tracks.recentlyPlayedTracks.length - 1
-      //       ]
-      //   )
-      //   console.log('reset due to inactivity', resetTrack.name)
-      //   commit('resetTimer', resetTrack)
-      // }
-
       commit('tracks/setPlayingIndex', track.index, { root: true })
       commit('tracks/loadingTrack', track.index, { root: true })
     }
@@ -84,9 +58,7 @@ export async function play(
       dispatch('addEventListenersForPlayer', track)
     }
     commit('tracks/doneLoadingTrack', track.index, { root: true })
-    // play
     commit('playTrack', track)
-    // commit('tracks/addRecentlyPlayedTrack', track, { root: true })
   }
 }
 
@@ -97,7 +69,6 @@ export function togglePlay(
   { state, dispatch }: { state: State; dispatch: any },
   track: Track = getCurrentTrack(state),
 ) {
-  console.log(track)
   if (track !== undefined) {
     if (track.playing) {
       dispatch('pause', track)

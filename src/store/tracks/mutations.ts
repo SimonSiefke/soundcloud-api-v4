@@ -36,33 +36,3 @@ export function setNextTracksLink(state: State, nextTrackLink: string) {
 export function setTracks(state: State, tracks: Track[]) {
   state.tracks = tracks
 }
-
-// export function addRecentlyPlayedTrack (state: State, track: Track) {
-//   // TODO: refactor
-//   // @ts-ignore
-//   if (state.recentlyPlayedTracks.includes(track.id)) {
-//     console.log('includes', track.name, track.id)
-
-//     const index = state.recentlyPlayedTracks.indexOf(track.id)
-
-//     console.log('index', index)
-
-//     state.recentlyPlayedTracks = [
-//       track.id,
-//       ...state.recentlyPlayedTracks.slice(0, index),
-//       ...state.recentlyPlayedTracks.slice(index + 1)
-//     ]
-//   } else {
-//     state.recentlyPlayedTracks = [
-//       track.id,
-//       ...state.recentlyPlayedTracks.slice(
-//         0,
-//         state.recentlyPlayedTracks.length - 1
-//       )
-//     ]
-//   }
-// }
-// export function resetRecentlyPlayedTracks (state: State) {
-//   console.log('reset')
-//   Vue.set(state, 'recentlyPlayedTracks', [])
-// }
