@@ -2,6 +2,37 @@ import Soundcloud from 'soundcloud'
 import { getCurrentTrack } from '@/utils'
 import { Track, State } from '@/types'
 
+const hooks = {
+  beforePause() {
+    console.log('pause')
+    // if ('mediaSession' in navigator) {
+    //   // @ts-ignore
+    //   navigator.mediaSession.playbackState = 'paused'
+    // }
+  },
+  afterPause() {
+    if ('mediaSession' in navigator) {
+      // @ts-ignore
+      navigator.mediaSession.playbackState = 'paused'
+    }
+  },
+  beforePlay({ dispatch }: { dispatch: Function }, track: Track) {
+    console.log('play')
+    // if ('mediaSession' in navigator) {
+    //   dispatch('updateMediaSession', track)
+    //   // @ts-ignore
+    //   navigator.mediaSession.playbackState = 'playing'
+    // }
+  },
+  afterPlay({ dispatch }: { dispatch: Function }, track: Track) {
+    if ('mediaSession' in navigator) {
+      dispatch('updateMediaSession', track)
+      // @ts-ignore
+      navigator.mediaSession.playbackState = 'playing'
+    }
+  },
+}
+
 export async function updatePlayer(
   { state, commit }: { state: State; commit: any },
   track: Track,
@@ -21,9 +52,11 @@ export function pause(
   { state, commit }: { state: State; commit: any },
   track: Track = getCurrentTrack(state),
 ) {
+  hooks.beforePause()
   if (track !== undefined) {
     commit('pauseTrack', track)
   }
+  hooks.afterPause()
 }
 
 export async function play(
@@ -40,6 +73,7 @@ export async function play(
   },
   track: Track = getCurrentTrack(state),
 ) {
+  hooks.beforePlay({ dispatch }, track)
   if (track !== undefined) {
     if (
       rootState.tracks.playingIndex !== track.index &&
@@ -59,6 +93,7 @@ export async function play(
     }
     commit('tracks/doneLoadingTrack', track.index, { root: true })
     commit('playTrack', track)
+    hooks.afterPlay({ dispatch }, track)
   }
 }
 
@@ -91,5 +126,61 @@ export function addEventListenersForPlayer(
           commit('playTrack', track)
         }
     }
+  })
+}
+
+export function updateMediaSession(
+  { state, commit, dispatch }: { state: State; commit: any; dispatch: any },
+  track: Track,
+) {
+  console.log('set up media session')
+
+  // @ts-ignore
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title: track.name,
+    artist: track.userName,
+    artwork: [
+      {
+        src: 'https://dummyimage.com/96x96',
+        sizes: '96x96',
+        type: 'image/png',
+      },
+      {
+        src: 'https://dummyimage.com/128x128',
+        sizes: '128x128',
+        type: 'image/png',
+      },
+      {
+        src: 'https://dummyimage.com/192x192',
+        sizes: '192x192',
+        type: 'image/png',
+      },
+      {
+        src: 'https://dummyimage.com/256x256',
+        sizes: '256x256',
+        type: 'image/png',
+      },
+      {
+        src: 'https://dummyimage.com/384x384',
+        sizes: '384x384',
+        type: 'image/png',
+      },
+      {
+        src: 'https://dummyimage.com/512x512',
+        sizes: '512x512',
+        type: 'image/png',
+      },
+    ],
+  })
+
+  // @ts-ignore
+  navigator.mediaSession.setActionHandler('play', () => {
+    console.log('media session play')
+    dispatch('play', track)
+  })
+  // @ts-ignore
+  navigator.mediaSession.setActionHandler('pause', () => {
+    console.log('media session pause')
+    dispatch('pause', track)
   })
 }
