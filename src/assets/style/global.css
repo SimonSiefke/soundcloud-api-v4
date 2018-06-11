@@ -67,5 +67,8 @@ p {
 body {
   background: var(--bg);
   font-family: 'Clear Sans', serif;
+}
+
+* {
   overscroll-behavior-y: none;
 }
