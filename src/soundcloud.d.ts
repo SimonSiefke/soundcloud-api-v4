@@ -4,3 +4,7 @@ declare module 'soundcloud' {
   export function get(x: any, y: any): any
   export function stream(url: any): any
 }
+
+declare module 'soundcloud-audio' {
+
+}

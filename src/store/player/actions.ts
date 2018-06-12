@@ -1,6 +1,10 @@
+import SoundCloudAudio from 'soundcloud-audio'
 import Soundcloud from 'soundcloud'
 import { getCurrentTrack } from '@/utils'
 import { Track, State } from '@/types'
+
+// @ts-ignore
+const scPlayer = new SoundCloudAudio(process.env.VUE_APP_SOUNDCLOUD_CLIENT_ID)
 
 const hooks = {
   beforePause() {
