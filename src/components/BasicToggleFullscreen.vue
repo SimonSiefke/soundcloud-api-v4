@@ -17,5 +17,5 @@ div
   bottom 22.5px
   height 55px
   border-radius 50%
-  background green
+  background dodgerblue
 </style>
