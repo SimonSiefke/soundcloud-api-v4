@@ -26,5 +26,5 @@ export interface Player {
   pause: () => void
   isPlaying: () => void
   on: (event: string, callback: any) => void
-  seek: (time: number) => void
+  setTime: (time: number) => void
 }

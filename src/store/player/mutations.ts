@@ -11,7 +11,7 @@ export function pauseTrack(state: State, track: Track) {
 }
 
 export function resetTimer(state: State, track: Track) {
-  track.player!.seek(0)
+  track.player!.setTime(0)
 }
 
 export function setPlayer(
