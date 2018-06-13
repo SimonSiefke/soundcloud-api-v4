@@ -54,4 +54,9 @@ export function updateMediaSession(
     console.log('media session pause')
     dispatch('pause', track)
   })
+  // @ts-ignore
+  navigator.mediaSession.setActionHandler('previoustrack', () => {})
+
+  // @ts-ignore
+  navigator.mediaSession.setActionHandler('previoustrack', () => {})
 }
