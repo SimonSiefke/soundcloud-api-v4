@@ -1,38 +1,29 @@
-import SoundCloudAudio from 'soundcloud-audio'
-import Soundcloud from 'soundcloud'
 import { getCurrentTrack } from '@/utils'
 import { Track, State } from '@/types'
+import SoundCloudAudio from 'soundcloud-audio'
 
-// @ts-ignore
-const scPlayer = new SoundCloudAudio(process.env.VUE_APP_SOUNDCLOUD_CLIENT_ID)
+export { updateMediaSession } from './plugins/mediaSession'
+
+const SOUNDCLOUD_CLIENT_ID = process.env.VUE_APP_SOUNDCLOUD_CLIENT_ID
 
 const hooks = {
   beforePause() {
-    console.log('pause')
+    console.log('before pause')
     // if ('mediaSession' in navigator) {
     //   // @ts-ignore
     //   navigator.mediaSession.playbackState = 'paused'
     // }
   },
   afterPause() {
-    if ('mediaSession' in navigator) {
-      // @ts-ignore
-      navigator.mediaSession.playbackState = 'paused'
-    }
+    console.log('after pause')
   },
-  beforePlay({ dispatch }: { dispatch: Function }, track: Track) {
-    console.log('play')
-    // if ('mediaSession' in navigator) {
-    //   dispatch('updateMediaSession', track)
-    //   // @ts-ignore
-    //   navigator.mediaSession.playbackState = 'playing'
-    // }
-  },
+  beforePlay({ dispatch }: { dispatch: Function }, track: Track) {},
   afterPlay({ dispatch }: { dispatch: Function }, track: Track) {
+    console.log('after play')
     if ('mediaSession' in navigator) {
+      console.log('upadte media session')
       dispatch('updateMediaSession', track)
       // @ts-ignore
-      navigator.mediaSession.playbackState = 'playing'
     }
   },
 }
@@ -42,7 +33,18 @@ export async function updatePlayer(
   track: Track,
 ) {
   try {
-    const newPlayer = await Soundcloud.stream(`/tracks/${track.id}`)
+    // @ts-ignore
+    const newPlayer = new SoundCloudAudio(process.env.VUE_APP_SOUNDCLOUD_CLIENT_ID)
+    await new Promise((resolve, reject) => {
+      newPlayer.resolve(
+        `https://api.soundcloud.com/tracks/${track.id}`,
+        resolve,
+      )
+    })
+    console.log('new plyer is')
+
+    console.log(newPlayer)
+    // const newPlayer = await Soundcloud.stream(`/tracks/${track.id}`)
     commit('setPlayer', { track, newPlayer })
   } catch (error) {
     if (error.status === 404) {
@@ -130,61 +132,5 @@ export function addEventListenersForPlayer(
           commit('playTrack', track)
         }
     }
-  })
-}
-
-export function updateMediaSession(
-  { state, commit, dispatch }: { state: State; commit: any; dispatch: any },
-  track: Track,
-) {
-  console.log('set up media session')
-
-  // @ts-ignore
-  navigator.mediaSession.metadata = new MediaMetadata({
-    title: track.name,
-    artist: track.userName,
-    artwork: [
-      {
-        src: 'https://dummyimage.com/96x96',
-        sizes: '96x96',
-        type: 'image/png',
-      },
-      {
-        src: 'https://dummyimage.com/128x128',
-        sizes: '128x128',
-        type: 'image/png',
-      },
-      {
-        src: 'https://dummyimage.com/192x192',
-        sizes: '192x192',
-        type: 'image/png',
-      },
-      {
-        src: 'https://dummyimage.com/256x256',
-        sizes: '256x256',
-        type: 'image/png',
-      },
-      {
-        src: 'https://dummyimage.com/384x384',
-        sizes: '384x384',
-        type: 'image/png',
-      },
-      {
-        src: 'https://dummyimage.com/512x512',
-        sizes: '512x512',
-        type: 'image/png',
-      },
-    ],
-  })
-
-  // @ts-ignore
-  navigator.mediaSession.setActionHandler('play', () => {
-    console.log('media session play')
-    dispatch('play', track)
-  })
-  // @ts-ignore
-  navigator.mediaSession.setActionHandler('pause', () => {
-    console.log('media session pause')
-    dispatch('pause', track)
   })
 }

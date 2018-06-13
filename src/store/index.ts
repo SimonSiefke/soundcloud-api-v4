@@ -1,13 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Soundcloud from 'soundcloud'
+// import Soundcloud from 'soundcloud'
 import moduleTracks from './tracks'
 
-const modulePlayerDynamic = () => import(/* webpackChunkName: 'player' */ './player')
+const modulePlayerDynamic = () =>
+  import(/* webpackChunkName: 'player' */ './player')
 
-Soundcloud.initialize({
-  client_id: process.env.VUE_APP_SOUNDCLOUD_CLIENT_ID,
-})
+// Soundcloud.initialize({
+//   client_id: process.env.VUE_APP_SOUNDCLOUD_CLIENT_ID,
+// })
 
 Vue.use(Vuex)
 
@@ -31,6 +32,7 @@ lazyLoadModules({ player: modulePlayerDynamic })
 // <hotReloading>
 // @ts-ignore
 if (process.env === 'development' && module.hot !== undefined) {
+  console.log('hot update')
   // @ts-ignore
   module.hot.accept(['./player', './tracks'], async () => {
     store.hotUpdate({
