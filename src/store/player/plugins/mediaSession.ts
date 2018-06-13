@@ -58,5 +58,5 @@ export function updateMediaSession(
   navigator.mediaSession.setActionHandler('previoustrack', () => {})
 
   // @ts-ignore
-  navigator.mediaSession.setActionHandler('previoustrack', () => {})
+  navigator.mediaSession.setActionHandler('nexttrack', () => {})
 }
