@@ -124,13 +124,10 @@ export function addEventListenersForPlayer(
   { state, commit }: { state: State; commit: any },
   track: Track,
 ) {
-  track.player!.on('state-change', (newPlayerState: string) => {
-    switch (newPlayerState) {
-      case 'ended':
-        if (state.loop) {
-          commit('resetTimer', track)
-          commit('playTrack', track)
-        }
+  track.player!.on('ended', () => {
+    if (state.loop) {
+      commit('resetTimer', track)
+      commit('playTrack', track)
     }
   })
 }
