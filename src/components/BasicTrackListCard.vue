@@ -4,12 +4,7 @@
       <img v-if="track" :src="track.cover" alt="">
     </div>
     <div class="info-container">
-      <div class="info--top">
-        <span class="user-name">{{ track ? track.userName : '' }}</span>
-        <span class="prop">
-          <img src="@/assets/icons/heart.svg">
-        </span>
-      </div>
+      <span class="user-name">{{ track ? track.userName : '' }}</span>
       <p class="track-name">{{ track ? track.name : '' }}</p>
     </div>
     <div class="loading" v-if="track && track.loading"> loading </div>
@@ -111,28 +106,6 @@ section.active
     background-repeat no-repeat
     animation shine 1s linear infinite
     background-position -200px 0 /* highlight */, 0 0 /* placeholder content */
-
-.info--top
-  display flex
-  align-items center
-
-  // height 10px
-  .prop
-    $scale = 0.8
-    /* lineheight must be larger so that letter don't get cut up, but that introduces extra space, with we take care of with a negative margin-top */
-    $font-size = 0.7rem
-    $half-line-height-extra-space = -1 * $font-size * 0.25
-    $margin-top = 0.3rem // bring username more to center
-    $margin-bottom = 0.11rem // less vertical space between texts
-    display flex
-    width 0.7rem * $scale
-    height 0.7rem * $scale
-    margin-top $margin-top + $half-line-height-extra-space * 2
-    margin-bottom $margin-bottom + $half-line-height-extra-space
-    margin-left 0.5rem
-
-    >*
-      width 100%
 
 .track-name
   /* lineheight must be larger so that letter don't get cut up, but that introduces extra padding, with we take care of with a negative margin-top */
