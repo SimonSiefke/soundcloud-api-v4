@@ -44,6 +44,7 @@
 
 body {
   margin: 0 0 calc(var(--navigation-height) + 22.5px) 0;
+  overflow-y: scroll; /* avoid content jump */
 }
 /* Resets */
 ul {
