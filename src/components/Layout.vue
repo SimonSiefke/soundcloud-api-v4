@@ -2,7 +2,7 @@
   <div>
     <BasicSearchBar />
     <BasicTrackList :tracks="tracks" :playingIndex="playingIndex" />
-    <BasicNavigation/>
+    <BasicNavigation :track="tracks[playingIndex]" />
     <BasicToggleFullscreen />
   </div>
 </template>
@@ -24,6 +24,16 @@ export default Vue.extend({
     BasicNavigation,
     BasicToggleFullscreen,
   },
+  provide() {
+    const progress = {}
+
+    Object.defineProperty(progress, 'value', {
+      enumerable: true,
+      get: () => this.progress,
+    })
+
+    return { progress }
+  },
   created() {
     this.getTracks()
   },
@@ -33,6 +43,7 @@ export default Vue.extend({
   },
   computed: {
     ...mapState('tracks', ['tracks', 'playingIndex']),
+    ...mapState('player', ['progress']),
 
   },
 })

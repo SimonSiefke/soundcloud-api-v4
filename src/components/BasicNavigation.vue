@@ -1,15 +1,17 @@
 <template>
   <nav>
-    <p>1</p>
-    <p>2</p>
-    <p>3</p>
-    <p>4</p>
+    <basic-progress-bar />
   </nav>
 </template>
 
 <script>
+import BasicProgressBar from '@/components/BasicProgressBar.vue'
+
 export default {
   name: 'BasicNavigation',
+  components: {
+    BasicProgressBar,
+  },
   created() {
     console.log('navigation loaded')
   },
@@ -18,6 +20,7 @@ export default {
 
 <style lang="stylus" scoped>
 nav
+  box-sizing border-box
   position fixed
   z-index 3
   display flex

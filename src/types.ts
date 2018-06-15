@@ -27,4 +27,5 @@ export interface Player {
   isPlaying: () => void
   on: (event: string, callback: any) => void
   setTime: (time: number) => void
+  audio: any
 }

@@ -1,5 +1,5 @@
 import { getCurrentTrack } from '@/utils'
-import { Track, State } from '@/types'
+import { Track, State, Player } from '@/types'
 import SoundCloudAudio from 'soundcloud-audio'
 
 export { updateMediaSession } from './plugins/mediaSession'
@@ -29,7 +29,7 @@ const hooks = {
 }
 
 export async function updatePlayer(
-  { state, commit }: { state: State; commit: any },
+  { state, dispatch }: { state: State; dispatch: any },
   track: Track,
 ) {
   try {
@@ -45,7 +45,7 @@ export async function updatePlayer(
 
     console.log(newPlayer)
     // const newPlayer = await Soundcloud.stream(`/tracks/${track.id}`)
-    commit('setPlayer', { track, newPlayer })
+    dispatch('setPlayer', { track, newPlayer })
   } catch (error) {
     if (error.status === 404) {
       // @ts-ignore
@@ -129,5 +129,18 @@ export function addEventListenersForPlayer(
       commit('resetTimer', track)
       commit('playTrack', track)
     }
+  })
+}
+
+export function setPlayer(
+  { state, commit }: { state: State; commit: Function },
+  { track, newPlayer }: { track: Track; newPlayer: Player },
+) {
+  track.player = newPlayer
+  track.player.on('timeupdate', (x: any) => {
+    const progressPercent =
+      (track!.player!.audio.currentTime / (track.duration / 1000)) * 100
+    // @ts-ignore
+    commit('updateProgress', progressPercent)
   })
 }

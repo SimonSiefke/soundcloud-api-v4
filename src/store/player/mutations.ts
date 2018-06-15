@@ -1,4 +1,5 @@
-import { State, Track, Player } from '@/types'
+import { Track, Player } from '@/types'
+import { State } from './types'
 
 export function playTrack(state: State, track: Track) {
   track.player!.play() // track.player will not be null
@@ -14,9 +15,6 @@ export function resetTimer(state: State, track: Track) {
   track.player!.setTime(0)
 }
 
-export function setPlayer(
-  state: State,
-  { track, newPlayer }: { track: Track; newPlayer: Player },
-) {
-  track.player = newPlayer
+export function updateProgress(state: State, newProgress: number) {
+  state.progress = newProgress
 }
