@@ -42,13 +42,26 @@
   /* --user-name-color: #f6f4d2; */
 }
 
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  padding-bottom: calc(
-    var(--navigation-height) + 22.5px
-  ); /* height of nav-bar plus some space */
+  padding-bottom: var(--navigation-height);
   overflow-y: scroll; /* avoid content jump */
+  /* background: var(--bg); */
+  background: black;
+  font-family: 'Clear Sans', serif;
+  overscroll-behavior-y: none;
+  height: 100%;
 }
+
+body > div {
+  background: var(--bg);
+  height: 100%;
+}
+
 /* Resets */
 ul {
   margin: 0;
@@ -64,12 +77,4 @@ img {
 
 p {
   margin: 0;
-}
-
-/* Global Styles */
-
-body {
-  background: var(--bg);
-  font-family: 'Clear Sans', serif;
-  overscroll-behavior-y: none;
 }
