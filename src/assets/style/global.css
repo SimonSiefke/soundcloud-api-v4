@@ -44,7 +44,6 @@
 
 body {
   margin: 0;
-  padding-bottom: var(--navigation-height);
   overflow-y: scroll; /* avoid content jump */
   background: black;
   font-family: 'Clear Sans', serif;
@@ -53,7 +52,9 @@ body {
 
 body > div {
   background: var(--bg);
-  min-height: calc(100vh - var(--navigation-height));
+  padding-bottom: var(--navigation-height);
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 /* Resets */
