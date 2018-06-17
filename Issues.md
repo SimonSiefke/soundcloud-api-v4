@@ -5,3 +5,4 @@
 1.  like songs
 1.  lazyload tracks
 1.  progress transition
+1.  lru cache for player
