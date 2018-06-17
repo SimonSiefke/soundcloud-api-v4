@@ -1,5 +1,4 @@
-import { getCurrentTrack } from '@/utils'
-import { Track, State, Player } from '@/types'
+import { Track, Player } from '@/types'
 import SoundCloudAudio from 'soundcloud-audio'
 
 export { updateMediaSession } from './plugins/mediaSession'
@@ -29,7 +28,7 @@ const hooks = {
 }
 
 export async function updatePlayer(
-  { state, dispatch }: { state: State; dispatch: any },
+  { state, dispatch }: { state: any; dispatch: any },
   track: Track,
 ) {
   try {
@@ -55,11 +54,11 @@ export async function updatePlayer(
   }
 }
 export function pause(
-  { state, commit }: { state: State; commit: any },
-  track: Track = getCurrentTrack(state),
+  { rootState, state, commit }: { state: any; rootState: any; commit: any },
+  track: Track = rootState.getters['tracks/getCurrentTrack'],
 ) {
   hooks.beforePause()
-  if (track !== undefined) {
+  if (track !== null) {
     commit('pauseTrack', track)
   }
   hooks.afterPause()
@@ -72,12 +71,12 @@ export async function play(
     commit,
     dispatch,
   }: {
-  state: State
+  state: any
   rootState: any
   commit: any
   dispatch: any
   },
-  track: Track = getCurrentTrack(state),
+  track: Track = rootState.getters['tracks/getCurrentTrack'],
 ) {
   hooks.beforePlay({ dispatch }, track)
   if (track !== undefined) {
@@ -107,8 +106,8 @@ export async function play(
  * toggles between play and pause
  */
 export function togglePlay(
-  { state, dispatch }: { state: State; dispatch: any },
-  track: Track = getCurrentTrack(state),
+  { rootState, state, dispatch }: { state: any; rootState: any; dispatch: any },
+  track: Track = rootState.getters['tracks/getCurrentTrack'],
 ) {
   if (track !== undefined) {
     if (track.playing) {
@@ -121,7 +120,7 @@ export function togglePlay(
 
 /** if a song ends, we need to update our state */
 export function addEventListenersForPlayer(
-  { state, commit }: { state: State; commit: any },
+  { state, commit }: { state: any; commit: any },
   track: Track,
 ) {
   track.player!.on('ended', () => {
@@ -133,7 +132,7 @@ export function addEventListenersForPlayer(
 }
 
 export function setPlayer(
-  { state, commit }: { state: State; commit: Function },
+  { state, commit }: { state: any; commit: Function },
   { track, newPlayer }: { track: Track; newPlayer: Player },
 ) {
   track.player = newPlayer

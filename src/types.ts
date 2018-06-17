@@ -1,9 +1,9 @@
-export interface State {
-  tracks: Track[]
-  playingIndex: number
-  loop: boolean
-  nextTracksLink: string
-}
+// export interface State {
+//   tracks: Track[]
+//   playingIndex: number
+//   loop: boolean
+//   nextTracksLink: string
+// }
 export interface Track {
   id: number
   cover: string

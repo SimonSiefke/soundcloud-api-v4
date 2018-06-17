@@ -3,7 +3,7 @@
     <BasicSearchBar />
     <BasicTrackList :tracks="tracks" :playingIndex="playingIndex" />
     <BasicNavigation :track="tracks[playingIndex]" />
-    <BasicToggleFullscreen />
+    <BasicToggleFullscreen :track="tracks[playingIndex]" />
   </div>
 </template>
 
