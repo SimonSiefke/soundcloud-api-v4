@@ -42,8 +42,6 @@ export const actions: ActionTree<PlayerState, RootState> = {
       },
       { root: true },
     )
-
-    // Vue.set(currentTrack, 'playing', false)
     commit('pause')
   },
   playCurrent({ rootGetters, commit }) {
@@ -56,8 +54,6 @@ export const actions: ActionTree<PlayerState, RootState> = {
       },
       { root: true },
     )
-
-    // Vue.set(currentTrack, 'playing', true)
     commit('play')
   },
   stopCurrent({ rootGetters, commit }) {
@@ -70,13 +66,10 @@ export const actions: ActionTree<PlayerState, RootState> = {
       },
       { root: true },
     )
-    // Vue.set(currentTrack, 'playing', false)
     commit('stop')
   },
   async play(
-    {
-      state, rootGetters, rootState, commit, dispatch,
-    },
+    { rootGetters, commit, dispatch },
     track: Track = rootGetters['tracks/currentTrack'],
   ) {
     const currentTrack = rootGetters['tracks/currentTrack']
