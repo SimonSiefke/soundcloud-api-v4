@@ -5,6 +5,7 @@ import { Track, Player } from '@/types'
 import { RootState } from '@/store/types'
 import { PlayerState } from '@/store/playerModule/types'
 import { hooks } from '@/store/playerModule/plugins'
+import { player } from '@/store/playerModule/state'
 
 const SOUNDCLOUD_CLIENT_ID = process.env.VUE_APP_SOUNDCLOUD_CLIENT_ID
 
@@ -22,7 +23,7 @@ export const actions: ActionTree<PlayerState, RootState> = {
         )
       })
 
-      state.player = newPlayer
+      player.player = newPlayer
     } catch (error) {
       if (error.status === 404) {
         // @ts-ignore
@@ -33,17 +34,43 @@ export const actions: ActionTree<PlayerState, RootState> = {
   },
   pauseCurrent({ rootGetters, commit }) {
     const currentTrack = rootGetters['tracks/currentTrack']
-    Vue.set(currentTrack, 'playing', false)
+    commit(
+      'tracks/setTrackPlayingState',
+      {
+        track: currentTrack,
+        newPlayingState: false,
+      },
+      { root: true },
+    )
+
+    // Vue.set(currentTrack, 'playing', false)
     commit('pause')
   },
   playCurrent({ rootGetters, commit }) {
     const currentTrack = rootGetters['tracks/currentTrack']
-    Vue.set(currentTrack, 'playing', true)
+    commit(
+      'tracks/setTrackPlayingState',
+      {
+        track: currentTrack,
+        newPlayingState: true,
+      },
+      { root: true },
+    )
+
+    // Vue.set(currentTrack, 'playing', true)
     commit('play')
   },
   stopCurrent({ rootGetters, commit }) {
     const currentTrack = rootGetters['tracks/currentTrack']
-    Vue.set(currentTrack, 'playing', false)
+    commit(
+      'tracks/setTrackPlayingState',
+      {
+        track: currentTrack,
+        newPlayingState: false,
+      },
+      { root: true },
+    )
+    // Vue.set(currentTrack, 'playing', false)
     commit('stop')
   },
   async play(
@@ -56,7 +83,7 @@ export const actions: ActionTree<PlayerState, RootState> = {
     if (track !== null) {
       const isNewTrack = currentTrack === null || currentTrack.id !== track.id
       if (isNewTrack) {
-        if (state.player !== null) {
+        if (player.player !== null) {
           dispatch('stopCurrent')
         }
         commit('updateProgress', 0)
@@ -72,7 +99,7 @@ export const actions: ActionTree<PlayerState, RootState> = {
       throw new Error('track is null, cannot play')
     }
   },
-  togglePlay({ state, dispatch, rootGetters }, track: Track) {
+  togglePlay({ dispatch, rootGetters }, track: Track) {
     const currentTrack = rootGetters['tracks/currentTrack']
     if (currentTrack === null || track.id !== currentTrack.id) {
       dispatch('play', track)
@@ -84,21 +111,22 @@ export const actions: ActionTree<PlayerState, RootState> = {
   },
   addEventListenersForPlayer({ state, rootGetters, commit }) {
     const currentTrack = rootGetters['tracks/currentTrack']
-    if (state.player !== null) {
-      state.player.on('timeupdate', () => {
-        if (state.player !== null) {
+    if (player.player !== null) {
+      player.player.on('timeupdate', () => {
+        if (player.player !== null) {
           const progressPercent =
-            (state!.player!.audio.currentTime /
+            (player!.player!.audio.currentTime /
               (currentTrack.duration / 1000)) *
             100
           // @ts-ignore
           commit('updateProgress', progressPercent)
         }
       })
-      state.player.on('ended', () => {
+      player.player.on('ended', () => {
+        console.log('ended')
         if (state.loop) {
           commit('resetTimer')
-          commit('playTrack')
+          commit('playCurrent')
         }
       })
     } else {

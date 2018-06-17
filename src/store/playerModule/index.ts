@@ -3,12 +3,7 @@ import { RootState } from '@/store/types'
 import { PlayerState } from '@/store/playerModule/types'
 import { actions } from '@/store/playerModule/actions'
 import { mutations } from '@/store/playerModule/mutations'
-
-const state: PlayerState = {
-  loop: true,
-  progress: 0,
-  player: null,
-}
+import { state } from '@/store/playerModule/state'
 
 const playerModule: Module<PlayerState, RootState> = {
   state,

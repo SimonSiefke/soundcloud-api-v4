@@ -4,11 +4,10 @@ import { Track } from '@/types'
 import { TrackState } from '@/store/trackModule/types'
 
 export const mutations: MutationTree<TrackState> = {
-  setPlayingIndex(state, newPlayingIndex: number) {
-    if (state.playingIndex !== null) {
-      // Vue.set(state.tracks[state.playingIndex], 'playing', false)
-      // Vue.set(state.tracks[newPlayingIndex], 'playing', true)
-    }
+  setTrackPlayingState(state, { track, newPlayingState }) {
+    Vue.set(track, 'playing', newPlayingState)
+  },
+  setPlayingIndex(state, newPlayingIndex: number | null) {
     state.playingIndex = newPlayingIndex
   },
   incrementPlayingIndex(state) {

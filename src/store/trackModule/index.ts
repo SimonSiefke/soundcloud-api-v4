@@ -4,12 +4,7 @@ import { TrackState } from '@/store/trackModule/types'
 import { getters } from '@/store/trackModule/getters'
 import { actions } from '@/store/trackModule/actions'
 import { mutations } from '@/store/trackModule/mutations'
-
-export const state: TrackState = {
-  tracks: [...Array(8).fill(null)],
-  playingIndex: null,
-  nextTracksLink: '',
-}
+import { state } from '@/store/trackModule/state'
 
 const trackModule: Module<TrackState, RootState> = {
   state,

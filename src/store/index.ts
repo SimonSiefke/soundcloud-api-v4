@@ -13,6 +13,7 @@ const store = new Vuex.Store({
   modules: {
     tracks: trackModule,
   },
+  strict: process.env.NODE_ENV !== 'production',
 })
 
 lazyLoadModules(store, dynamicModules)
