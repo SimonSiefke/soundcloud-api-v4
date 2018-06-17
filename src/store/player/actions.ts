@@ -1,50 +1,33 @@
+import Vue from 'vue'
 import { Track, Player } from '@/types'
 import SoundCloudAudio from 'soundcloud-audio'
-
-export { updateMediaSession } from './plugins/mediaSession'
+import { hooks } from './plugins/index'
+import { State } from './types'
 
 const SOUNDCLOUD_CLIENT_ID = process.env.VUE_APP_SOUNDCLOUD_CLIENT_ID
 
-const hooks = {
-  beforePause() {
-    console.log('before pause')
-    // if ('mediaSession' in navigator) {
-    //   // @ts-ignore
-    //   navigator.mediaSession.playbackState = 'paused'
-    // }
-  },
-  afterPause() {
-    console.log('after pause')
-  },
-  beforePlay({ dispatch }: { dispatch: Function }, track: Track) {},
-  afterPlay({ dispatch }: { dispatch: Function }, track: Track) {
-    console.log('after play')
-    if ('mediaSession' in navigator) {
-      console.log('upadte media session')
-      dispatch('updateMediaSession', track)
-      // @ts-ignore
-    }
-  },
-}
+export async function updatePlayer({
+  rootGetters,
+  state,
+  dispatch,
+}: {
+rootGetters: any
+state: State
+dispatch: any
+}) {
+  const currentTrack = rootGetters['tracks/currentTrack']
 
-export async function updatePlayer(
-  { state, dispatch }: { state: any; dispatch: any },
-  track: Track,
-) {
   try {
     // @ts-ignore
     const newPlayer = new SoundCloudAudio(process.env.VUE_APP_SOUNDCLOUD_CLIENT_ID)
     await new Promise((resolve, reject) => {
       newPlayer.resolve(
-        `https://api.soundcloud.com/tracks/${track.id}`,
+        `https://api.soundcloud.com/tracks/${currentTrack.id}`,
         resolve,
       )
     })
-    console.log('new plyer is')
 
-    console.log(newPlayer)
-    // const newPlayer = await Soundcloud.stream(`/tracks/${track.id}`)
-    dispatch('setPlayer', { track, newPlayer })
+    state.player = newPlayer
   } catch (error) {
     if (error.status === 404) {
       // @ts-ignore
@@ -53,93 +36,143 @@ export async function updatePlayer(
     alert('something went wrong')
   }
 }
-export function pause(
-  { rootState, state, commit }: { state: any; rootState: any; commit: any },
-  track: Track = rootState.getters['tracks/getCurrentTrack'],
-) {
+
+export function pauseCurrent({
+  rootGetters,
+  commit,
+}: {
+commit: any
+rootGetters: any
+}) {
+  const currentTrack = rootGetters['tracks/currentTrack']
+  Vue.set(currentTrack, 'playing', false)
   hooks.beforePause()
-  if (track !== null) {
-    commit('pauseTrack', track)
-  }
+  commit('pause')
   hooks.afterPause()
+}
+
+export function playCurrent({
+  rootGetters,
+  commit,
+}: {
+commit: any
+rootGetters: any
+}) {
+  const currentTrack = rootGetters['tracks/currentTrack']
+  Vue.set(currentTrack, 'playing', true)
+  hooks.beforePlay()
+  commit('play')
+  hooks.afterPlay()
+}
+
+export function stopCurrent({
+  rootGetters,
+  commit,
+}: {
+commit: any
+rootGetters: any
+}) {
+  const currentTrack = rootGetters['tracks/currentTrack']
+  Vue.set(currentTrack, 'playing', false)
+  commit('stop')
 }
 
 export async function play(
   {
     state,
+    rootGetters,
     rootState,
     commit,
     dispatch,
   }: {
-  state: any
+  state: State
+  rootGetters: any
   rootState: any
   commit: any
   dispatch: any
   },
-  track: Track = rootState.getters['tracks/getCurrentTrack'],
+  track: Track = rootGetters['tracks/currentTrack'],
 ) {
-  hooks.beforePlay({ dispatch }, track)
-  if (track !== undefined) {
-    if (
-      rootState.tracks.playingIndex !== track.index &&
-      rootState.tracks.tracks[rootState.tracks.playingIndex].player !== null
-    ) {
-      commit(
-        'pauseTrack',
-        rootState.tracks.tracks[rootState.tracks.playingIndex],
-      )
+  if (track !== null) {
+    if (rootState.tracks.playingIndex !== track.index) {
+      if (state.player !== null) {
+        dispatch('stopCurrent')
+      }
       commit('tracks/setPlayingIndex', track.index, { root: true })
       commit('tracks/loadingTrack', track.index, { root: true })
     }
+
     // create a new soundcloud player if it doesn't already exist
-    if (track.player === null) {
-      await dispatch('updatePlayer', track)
-      dispatch('addEventListenersForPlayer', track)
+    if (state.player === null) {
+      await dispatch('updatePlayer')
+      dispatch('addEventListenersForPlayer')
     }
     commit('tracks/doneLoadingTrack', track.index, { root: true })
-    commit('playTrack', track)
-    hooks.afterPlay({ dispatch }, track)
+    dispatch('playCurrent')
   }
 }
 
+// export function pause(
+//   {
+//     rootGetters,
+//     dispatch,
+//   }: {
+//   rootGetters: any
+//   dispatch: Function
+//   },
+//   track: Track = rootGetters['tracks/currentTrack'],
+// ) {
+//   dispatch('pauseCurrent')
+// }
 /**
  * toggles between play and pause
  */
 export function togglePlay(
-  { rootState, state, dispatch }: { state: any; rootState: any; dispatch: any },
-  track: Track = rootState.getters['tracks/getCurrentTrack'],
+  {
+    state,
+    dispatch,
+    rootGetters,
+  }: { rootGetters: any; state: any; dispatch: any },
+  track: Track,
 ) {
-  if (track !== undefined) {
-    if (track.playing) {
-      dispatch('pause', track)
-    } else {
-      dispatch('play', track)
-    }
+  const currentTrack = rootGetters['tracks/currentTrack']
+  if (currentTrack === null || track.id !== currentTrack.id) {
+    dispatch('play', track)
+  } else if (currentTrack.playing) {
+    dispatch('pauseCurrent')
+  } else {
+    dispatch('playCurrent')
   }
 }
 
 /** if a song ends, we need to update our state */
-export function addEventListenersForPlayer(
-  { state, commit }: { state: any; commit: any },
-  track: Track,
-) {
-  track.player!.on('ended', () => {
-    if (state.loop) {
-      commit('resetTimer', track)
-      commit('playTrack', track)
-    }
-  })
-}
-
-export function setPlayer(
-  { state, commit }: { state: any; commit: Function },
-  { track, newPlayer }: { track: Track; newPlayer: Player },
-) {
-  track.player = newPlayer
-  track.player.on('timeupdate', (x: any) => {
-    const progressPercent =
-      (track!.player!.audio.currentTime / (track.duration / 1000)) * 100
-    // @ts-ignore
-    commit('updateProgress', progressPercent)
-  })
+export function addEventListenersForPlayer({
+  state,
+  rootGetters,
+  commit,
+}: {
+state: State
+rootGetters: any
+commit: any
+}) {
+  const currentTrack = rootGetters['tracks/currentTrack']
+  if (state.player !== null) {
+    state.player.on('timeupdate', () => {
+      if (state.player !== null) {
+        const progressPercent =
+          (state!.player!.audio.currentTime / (currentTrack.duration / 1000)) *
+          100
+        // @ts-ignore
+        commit('updateProgress', progressPercent)
+      }
+    })
+    state.player.on('ended', () => {
+      if (state.loop) {
+        commit('resetTimer')
+        commit('playTrack')
+      }
+    })
+  } else {
+    throw new Error('player is null, cannot add EventListeners')
+  }
 }

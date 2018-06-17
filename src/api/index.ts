@@ -32,7 +32,6 @@ export async function Api_GetTracks(options: object = {}): Promise<{ [key: strin
         userLink: track.user.permalink_url,
         userName: track.user.username,
         playing: false,
-        player: null,
         index,
         loading: false,
       }))

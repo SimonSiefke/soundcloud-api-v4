@@ -5,6 +5,7 @@ import { State } from './types'
 const state: State = {
   loop: true,
   progress: 0,
+  player: null,
 }
 
 export default {

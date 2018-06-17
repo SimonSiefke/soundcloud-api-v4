@@ -1,9 +1,15 @@
-// export interface State {
-//   tracks: Track[]
-//   playingIndex: number
-//   loop: boolean
-//   nextTracksLink: string
-// }
+interface _Player {
+  play: () => void
+  pause: () => void
+  isPlaying: () => void
+  on: (event: string, callback: any) => void
+  setTime: (time: number) => void
+  audio: any
+  off: (event: string) => void
+}
+
+export type Player = _Player | null
+
 export interface Track {
   id: number
   cover: string
@@ -18,14 +24,4 @@ export interface Track {
   playing: boolean
   loading: boolean
   index: number
-  player: Player | null
-}
-
-export interface Player {
-  play: () => void
-  pause: () => void
-  isPlaying: () => void
-  on: (event: string, callback: any) => void
-  setTime: (time: number) => void
-  audio: any
 }

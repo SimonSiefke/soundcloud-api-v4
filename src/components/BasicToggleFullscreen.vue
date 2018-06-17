@@ -1,9 +1,9 @@
 <template>
   <div @click="togglePlay(track)">
-    <template v-if="track.playing">
+    <template v-if="track && track.playing">
       <img src="@/assets/icons/pause.svg" alt="pause">
     </template>
-    <template v-else>
+    <template v-else-if="track && !track.playing">
       <img src="@/assets/icons/play.svg" alt="play">
     </template>
   </div>
@@ -16,7 +16,7 @@ export default {
   props: ['track'],
   name: 'BasicToggleFullscreen',
   methods: {
-    ...mapActions('player', ['togglePlay', 'play', 'pause']),
+    ...mapActions('player', ['togglePlay']),
   },
 }
 </script>
