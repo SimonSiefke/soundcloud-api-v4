@@ -102,7 +102,9 @@ export const actions: ActionTree<PlayerState, RootState> = {
       dispatch('playCurrent')
     }
   },
-  addEventListenersForPlayer({ state, rootGetters, commit }) {
+  addEventListenersForPlayer({
+    state, rootGetters, commit, dispatch,
+  }) {
     const currentTrack = rootGetters['tracks/currentTrack']
     if (player.player !== null) {
       player.player.on('timeupdate', () => {
@@ -119,7 +121,7 @@ export const actions: ActionTree<PlayerState, RootState> = {
         console.log('ended')
         if (state.loop) {
           commit('resetTimer')
-          commit('playCurrent')
+          dispatch('playCurrent')
         }
       })
     } else {
