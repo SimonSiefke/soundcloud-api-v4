@@ -98,6 +98,7 @@ export async function play(
       if (state.player !== null) {
         dispatch('stopCurrent')
       }
+      commit('updateProgress', 0)
       commit('tracks/setPlayingIndex', track.index, { root: true })
       commit('tracks/loadingTrack', track.index, { root: true })
     }
