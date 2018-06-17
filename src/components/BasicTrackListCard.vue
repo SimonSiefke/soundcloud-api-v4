@@ -1,7 +1,7 @@
 <template>
   <section :class="{active: active}" @click="togglePlay(track)">
     <div class="image-container">
-      <img v-if="track" :src="track.cover" alt="">
+      <img v-if="track && track.cover" :src="track.cover" alt="">
     </div>
     <div class="info-container">
       <span class="user-name">{{ track ? track.userName : '' }}</span>
