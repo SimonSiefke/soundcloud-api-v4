@@ -23,7 +23,7 @@ export const actions: ActionTree<PlayerState, RootState> = {
         )
       })
 
-      player.player = newPlayer
+      Vue.set(player, 'player', newPlayer)
     } catch (error) {
       if (error.status === 404) {
         // @ts-ignore
@@ -79,7 +79,7 @@ export const actions: ActionTree<PlayerState, RootState> = {
         if (player.player !== null) {
           dispatch('stopCurrent')
         }
-        commit('updateProgress', 0)
+        // commit('updateProgress', 0)
         commit('tracks/setPlayingIndex', track.index, { root: true })
         commit('tracks/loadingTrack', track.index, { root: true })
         await dispatch('updatePlayer')
@@ -107,16 +107,16 @@ export const actions: ActionTree<PlayerState, RootState> = {
   }) {
     const currentTrack = rootGetters['tracks/currentTrack']
     if (player.player !== null) {
-      player.player.on('timeupdate', () => {
-        if (player.player !== null) {
-          const progressPercent =
-            (player!.player!.audio.currentTime /
-              (currentTrack.duration / 1000)) *
-            100
-          // @ts-ignore
-          commit('updateProgress', progressPercent)
-        }
-      })
+      // player.player.on('timeupdate', () => {
+      //   if (player.player !== null) {
+      //     const progressPercent =
+      //       (player!.player!.audio.currentTime /
+      //         (currentTrack.duration / 1000)) *
+      //       100
+      //     // @ts-ignore
+      //     commit('updateProgress', progressPercent)
+      //   }
+      // })
       player.player.on('ended', () => {
         console.log('ended')
         if (state.loop) {

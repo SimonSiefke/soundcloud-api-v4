@@ -11,7 +11,7 @@ export const mutations: MutationTree<PlayerState> = {
     }
   },
   pause() {
-    if (player.player !== null) {
+    if (player!.player !== null) {
       player.player.pause()
     } else {
       throw new Error('player is null, cannot pause')
@@ -20,9 +20,14 @@ export const mutations: MutationTree<PlayerState> = {
   stop() {
     if (player.player !== null) {
       player.player.pause()
-      player.player.off('timeupdate')
-      player.player.off('ended')
-      player.player = null
+      player.player.setTime(0)
+      /* create a timeout so that the progress-bar
+         can update its progress to 0, then the
+         current player will be deleted */
+      setTimeout(() => {
+        player.player.unbindAll()
+        player.player = null
+      }, 0)
     } else {
       throw new Error('player is null, cannot stop')
     }

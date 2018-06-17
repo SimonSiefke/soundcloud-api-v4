@@ -24,16 +24,16 @@ export default Vue.extend({
     BasicNavigation,
     BasicToggleFullscreen,
   },
-  provide() {
-    const progress = {}
+  // provide() {
+  //   const progress = {}
 
-    Object.defineProperty(progress, 'value', {
-      enumerable: true,
-      get: () => this.progress,
-    })
+  //   Object.defineProperty(progress, 'value', {
+  //     enumerable: true,
+  //     get: () => this.progress,
+  //   })
 
-    return { progress }
-  },
+  //   return { progress }
+  // },
   created() {
     this.getTracks()
   },
