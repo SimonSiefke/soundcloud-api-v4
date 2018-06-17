@@ -130,6 +130,7 @@ section.active
     background-position 200px 0 /* highlight */, 0 0 /* placeholder content */
 
 // equalizer
+$precision = 5
 $size = 4rem
 $max = ($size / 2.857142857)
 // When $size is 40px, $max is 14px, $width is 4px, $margin is 1px
@@ -140,20 +141,20 @@ $equalizers = 4
 $equalizerSize = ($equalizers * $width) + (($equalizers - 1) * $margin)
 $bottom = (($size - $max) / 2)
 $left = (($size - $equalizerSize) / 2)
-$two = ($max / 7)
+$two = round(($max / 7), $precision)
 // Heights
-$three = ($max / 4.666666667)
-$four = ($max / 3.5)
-$five = ($max / 2.8)
-$six = ($max / 2.333333333)
-$seven = ($max / 2)
-$eight = ($max / 1.75)
-$nine = ($max / 1.555555556)
-$ten = ($max / 1.4)
-$eleven = ($max / 1.272727273)
-$twelve = ($max / 1.166666667)
-$thirteen = ($max / 1.076923077)
-$fourteen = $max
+$three = round(($max / 4.666666667), $precision)
+$four = round(($max / 3.5), $precision)
+$five = round(($max / 2.8), $precision)
+$six = round(($max / 2.333333333), $precision)
+$seven = round(($max / 2), $precision)
+$eight = round(($max / 1.75), $precision)
+$nine = round(($max / 1.555555556), $precision)
+$ten = round(($max / 1.4), $precision)
+$eleven = round(($max / 1.272727273), $precision)
+$twelve = round(($max / 1.166666667), $precision)
+$thirteen = round(($max / 1.076923077), $precision)
+$fourteen = round($max, $precision)
 
 .equalizer
   position absolute
@@ -360,7 +361,7 @@ $fourteen = $max
     height $thirteen
 
   20%
-    height $size / 2.666666667
+    height round($size * (1 / 2.666666667), $precision)
 
   24%
     height $fourteen
