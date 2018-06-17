@@ -12,7 +12,6 @@ export default {
   methods: {
     ...mapActions('tracks', ['getTracks']),
     search(searchValue:string) {
-      console.log(searchValue)
       const query = { q: searchValue }
       // @ts-ignore
       this.getTracks(query)

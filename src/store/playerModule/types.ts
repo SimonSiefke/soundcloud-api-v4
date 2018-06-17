@@ -1,6 +1,6 @@
 import { Player } from '@/types'
 
-export interface State {
+export interface PlayerState {
   loop: boolean
   progress: number
   player: Player

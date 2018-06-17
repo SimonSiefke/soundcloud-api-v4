@@ -1,6 +1,6 @@
 import { Track } from '@/types'
 
-export interface State {
+export interface TrackState {
   tracks: Track[]
   // recentlyPlayedTracks: (string | number)[]
   playingIndex: number | null

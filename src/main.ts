@@ -1,10 +1,10 @@
 import Vue from 'vue'
+import '@/registerServiceWorker'
 import '@/assets/style/global.css'
 import '@/assets/fonts/clear-sans.css'
-import App from './App.vue'
-import router from './router'
-import store from './store/index'
-import './registerServiceWorker'
+import router from '@/router'
+import store from '@/store'
+import App from '@/App.vue'
 
 Vue.config.productionTip = false
 Vue.config.devtools = true

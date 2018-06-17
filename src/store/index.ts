@@ -1,46 +1,34 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import Soundcloud from 'soundcloud'
-import moduleTracks from './tracks'
+import trackModule from '@/store/trackModule'
+import { lazyLoadModules } from '@/store/util'
 
 const dynamicModules = {
-  player: () => import(/* webpackChunkName: 'player' */ './player'),
-}
-
-// eslint-disable-next-line no-shadow
-async function lazyLoadModules(store: any, dynamicModules: object) {
-  // @ts-ignore
-  for (const [moduleName, moduleFunction] of Object.entries(dynamicModules)) {
-    // eslint-disable-next-line no-await-in-loop
-    const importedModule = (await moduleFunction()).default
-    store.registerModule(moduleName as any, importedModule as any)
-  }
+  player: () => import(/* webpackChunkName: 'player' */ './playerModule'),
 }
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   modules: {
-    tracks: moduleTracks,
+    tracks: trackModule,
   },
 })
 
 lazyLoadModules(store, dynamicModules)
 
-// <hotReloading>
 // @ts-ignore
 if (process.env === 'development' && module.hot !== undefined) {
   console.log('hot update')
   // @ts-ignore
-  module.hot.accept(['./player', './tracks'], async () => {
+  module.hot.accept(['./playerModule', './trackModule'], async () => {
     store.hotUpdate({
       modules: {
         player: (await dynamicModules.player()).default,
-        tracks: require('./tracks').default,
+        tracks: require('./trackModule').default,
       },
     })
   })
 }
-// </hotReloading>
 
 export default store

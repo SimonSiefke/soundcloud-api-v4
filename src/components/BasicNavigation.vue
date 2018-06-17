@@ -12,9 +12,6 @@ export default {
   components: {
     BasicProgressBar,
   },
-  created() {
-    console.log('navigation loaded')
-  },
 }
 </script>
 
