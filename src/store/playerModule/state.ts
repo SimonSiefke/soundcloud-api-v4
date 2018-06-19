@@ -11,12 +11,4 @@ export const player = new Vue({
     player: null as any,
   },
 })
-// export const player = {
-//   _player: null,
-//   get player() {
-//     return this._player // eslint-disable-line
-//   },
-//   set player(newPlayer) {
-//     this._player = newPlayer // eslint-disable-line
-//   },
-// } as any
+
