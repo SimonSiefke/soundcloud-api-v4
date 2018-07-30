@@ -9,6 +9,7 @@ import App from '@/App.vue'
 Vue.config.productionTip = false
 Vue.config.devtools = true
 Vue.config.performance = true
+Vue.config.ignoredElements = ['google-cast-button']
 
 new Vue({
   router,

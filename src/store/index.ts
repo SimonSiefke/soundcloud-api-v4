@@ -4,7 +4,7 @@ import trackModule from '@/store/trackModule'
 import { lazyLoadModules } from '@/store/util'
 
 const dynamicModules = {
-  player: () => import(/* webpackChunkName: 'player' */ './playerModule'),
+  player: () => import(/* webpackChunkName: 'store-module-player' */ './playerModule'),
 }
 
 Vue.use(Vuex)

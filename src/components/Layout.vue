@@ -1,5 +1,6 @@
 <template >
   <div>
+    <chromecast-wrapper ></chromecast-wrapper>
     <BasicSearchBar />
     <BasicTrackList :tracks="tracks" :playingIndex="playingIndex" />
     <BasicNavigation :track="currentTrack" />
@@ -13,8 +14,11 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import BasicTrackList from '@/components/BasicTrackList.vue'
 import BasicSearchBar from '@/components/BasicSearchBar.vue'
 
-const BasicNavigation = () => import(/* webpackChunkName: 'navigation' */ '@/components/BasicNavigation.vue')
-const BasicToggleFullscreen = () => import(/* webpackChunkName: 'navigation' */ '@/components/BasicToggleFullscreen.vue')
+const BasicNavigation = () => import(/* webpackChunkName: 'component-navigation' */ '@/components/BasicNavigation.vue')
+const BasicToggleFullscreen = () => import(/* webpackChunkName: 'component-navigation' */ '@/components/BasicToggleFullscreen.vue')
+
+const ChromecastWrapper = () => import(/* webpackChunkName: 'component-chromecast-wrapper' */'@/components/ChromecastWrapper.vue')
+
 
 export default Vue.extend({
   name: 'Layout',
@@ -23,6 +27,23 @@ export default Vue.extend({
     BasicSearchBar,
     BasicNavigation,
     BasicToggleFullscreen,
+    ChromecastWrapper,
+  },
+  data() {
+    return {
+      chromeCastAvailable: null,
+    }
+  },
+  mounted() {
+    // @ts-ignore
+    window.__onGCastApiAvailable = (isAvailable:boolean) => {
+      // @ts-ignore
+      this.chromeCastAvailable = isAvailable
+      console.log('init chrome cast')
+      if (!isAvailable) {
+        console.log('cast not isAvailable')
+      }
+    }
   },
   // provide() {
   //   const progress = {}
