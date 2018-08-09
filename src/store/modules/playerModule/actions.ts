@@ -4,6 +4,7 @@ import { RootState } from '@/store/types'
 import { hooks } from '@/store/modules/playerModule/plugins'
 import { player } from '@/store/modules/audioModule/state'
 import { NoPlayer } from '@/store/modules/audioModule/audioPlayers/NoPlayer'
+import rootStore from '@/store'
 
 export const actions: ActionTree<null, RootState> = {
   async updatePlayer({ rootGetters, dispatch }) {
@@ -21,13 +22,6 @@ export const actions: ActionTree<null, RootState> = {
     commit('tracks/AUDIO_SHOULD_BE_PLAYING', track, { root: true })
     if (player.player === NoPlayer.instance) {
       console.warn('switch from null to local player before playing')
-      return
-      // const {
-      //   LocalDevicePlayer,
-      // } = await import(/* webpackChunkName: 'audio-player-local-device' */ '@/store/modules/audioModule/audioPlayers/LocalDevicePlayer')
-      // dispatch('audio/SET_AUDIO_PLAYER', new LocalDevicePlayer(), {
-      //   root: true,
-      // })
     }
     if (track !== null) {
       const isNewTrack = oldTrack === null || oldTrack.id !== track.id

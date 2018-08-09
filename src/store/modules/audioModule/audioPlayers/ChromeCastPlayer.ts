@@ -7,8 +7,6 @@ import {
   remotePlayerController,
 } from '@/store/modules/audioModule/audioPlayers/ChromeCastPlayerWrapper'
 
-const castSession = cast.framework.CastContext.getInstance().getCurrentSession()
-
 const SOUNDCLOUD_CLIENT_ID = process.env.VUE_APP_SOUNDCLOUD_CLIENT_ID
 
 export class ChromeCastPlayer implements AudioPlayer {
@@ -18,11 +16,18 @@ export class ChromeCastPlayer implements AudioPlayer {
   // @ts-ignore
   private lastTrack: Track | null
   public progressEventEmitter = new Mitt()
+  public static instance: ChromeCastPlayer
 
   constructor(store: any) {
-    this.store = store
-    this.lastTrack = null
-    this.addEventListenersForPlayer()
+    if (!ChromeCastPlayer.instance) {
+      this.store = store
+      this.lastTrack = null
+      this.addEventListenersForPlayer()
+      ChromeCastPlayer.instance = this
+    }
+    ChromeCastPlayer.instance.castSession = cast.framework.CastContext.getInstance().getCurrentSession()
+
+    return ChromeCastPlayer.instance
   }
 
   public play(track: Track) {
@@ -55,7 +60,7 @@ export class ChromeCastPlayer implements AudioPlayer {
     remotePlayerController.seek()
   }
   public async updateTrack(oldTrack: Track | null, newTrack: Track) {
-    if (!castSession) {
+    if (!this.castSession) {
       console.warn('no castsession')
       return
     }
@@ -64,12 +69,17 @@ export class ChromeCastPlayer implements AudioPlayer {
     const audioUrl = `https://api.soundcloud.com/tracks/${
       newTrack.id
     }/stream?client_id=${SOUNDCLOUD_CLIENT_ID}`
-
+    console.log('before request')
     const mediaInfo = new chrome.cast.media.MediaInfo(audioUrl, 'audio/mp3')
 
     const request = new chrome.cast.media.LoadRequest(mediaInfo)
+    console.log('request done', request)
 
-    await castSession.loadMedia(request)
+    try {
+      await this.castSession.loadMedia(request)
+    } catch (error) {
+      console.error('chromecast failed to load media')
+    }
 
     remotePlayer.volumeLevel = 0.1
     remotePlayerController.setVolumeLevel()
@@ -88,12 +98,18 @@ export class ChromeCastPlayer implements AudioPlayer {
       }
     }, 1000)
   }
+  beforeDelete() {
+    if (this.incrementProgressTimer) {
+      clearInterval(this.incrementProgressTimer)
+    }
+  }
 
   private onEnd() {
     console.log('end')
     // @ts-ignore
     if (this.store.state.audio.loop) {
       clearInterval(this.incrementProgressTimer)
+      console.log('restart with', this.lastTrack)
       // @ts-ignore
       this.updateTrack(this.lastTrack, this.lastTrack)
     }

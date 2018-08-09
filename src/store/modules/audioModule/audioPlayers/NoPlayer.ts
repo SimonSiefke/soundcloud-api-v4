@@ -5,14 +5,14 @@ import * as Mitt from 'mitt/dist/mitt.umd'
 import { Track } from '@/types'
 
 export class NoPlayer implements AudioPlayer {
-  public static instance: AudioPlayer
+  public static instance: NoPlayer
   public progressEventEmitter = new Mitt()
 
   constructor() {
-    // if (NoPlayer.instance) {
-    //   return NoPlayer.instance
-    // }
-    // NoPlayer.instance = this
+    if (NoPlayer.instance) {
+      return NoPlayer.instance
+    }
+    NoPlayer.instance = this
   }
   public play(track: Track) {
     console.error('null player cannot play track')

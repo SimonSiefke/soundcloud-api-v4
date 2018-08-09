@@ -9,15 +9,16 @@ const SOUNDCLOUD_CLIENT_ID = process.env.VUE_APP_SOUNDCLOUD_CLIENT_ID
 
 export class LocalDevicePlayer implements AudioPlayer {
   private player: any
-  private store: typeof rootStore
+  private store: any
   public progressEventEmitter = new Mitt()
 
-  constructor(store: typeof rootStore) {
+  constructor(store: any) {
     this.store = store
   }
 
   public play(track: Track) {
     console.log('play')
+    console.log(this.store.dispatch)
     this.player.play()
     this.store.dispatch('audio/AUDIO_PLAYING', track)
   }
@@ -34,6 +35,7 @@ export class LocalDevicePlayer implements AudioPlayer {
     this.player.setTime(time)
   }
   public async updateTrack(oldTrack: Track | null, newTrack: Track) {
+    // console.log('local')
     if (oldTrack) {
       this.pause(oldTrack)
     }

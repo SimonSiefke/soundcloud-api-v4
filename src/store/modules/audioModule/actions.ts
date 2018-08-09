@@ -8,16 +8,19 @@ import { player } from '@/store/modules/audioModule/state'
 import { NoPlayer } from '@/store/modules/audioModule/audioPlayers/NoPlayer'
 import { Track } from '@/types'
 import Vue from 'vue'
+import store from '@/store'
 
 const oldTrack: Track | null = null
 
 export const actions: ActionTree<AudioModuleState, RootState> = {
   SET_AUDIO_PLAYER({ rootGetters, dispatch }, newPlayer: AudioPlayer) {
+    console.log('set audio player')
     const currentTrack = rootGetters['tracks/currentTrack']
     const oldPlayer = player.player
     if (oldPlayer.beforeDelete) {
       oldPlayer.beforeDelete(currentTrack)
     }
+    console.log('deleted old')
     Vue.set(player, 'player', newPlayer)
     if (currentTrack !== null) {
       console.log('update new player with new track')
@@ -27,12 +30,12 @@ export const actions: ActionTree<AudioModuleState, RootState> = {
 
   async updateTrack({ dispatch }, newTrack) {
     if (player.player === NoPlayer.instance) {
-      console.warn('cannot update player, because player is null')
-      // const {
-      //   LocalDevicePlayer,
-      // } = await import(/* webpackChunkName: 'audio-player-local-device' */ '@/store/modules/audioModule/audioPlayers/LocalDevicePlayer')
+      console.warn('cannot update player, because player is null, switching to local')
+      const {
+        LocalDevicePlayer,
+      } = await import(/* webpackChunkName: 'audio-player-local-device' */ '@/store/modules/audioModule/audioPlayers/LocalDevicePlayer')
 
-      // player.player = new LocalDevicePlayer(store)
+      player.player = new LocalDevicePlayer(store)
     }
     await player.player.updateTrack(oldTrack, newTrack)
   },
