@@ -61,7 +61,7 @@ export class LocalDevicePlayer implements AudioPlayer {
 
   public beforeDelete(oldTrack: Track | null) {
     console.log('local before delete', oldTrack)
-    if (oldTrack !== null) {
+    if (this.player) {
       this.player.pause()
     }
     this.player.unbindAll()

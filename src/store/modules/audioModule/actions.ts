@@ -28,7 +28,7 @@ export const actions: ActionTree<AudioModuleState, RootState> = {
     }
   },
 
-  async updateTrack({ dispatch }, newTrack) {
+  async updateTrack({ dispatch }, newTrack: Track) {
     if (player.player === NoPlayer.instance) {
       console.warn('cannot update player, because player is null, switching to local')
       const {
@@ -39,37 +39,37 @@ export const actions: ActionTree<AudioModuleState, RootState> = {
     }
     await player.player.updateTrack(oldTrack, newTrack)
   },
-  play(state, track) {
+  play(state, track: Track) {
     if (player.player !== NoPlayer.instance) {
       player.player.play(track)
     } else {
       throw new Error('player is null, cannot play')
     }
   },
-  AUDIO_PLAYING({ commit }, track) {
+  AUDIO_PLAYING({ commit }, track: Track) {
     commit('tracks/AUDIO_PLAYING', track, { root: true })
   },
-  pause(state, track) {
+  pause(state, track: Track) {
     if (player.player !== NoPlayer.instance) {
       player.player.pause(track)
     } else {
       throw new Error('player is null, cannot pause')
     }
   },
-  AUDIO_PAUSED({ commit }, track) {
+  AUDIO_PAUSED({ commit }, track: Track) {
     console.log(track)
     if (track !== null) {
       commit('tracks/AUDIO_PAUSED', track, { root: true })
     }
   },
-  stop({ commit }, track) {
+  stop({ commit }, track: Track) {
     if (player.player !== NoPlayer.instance) {
       player.player.stop(track)
     } else {
       throw new Error('player is null, cannot stop')
     }
   },
-  AUDIO_STOPPED({ commit }, track) {
+  AUDIO_STOPPED({ commit }, track: Track) {
     if (track !== null) {
       commit('tracks/AUDIO_STOPPED', track, { root: true })
     }

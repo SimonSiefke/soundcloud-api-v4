@@ -36,7 +36,6 @@ export class ChromeCastPlayer implements AudioPlayer {
     } else {
       throw new Error('chromecast cannot play')
     }
-    this.store.dispatch('audio/AUDIO_PLAYING', track)
     this.setUpProgressTimer()
   }
   public pause(track: Track) {
@@ -123,6 +122,25 @@ export class ChromeCastPlayer implements AudioPlayer {
           this.store.dispatch('audio/AUDIO_PAUSED', this.lastTrack)
         } else {
           this.store.dispatch('audio/AUDIO_PLAYING', this.lastTrack)
+        }
+      },
+    )
+
+    remotePlayerController.addEventListener(
+      cast.framework.RemotePlayerEventType.PLAYER_STATE_CHANGED,
+      (event: any) => {
+        if (event.value === 'PLAYING') {
+          this.store.dispatch('audio/AUDIO_PLAYING', this.lastTrack)
+        }
+      },
+    )
+
+    // For debugging
+    remotePlayerController.addEventListener(
+      cast.framework.RemotePlayerEventType.ANY_CHANGE,
+      (event: any) => {
+        if (event.field !== 'currentTime') {
+          console.log('any change', event.field, event)
         }
       },
     )
