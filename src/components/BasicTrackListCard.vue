@@ -12,7 +12,6 @@
       <span class="user-name">{{ track ? track.userName : '' }}</span>
       <p class="track-name">{{ track ? track.name : '' }}</p>
     </div>
-    {{ track&& track.audioState }}
     <div
       v-if="track && track.audioShouldBeState==='SHOULD_BE_PLAYING' && track.audioState!=='PLAYING'"
       class="loading"> loading </div>
