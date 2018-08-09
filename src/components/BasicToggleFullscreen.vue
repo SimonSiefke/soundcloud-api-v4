@@ -1,10 +1,16 @@
 <template>
-  <div @click="togglePlay(track)">
-    <template v-if="track && track.playing">
-      <img src="@/assets/icons/pause.svg" alt="pause">
+  <div
+    id="play"
+    @click="togglePlay(track)">
+    <template v-if="track && track.state==='PLAYING'">
+      <img
+        src="@/assets/icons/pause.svg"
+        alt="pause">
     </template>
-    <template v-else-if="track && !track.playing">
-      <img src="@/assets/icons/play.svg" alt="play">
+    <template v-else-if="track && track.state==='PAUSED'">
+      <img
+        src="@/assets/icons/play.svg"
+        alt="play">
     </template>
   </div>
 </template>
@@ -13,8 +19,8 @@
 import { mapActions } from 'vuex'
 
 export default {
-  props: ['track'],
   name: 'BasicToggleFullscreen',
+  props: ['track'],
   methods: {
     ...mapActions('player', ['togglePlay']),
   },

@@ -1,8 +1,11 @@
 <template >
   <div>
-    <chromecast-wrapper ></chromecast-wrapper>
+    <chromecast-wrapper />
     <BasicSearchBar />
-    <BasicTrackList :tracks="tracks" :playingIndex="playingIndex" />
+    <BasicTrackList
+      :tracks="tracks"
+      :current-track="currentTrack"
+    />
     <BasicNavigation :track="currentTrack" />
     <BasicToggleFullscreen :track="currentTrack" />
   </div>
@@ -17,7 +20,7 @@ import BasicSearchBar from '@/components/BasicSearchBar.vue'
 const BasicNavigation = () => import(/* webpackChunkName: 'component-navigation' */ '@/components/BasicNavigation.vue')
 const BasicToggleFullscreen = () => import(/* webpackChunkName: 'component-navigation' */ '@/components/BasicToggleFullscreen.vue')
 
-const ChromecastWrapper = () => import(/* webpackChunkName: 'component-chromecast-wrapper' */'@/components/ChromecastWrapper.vue')
+const ChromecastWrapper = () => import(/* webpackChunkName: 'component-chromecast-wrapper' */ '@/components/ChromecastWrapper.vue')
 
 
 export default Vue.extend({
@@ -34,8 +37,15 @@ export default Vue.extend({
       chromeCastAvailable: null,
     }
   },
+  computed: {
+    ...mapState('tracks', ['tracks', 'playingIndex']),
+    ...mapState('player', ['progress']),
+    ...mapGetters('tracks', ['currentTrack']),
+
+  },
   mounted() {
     // @ts-ignore
+    // eslint-disable-next-line
     window.__onGCastApiAvailable = (isAvailable:boolean) => {
       // @ts-ignore
       this.chromeCastAvailable = isAvailable
@@ -62,11 +72,6 @@ export default Vue.extend({
     ...mapActions('tracks', ['getTracks']),
     ...mapActions('player', ['togglePlay']),
   },
-  computed: {
-    ...mapState('tracks', ['tracks', 'playingIndex']),
-    ...mapState('player', ['progress']),
-    ...mapGetters('tracks', ['currentTrack']),
 
-  },
 })
 </script>

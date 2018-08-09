@@ -1,44 +1,56 @@
+<template>
+  <div
+    v-if="chromeCastAvailable"
+    v-html="castButton" />
+</template>
 
 <script lang="ts">
 import Vue from 'vue'
 
-const chromeCastSdk = import(/* webpackChunkName: 'chromecast-sdk' */'@/plugins/chromecast.ts')
-
+interface Data{
+  chromeCastAvailable:null|boolean
+  castButton: string
+}
 
 export default Vue.extend({
-  data() {
+  data():Data {
     return {
       chromeCastAvailable: null,
-      chromecast: null as any,
+      castButton: '<button is="google-cast-button"></button>',
     }
   },
-  mounted() {
+  async mounted() {
     // @ts-ignore
     // eslint-disable-next-line
-    window.__onGCastApiAvailable = (isAvailable:boolean) => {
-      // @ts-ignore
+    window.__onGCastApiAvailable = async (isAvailable:boolean) => {
       this.chromeCastAvailable = isAvailable
       if (isAvailable) {
-        console.log('is def')
-        this.chromecast = () => import(/* webpackChunkName: 'component-chromecast' */ '@/components/Chromecast.vue')
-      }
-      // console.log('init chrome cast')
-      if (!isAvailable) {
+        console.log('cast is available')
+        import(/* webpackChunkName: 'audio-player-chrome-cast-wrapper' */ '@/store/modules/audioModule/audioPlayers/ChromeCastPlayerWrapper.ts')
+      } else {
         console.log('cast not isAvailable')
       }
     }
-  },
-  render(h) {
-    console.log(this.chromeCastAvailable)
-    if (this.chromeCastAvailable) {
-      console.log('render this', this.chromecast)
-      return h(this.chromecast)
-    }
-    return h(null as any)
+    // lazyload the chromecast sdk script
+    const chromecastSdkScript = document.createElement('script')
+    chromecastSdkScript.src = 'https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1'
+    document.head.appendChild(chromecastSdkScript)
   },
 })
 </script>
 
 
-<style scoped>
+<style lang="stylus" scoped>
+div {
+  position: fixed;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  width: 55px;
+  bottom: 22.5px;
+  left: 22.5px;
+  height: 55px;
+  border-radius: 50%;
+  background: dodgerblue;
+}
 </style>

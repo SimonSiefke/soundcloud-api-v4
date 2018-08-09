@@ -1,11 +1,26 @@
 import Vue from 'vue'
 import { MutationTree } from 'vuex'
 import { Track } from '@/types'
-import { TrackState } from '@/store/trackModule/types'
+import { TrackState } from '@/store/modules/trackModule/types'
 
 export const mutations: MutationTree<TrackState> = {
-  setTrackPlayingState(state, { track, newPlayingState }) {
-    Vue.set(track, 'playing', newPlayingState)
+  AUDIO_SHOULD_BE_STOPPED(state, track) {
+    Vue.set(track, 'audioShouldBeState', 'SHOULD_BE_STOPPED')
+  },
+  AUDIO_STOPPED(state, track) {
+    Vue.set(track, 'audioState', 'STOPPED')
+  },
+  AUDIO_SHOULD_BE_PLAYING(state, track) {
+    Vue.set(track, 'audioShouldBeState', 'SHOULD_BE_PLAYING')
+  },
+  AUDIO_PLAYING(state, track) {
+    Vue.set(track, 'audioState', 'PLAYING')
+  },
+  AUDIO_SHOULD_BE_PAUSED(state, track) {
+    Vue.set(track, 'audioShouldBeState', 'SHOULD_BE_PAUSED')
+  },
+  AUDIO_PAUSED(state, track) {
+    Vue.set(track, 'audioState', 'PAUSED')
   },
   setPlayingIndex(state, newPlayingIndex: number | null) {
     state.playingIndex = newPlayingIndex
@@ -28,12 +43,12 @@ export const mutations: MutationTree<TrackState> = {
       throw new Error('playing index is null, cannot decrement')
     }
   },
-  loadingTrack(state, trackIndex: number) {
-    Vue.set(state.tracks[trackIndex], 'loading', true)
-  },
-  doneLoadingTrack(state, trackIndex: number) {
-    Vue.set(state.tracks[trackIndex], 'loading', false)
-  },
+  // loadingTrack(state, trackIndex: number) {
+  //   Vue.set(state.tracks[trackIndex], 'state', 'LOADING')
+  // },
+  // doneLoadingTrack(state, trackIndex: number) {
+  //   Vue.set(state.tracks[trackIndex], 'state', 'LOADED')
+  // },
   setNextTracksLink(state, nextTrackLink: string) {
     state.nextTracksLink = nextTrackLink
   },

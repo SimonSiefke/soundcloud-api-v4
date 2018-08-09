@@ -8,3 +8,6 @@ declare module 'soundcloud' {
 declare module 'soundcloud-audio' {
 
 }
+
+declare let cast: any
+declare let chrome: any

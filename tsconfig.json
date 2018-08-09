@@ -10,6 +10,7 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": ["node"],
+    "experimentalDecorators": true,
     "paths": {
       "@/*": ["src/*"]
     },
@@ -22,5 +23,5 @@
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "**/chromecast.ts"]
 }

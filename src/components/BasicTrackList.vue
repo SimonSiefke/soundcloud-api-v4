@@ -5,12 +5,12 @@ import BasicTrackListCard from '@/components/BasicTrackListCard.vue'
 export default Vue.extend({
   name: 'BasicTrackList',
   functional: true,
-  props: ['tracks', 'playingIndex'],
+  props: ['tracks', 'currentTrack'],
   render(h: any, { props }) {
     return props.tracks.map((track: any, index: number) => h(BasicTrackListCard, {
       props: {
         track,
-        active: index === props.playingIndex,
+        active: index === (props.currentTrack && props.currentTrack.index),
       },
     }))
   },

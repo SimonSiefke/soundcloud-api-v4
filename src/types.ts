@@ -1,3 +1,8 @@
+import {
+  audioState,
+  audioShouldBeState,
+} from '@/store/modules/audioModule/types'
+
 interface _Player {
   play: () => void
   pause: () => void
@@ -21,7 +26,7 @@ export interface Track {
   userAvatar: string
   userLink: string
   userName: string
-  playing: boolean
-  loading: boolean
+  audioState: audioState
+  audioShouldBeState: audioShouldBeState
   index: number
 }

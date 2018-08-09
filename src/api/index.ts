@@ -31,9 +31,9 @@ export async function Api_GetTracks(options: object = {}): Promise<{ [key: strin
         userAvatar: track.user.avatar_url,
         userLink: track.user.permalink_url,
         userName: track.user.username,
-        playing: false,
         index,
-        loading: false,
+        audioState: 'IDLE',
+        audioShouldBeState: 'SHOULD_BE_IDLE',
       }))
       const nextTracksLink = rawData.data.next_href
       return { newTracks, nextTracksLink }

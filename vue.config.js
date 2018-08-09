@@ -1,17 +1,35 @@
 // eslint-disable
 const plugins = []
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+
 // plugins.push(new BundleAnalyzerPlugin())
 
-const open = process.env === 'development'
+const precacheBlackList = [
+  /component-chromecast-wrapper/,
+  /audio-player-chrome-cast-wrapper/,
+  /store-module-audio/,
+  /audio-player-chromecast/,
+  /audio-player-local-device/,
+]
+
 module.exports = {
   devServer: {
     port: 3000,
-    open,
+    open: false,
   },
   configureWebpack(config) {
     return {
       plugins,
     }
+  },
+  chainWebpack: (config) => {
+    // config.plugins.delete('prefetch')
+    // modify prefetch options:
+    // eslint-disable-next-line
+    config.plugin('prefetch').tap(options => {
+      options[0].fileBlacklist = options[0].fileBlacklist || []
+      options[0].fileBlacklist.push(...precacheBlackList)
+      return options
+    })
   },
 }

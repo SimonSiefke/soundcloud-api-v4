@@ -6,7 +6,7 @@
 import Layout from '@/components/Layout.vue'
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     Layout,
   },

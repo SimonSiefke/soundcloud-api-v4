@@ -1,14 +1,18 @@
 <template>
   <div class="progress-wrapper">
-    <div class="progress" :style="{width: `${this.progressPercent}%`}"></div>
+    <div
+      :style="{width: `${progressPercent}%`}"
+      class="progress"/>
   </div>
 </template>
 
 <script lang="ts">
-import { player } from '@/store/playerModule/state'
+import Vue from 'vue'
+import { player } from '@/store/modules/audioModule/state'
 import { mapGetters } from 'vuex'
+import { AudioPlayer } from '@/store/modules/audioModule/types'
 
-export default {
+export default Vue.extend({
   data() {
     return {
       progressPercent: 0,
@@ -21,20 +25,24 @@ export default {
     },
   },
   watch: {
-    player(newPlayer: any) {
-      if (newPlayer !== null) {
-        newPlayer.on('timeupdate', () => {
-          // @ts-ignore
-          const trackDurationInSeconds = this.currentTrack.duration / 1000
-          const currentTimeInSeconds = newPlayer.audio.currentTime
-
-          // @ts-ignore
-          this.progressPercent = (currentTimeInSeconds / trackDurationInSeconds) * 100
-        })
-      }
+    player: {
+      handler(newPlayer:AudioPlayer) {
+        newPlayer.progressEventEmitter.on('progress', this.updateProgressPercent)
+      },
+      immediate: true,
     },
   },
-}
+  beforeDestroy() {
+    this.player.progressEventEmitter.removeListener(this.updateProgressPercent)
+  },
+  methods: {
+    updateProgressPercent(progressInMilliseconds:number) {
+      // @ts-ignore
+      const trackDurationInMilliseconds = this.currentTrack.duration
+      this.progressPercent = (progressInMilliseconds * 100000) / trackDurationInMilliseconds
+    },
+  },
+})
 </script>
 
 <style lang="stylus" scoped>

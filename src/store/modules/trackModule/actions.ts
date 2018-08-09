@@ -1,7 +1,7 @@
 import { ActionTree } from 'vuex'
 import { Api_GetTracks } from '@/api'
 import { RootState } from '@/store/types'
-import { TrackState } from '@/store/trackModule/types'
+import { TrackState } from '@/store/modules/trackModule/types'
 
 export const actions: ActionTree<TrackState, RootState> = {
   /**
