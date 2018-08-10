@@ -1,3 +1,4 @@
+<!-- this component cannot be functional component yet because of https://github.com/vuejs/vue-loader/issues/1136 -->
 <template>
   <section
     :class="{active: active}"
@@ -11,8 +12,6 @@
     <div class="info-container">
       <span class="user-name">{{ track ? track.userName : '' }}</span>
       <p class="track-name">{{ track ? track.name : '' }}</p>
-      <!-- <span class="user-name"/>
-      <p class="track-name"/> -->
     </div>
     <div
       v-if="track && track.audioShouldBeState==='SHOULD_BE_PLAYING' && track.audioState!=='PLAYING'"
