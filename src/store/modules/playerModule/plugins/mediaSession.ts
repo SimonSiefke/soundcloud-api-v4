@@ -23,12 +23,12 @@ export function updateMediaSession(
     // @ts-ignore
     navigator.mediaSession.setActionHandler('play', () => {
       console.log('media session play')
-      dispatch('playCurrent')
+      dispatch('togglePlay')
     })
     // @ts-ignore
     navigator.mediaSession.setActionHandler('pause', () => {
       console.log('media session pause')
-      dispatch('pauseCurrent')
+      dispatch('togglePlay')
     })
     // @ts-ignore
     navigator.mediaSession.setActionHandler('previoustrack', () => {})

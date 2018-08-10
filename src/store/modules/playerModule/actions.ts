@@ -38,7 +38,10 @@ export const actions: ActionTree<null, RootState> = {
       throw new Error('track is null, cannot play')
     }
   },
-  togglePlay({ dispatch, rootGetters, commit }, track: Track) {
+  togglePlay(
+    { dispatch, rootGetters, commit },
+    track: Track = rootGetters['tracks/currentTrack'],
+  ) {
     const oldTrack = rootGetters['tracks/currentTrack']
     if (oldTrack === null || track.id !== oldTrack.id) {
       dispatch('play', track)
