@@ -80,7 +80,6 @@ export class ChromeCastPlayer implements AudioPlayer {
       console.error('chromecast failed to load media')
     }
 
-    remotePlayer.volumeLevel = 0.1
     remotePlayerController.setVolumeLevel()
     this.store.dispatch('audio/AUDIO_PLAYING', newTrack)
     this.setUpProgressTimer()
