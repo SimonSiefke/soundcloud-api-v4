@@ -11,6 +11,8 @@
     <div class="info-container">
       <span class="user-name">{{ track ? track.userName : '' }}</span>
       <p class="track-name">{{ track ? track.name : '' }}</p>
+      <!-- <span class="user-name"/>
+      <p class="track-name"/> -->
     </div>
     <div
       v-if="track && track.audioShouldBeState==='SHOULD_BE_PLAYING' && track.audioState!=='PLAYING'"
@@ -101,8 +103,8 @@ section.active {
 }
 
 .user-name {
-  /* lineheight must be larger so that letter don't get cut up, but that introduces extra space, with we take care of with a negative margin-top */
-  $font-size = 0.7rem;
+  /* lineheight must be larger so that letters like y and g don't get cut, but that introduces extra space, with we take care of with a negative margin-top */
+  $font-size = 0.75rem;
   $half-line-height-extra-space = -1 * $font-size * 0.25;
   $margin-top = 0.3rem; // bring username more to center
   $margin-bottom = 0.11rem; // less vertical space between texts
@@ -126,9 +128,11 @@ section.active {
 }
 
 .track-name {
-  /* lineheight must be larger so that letter don't get cut up, but that introduces extra padding, with we take care of with a negative margin-top */
-  $font-size = 0.9rem;
-  margin-top: -1 * $font-size * 0.25; /* 50% of lineheight-padding */
+  /* lineheight must be larger so that letters like y and g don't get cut, but that introduces extra space, with we take care of with a negative margin-top */
+  $font-size = 1rem;
+  $half-line-height-extra-space = -1 * $font-size * 0.25;
+  $margin-top = 0.05rem; // bring username more to center
+  margin-top: $margin-top + $half-line-height-extra-space; /* 50% of lineheight-padding */
   color: var(--track-name-color);
   font-size: $font-size;
   line-height: $font-size * 1.5;
@@ -136,7 +140,7 @@ section.active {
   &:empty {
     width: 200px;
     height: @font-size;
-    margin-top: 0;
+    margin-top: $margin-top;
     background-image: linear-gradient(100deg, transparent, 'rgba(%s, 0.2)' % var(--divider-line-color) 50%, transparent 200px), linear-gradient('rgba(%s, 0.3)' % var(--divider-line-color), 'rgba(%s, 0.3)' % var(--divider-line-color)) /* placeholder color */;
     background-size: 30px 200px /* highlight */, 200px 200px /* placeholder content */;
     background-repeat: no-repeat;
