@@ -55,16 +55,6 @@ export default Vue.extend({
       }
     }
   },
-  // provide() {
-  //   const progress = {}
-
-  //   Object.defineProperty(progress, 'value', {
-  //     enumerable: true,
-  //     get: () => this.progress,
-  //   })
-
-  //   return { progress }
-  // },
   created() {
     this.getTracks()
   },

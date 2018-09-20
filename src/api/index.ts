@@ -1,6 +1,7 @@
 import { Track } from '@/types'
 import axios from 'axios'
 import querystring from 'querystring'
+import { beforeRequest, afterRequest } from '@/plugins'
 
 /**
  * retrieve necessary information about the tracks,
@@ -10,10 +11,10 @@ export async function Api_GetTracks(options: object = {}): Promise<{ [key: strin
   const defaultRequestOptions = {
     limit: 60, // max number of tracks per request
     linked_partitioning: 1, // send 1 link with the next bulk of tracks
-    q: 'odesza', // query parameter
     client_id: process.env.VUE_APP_SOUNDCLOUD_CLIENT_ID,
   }
   const mergedOptions = { ...defaultRequestOptions, ...options }
+  beforeRequest(mergedOptions)
   try {
     const rawData = await axios.get(`https://api.soundcloud.com/tracks?${querystring.stringify(mergedOptions)}`)
 
@@ -35,6 +36,7 @@ export async function Api_GetTracks(options: object = {}): Promise<{ [key: strin
         audioState: 'IDLE',
         audioShouldBeState: 'SHOULD_BE_IDLE',
       }))
+      afterRequest(mergedOptions)
       const nextTracksLink = rawData.data.next_href
       return { newTracks, nextTracksLink }
     }
