@@ -17,6 +17,8 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import BasicTrackList from '@/components/BasicTrackList.vue'
 import BasicSearchBar from '@/components/BasicSearchBar.vue'
 
+const loadFonts = () => import(/* webpackChunkName: 'loadFonts' */ '@/loadFonts')
+
 const BasicNavigation = () => import(/* webpackChunkName: 'component-navigation' */ '@/components/BasicNavigation.vue')
 const BasicToggleFullscreen = () => import(/* webpackChunkName: 'component-navigation' */ '@/components/BasicToggleFullscreen.vue')
 
@@ -57,6 +59,7 @@ export default Vue.extend({
   },
   created() {
     this.getTracks()
+    loadFonts()
   },
   methods: {
     ...mapActions('tracks', ['getTracks']),
