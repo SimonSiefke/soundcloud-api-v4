@@ -4,7 +4,6 @@ import { RootState } from '@/store/types'
 import { hooks } from '@/store/modules/playerModule/plugins'
 import { player } from '@/store/modules/audioModule/state'
 import { NoPlayer } from '@/store/modules/audioModule/audioPlayers/NoPlayer'
-import rootStore from '@/store'
 
 export const actions: ActionTree<null, RootState> = {
   async updatePlayer({ rootGetters, dispatch }) {

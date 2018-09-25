@@ -12,6 +12,5 @@ export const actions: ActionTree<TrackState, RootState> = {
     const { newTracks, nextTracksLink } = await Api_GetTracks(options)
     commit('setTracks', newTracks)
     commit('setNextTracksLink', nextTracksLink)
-    // commit('resetRecentlyPlayedTracks')
   },
 }

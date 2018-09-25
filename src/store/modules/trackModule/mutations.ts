@@ -43,12 +43,6 @@ export const mutations: MutationTree<TrackState> = {
       throw new Error('playing index is null, cannot decrement')
     }
   },
-  // loadingTrack(state, trackIndex: number) {
-  //   Vue.set(state.tracks[trackIndex], 'state', 'LOADING')
-  // },
-  // doneLoadingTrack(state, trackIndex: number) {
-  //   Vue.set(state.tracks[trackIndex], 'state', 'LOADED')
-  // },
   setNextTracksLink(state, nextTrackLink: string) {
     state.nextTracksLink = nextTrackLink
   },

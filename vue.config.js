@@ -4,7 +4,7 @@ const plugins = []
 
 // plugins.push(new BundleAnalyzerPlugin())
 
-const precacheBlackList = [
+const preCacheBlackList = [
   /component-chromecast-wrapper/,
   /audio-player-chrome-cast-wrapper/,
   /store-module-audio/,
@@ -28,7 +28,7 @@ module.exports = {
     // eslint-disable-next-line
     config.plugin('prefetch').tap(options => {
       options[0].fileBlacklist = options[0].fileBlacklist || []
-      options[0].fileBlacklist.push(...precacheBlackList)
+      options[0].fileBlacklist.push(...preCacheBlackList)
       return options
     })
   },

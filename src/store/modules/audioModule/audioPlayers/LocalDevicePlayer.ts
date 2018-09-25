@@ -1,7 +1,6 @@
 import { AudioPlayer } from '@/store/modules/audioModule/types'
 import { Track } from '@/types'
 import SoundCloudAudio from 'soundcloud-audio'
-import rootStore from '@/store'
 // @ts-ignore
 import * as Mitt from 'mitt/dist/mitt.umd'
 
@@ -35,7 +34,6 @@ export class LocalDevicePlayer implements AudioPlayer {
     this.player.setTime(time)
   }
   public async updateTrack(oldTrack: Track | null, newTrack: Track) {
-    // console.log('local')
     if (oldTrack) {
       this.pause(oldTrack)
     }
