@@ -15,10 +15,7 @@ workbox.routing.registerRoute(
 )
 
 workbox.routing.registerRoute(
-  ({ url }) => {
-    console.log(url)
-    return /tracks/.test(url.href)
-  },
+  ({ url }) => /tracks/.test(url.href),
   workbox.strategies.cacheFirst({
     cacheName: 'tracks-cache',
     plugins: [

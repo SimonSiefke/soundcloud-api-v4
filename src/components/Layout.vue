@@ -1,6 +1,5 @@
 <template >
   <div>
-
     <BasicSearchBar />
     <main>
       <BasicTrackList
@@ -74,9 +73,7 @@ export default Vue.extend({
 })
 </script>
 
-<style scoped>
-main {
-  overflow-y: scroll;
-  /* overscroll-behavior: contain; */
-}
+<style lang="stylus" scoped>
+main
+  overflow-y scroll
 </style>

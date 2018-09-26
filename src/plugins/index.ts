@@ -1,5 +1,5 @@
 export function beforeRequest(options: any) {
-  options.q = options.q || localStorage.getItem('ONTARIO_PLAYER_LAST_SEARCH')
+  options.q = options.q || localStorage.getItem('ONTARIO_PLAYER_LAST_SEARCH') || 'petit biscuit'
 }
 
 export function afterRequest(options: any) {

@@ -36,6 +36,7 @@
   /* --user-name-color: #f6f4d2; */
 }
 
+
 html {
   font-family: Arial, sans-serif;
   letter-spacing: 0.003rem;
@@ -49,17 +50,17 @@ html.fonts-loaded {
 body {
   margin: 0;
   /* avoid content jump */
-  /* overflow: hidden; */
+  overflow: hidden;
   background: black;
   /* overscroll-behavior-y: none; */
 }
 
 body>div {
   background: var(--bg);
-  min-height: 100%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  justify-content: space-between
 }
 
 html, body, body>div {
