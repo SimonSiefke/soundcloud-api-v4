@@ -23,6 +23,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+form
+  z-index 1 // be always above tracks, even when scrolling
+
 input
   width 100%
   margin 0
