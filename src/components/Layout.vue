@@ -1,13 +1,18 @@
 <template >
   <div>
-    <chromecast-wrapper />
+
     <BasicSearchBar />
-    <BasicTrackList
-      :tracks="tracks"
-      :current-track="currentTrack"
-    />
-    <BasicNavigation :track="currentTrack" />
-    <BasicToggleFullscreen :track="currentTrack" />
+    <main>
+      <BasicTrackList
+        :tracks="tracks"
+        :current-track="currentTrack"
+      />
+    </main>
+    <footer>
+      <chromecast-wrapper />
+      <BasicNavigation :track="currentTrack" />
+      <BasicToggleFullscreen :track="currentTrack" />
+    </footer>
   </div>
 </template>
 
@@ -68,3 +73,10 @@ export default Vue.extend({
 
 })
 </script>
+
+<style scoped>
+main {
+  overflow-y: scroll;
+  /* overscroll-behavior: contain; */
+}
+</style>

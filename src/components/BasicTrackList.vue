@@ -1,3 +1,15 @@
+<!--// <template functional >
+  //   <div>
+    //     <template v-for="(track, index) in props.tracks">
+      //       <basic-track-list-card
+//         :track="track"
+//         :active="index === (props.currentTrack && props.currentTrack.index)"
+//         :key="track.id" />
+      //     </template>
+    //   </div>
+  // </template>-->
+
+
 <script lang="ts">
 import Vue from 'vue'
 import BasicTrackListCard from '@/components/BasicTrackListCard.vue'
@@ -18,7 +30,9 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-section {
-  overflow: hidden;
+div {
+  /* height: 90vh; */
+  /* overflow-y: scroll; */
+  /* overscroll-behavior: contain; */
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="()=>search($event.target.firstChild.value)">
+  <form @submit.prevent="() => search($event.target.firstChild.value)">
     <input
       type="search"
       placeholder="search">

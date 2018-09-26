@@ -49,16 +49,25 @@ html.fonts-loaded {
 body {
   margin: 0;
   /* avoid content jump */
-  overflow-y: scroll;
+  /* overflow: hidden; */
   background: black;
-  overscroll-behavior-y: none;
+  /* overscroll-behavior-y: none; */
 }
 
 body>div {
   background: var(--bg);
-  padding-bottom: var(--navigation-height);
-  min-height: 100vh;
+  min-height: 100%;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+html, body, body>div {
+  height: 100%;
+}
+
+[v-cloak] {
+  display: none
 }
 
 /* Resets */
