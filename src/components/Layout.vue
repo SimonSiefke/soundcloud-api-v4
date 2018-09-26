@@ -76,4 +76,5 @@ export default Vue.extend({
 <style lang="stylus" scoped>
 main
   overflow-y scroll
+  flex 1
 </style>
