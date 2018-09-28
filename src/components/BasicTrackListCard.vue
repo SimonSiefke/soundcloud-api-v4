@@ -50,7 +50,8 @@ export default Vue.extend({
 .track
   position relative
   display flex
-  padding var(--space__small)
+  // TODO: margin or padding?
+  padding var(--space__small) calc(var(--space__small) + var(--simple-bar-width)) var(--space__small) var(--space__small)
 
 .track:not(:last-of-type):after
   content ''

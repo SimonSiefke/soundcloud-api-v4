@@ -12,13 +12,16 @@
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.0.1",
+    "axios": "^0.18.0",
     "can-ndjson-stream": "^1.0.0",
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "fs": "0.0.1-security",
     "json-server": "^0.14.0",
+    "json-to-ndjson": "0.0.1",
     "ndjson": "^1.5.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "querystring": "^0.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",

@@ -1,7 +1,8 @@
 <template >
   <div>
     <BasicSearchBar />
-    <main>
+    <main
+    >
       <BasicTrackList
         :tracks="tracks"
         :current-track="currentTrack"
@@ -20,6 +21,7 @@ import Vue from 'vue'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import BasicTrackList from '@/components/BasicTrackList.vue'
 import BasicSearchBar from '@/components/BasicSearchBar.vue'
+import SimpleBar from 'simplebar'
 
 const loadFonts = () => import(/* webpackChunkName: 'loadFonts' */ '@/loadFonts')
 
@@ -27,7 +29,6 @@ const BasicNavigation = () => import(/* webpackChunkName: 'component-navigation'
 const BasicToggleFullscreen = () => import(/* webpackChunkName: 'component-navigation' */ '@/components/BasicToggleFullscreen.vue')
 
 const ChromecastWrapper = () => import(/* webpackChunkName: 'component-chromecast-wrapper' */ '@/components/ChromecastWrapper.vue')
-
 
 export default Vue.extend({
   name: 'Layout',
@@ -47,7 +48,6 @@ export default Vue.extend({
     ...mapState('tracks', ['tracks', 'playingIndex']),
     ...mapState('player', ['progress']),
     ...mapGetters('tracks', ['currentTrack']),
-
   },
   mounted() {
     // @ts-ignore
@@ -60,6 +60,12 @@ export default Vue.extend({
         console.log('cast not isAvailable')
       }
     }
+    setTimeout(() => {
+      const el = new SimpleBar(document.querySelector('main'), {
+        autoHide: false,
+        minHeight: 150,
+      })
+    }, 2500)
   },
   created() {
     this.getTracks()
@@ -75,6 +81,6 @@ export default Vue.extend({
 
 <style lang="stylus" scoped>
 main
-  overflow-y scroll
+  overflow-y auto
   flex 1
 </style>

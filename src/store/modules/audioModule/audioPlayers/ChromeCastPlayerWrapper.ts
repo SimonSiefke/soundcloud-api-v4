@@ -38,7 +38,12 @@ remotePlayerController.addEventListener(
           player.player,
           ChromeCastPlayer.instance,
         )
-        store.dispatch('audio/SET_AUDIO_PLAYER', new ChromeCastPlayer(store))
+        const chromeCastPlayer = new ChromeCastPlayer(store)
+        store.dispatch('audio/SET_AUDIO_PLAYER', chromeCastPlayer)
+
+        window.addEventListener('beforeunload', () => {
+          chromeCastPlayer.pause(null)
+        })
       }
 
       console.log('ses', castSession)

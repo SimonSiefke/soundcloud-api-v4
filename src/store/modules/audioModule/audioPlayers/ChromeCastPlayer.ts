@@ -38,7 +38,8 @@ export class ChromeCastPlayer implements AudioPlayer {
     }
     this.setUpProgressTimer()
   }
-  public pause(track: Track) {
+
+  public pause(track: Track | null) {
     if (!remotePlayer.isPaused && remotePlayer.canPause) {
       remotePlayerController.playOrPause()
     } else {
@@ -70,14 +71,30 @@ export class ChromeCastPlayer implements AudioPlayer {
     }/stream?client_id=${SOUNDCLOUD_CLIENT_ID}`
     console.log('before request')
     const mediaInfo = new chrome.cast.media.MediaInfo(audioUrl, 'audio/mp3')
+    // const queueItem = new chrome.cast.media.QueueItem(mediaInfo)
+    // queueItem.preloadTime = 20
+    // queueItem.queueId = 7
+    const queueLoadRequest = new chrome.cast.media.QueueLoadRequest([])
+    // queueLoadRequest.repeatMode = chrome.cast.media.SINGLE
 
     const request = new chrome.cast.media.LoadRequest(mediaInfo)
-    console.log('request done', request)
+    // console.log('request done', request)
 
     try {
+      // await this.castSession.queueLoad(
+      //   queueLoadRequest,
+      //   (e) => {
+      //     console.log(e)
+      //   },
+      //   error => console.log(error),
+      // )
       await this.castSession.loadMedia(request)
     } catch (error) {
-      console.error('chromecast failed to load media')
+      console.error(
+        'chromecast failed to load media due to',
+        JSON.stringify(error),
+      )
+      return
     }
 
     remotePlayerController.setVolumeLevel()
