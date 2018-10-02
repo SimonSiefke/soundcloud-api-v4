@@ -2,10 +2,8 @@
   <div class="progress-wrapper">
     <div
       :style="{width: `${progressPercent}%`}"
-      :aria-valuetext="`${progressPercent}%`"
       class="progress"
-      aria-live="polite"
-      role="progress"/>
+    />
   </div>
 </template>
 
