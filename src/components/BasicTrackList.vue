@@ -11,14 +11,14 @@
 
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue, { CreateElement } from 'vue'
 import BasicTrackListCard from '@/components/BasicTrackListCard.vue'
 
 export default Vue.extend({
   name: 'BasicTrackList',
   functional: true,
   props: ['tracks', 'currentTrack'],
-  render(h: any, { props }) {
+  render(h: CreateElement, { props }) {
     return props.tracks.map((track: any, index: number) => h(BasicTrackListCard, {
       props: {
         track,

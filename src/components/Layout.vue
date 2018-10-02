@@ -1,8 +1,8 @@
 <template >
   <div>
     <BasicSearchBar />
-    <main
-    >
+    <!-- using tabindex -1 to not focus the main element but the elements inside of it -->
+    <main tabindex="-1">
       <BasicTrackList
         :tracks="tracks"
         :current-track="currentTrack"
@@ -60,12 +60,12 @@ export default Vue.extend({
         console.log('cast not isAvailable')
       }
     }
-    setTimeout(() => {
-      const el = new SimpleBar(document.querySelector('main'), {
-        autoHide: false,
-        minHeight: 150,
-      })
-    }, 2500)
+    // setTimeout(() => {
+    //   const el = new SimpleBar(document.querySelector('main'), {
+    //     autoHide: false,
+    //     minHeight: 150,
+    //   })
+    // }, 2500)
   },
   created() {
     this.getTracks()

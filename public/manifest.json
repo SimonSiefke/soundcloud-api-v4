@@ -1,6 +1,6 @@
 {
   "name": "soundcloud-api-v6",
-  "short_name": "soundcloud-api-v6",
+  "short_name": "s-api",
   "icons": [
     {
       "src": "/img/icons/android-chrome-192x192.png",
@@ -16,5 +16,6 @@
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#30343f",
-  "theme_color": "#30343f"
+  "theme_color": "#30343f",
+  "description": "🎧 to the music you ❤️"
 }

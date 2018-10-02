@@ -3,7 +3,9 @@
   <div
     :class="{active: active}"
     class="track"
-    @click="togglePlay(track)">
+    tabindex="0"
+    @click="togglePlay(track)"
+    @keydown.enter="togglePlay(track)">
     <div class="image-container">
       <img
         v-if="track && track.cover"
@@ -12,7 +14,10 @@
     </div>
     <div class="info-container">
       <span class="user-name">{{ track ? track.userName : '' }}</span>
-      <p class="track-name">{{ track ? track.name : '' }}</p>
+      <p
+        tabindex="-1"
+        class="track-name"
+      >{{ track ? track.name : '' }}</p>
     </div>
     <div
       v-if="track && track.audioShouldBeState==='SHOULD_BE_PLAYING' && track.audioState!=='PLAYING'"
@@ -48,10 +53,15 @@ export default Vue.extend({
 <style scoped lang="stylus">
 // TODO: lazyload images
 .track
+  box-sizing border-box // on focus, the element shouldn't change its size
   position relative
   display flex
+  border 2px solid transparent // use a transparent border so that the content doesn't jump when we focus and add a border
   // TODO: margin or padding?
   padding var(--space__small) calc(var(--space__small) + var(--simple-bar-width)) var(--space__small) var(--space__small)
+
+  &:focus
+    border-color var(--user-name-color)
 
 .track:not(:last-of-type):after
   content ''
@@ -74,10 +84,11 @@ export default Vue.extend({
   // TODO: glass effect
 
 .image-container
+  overflow hidden // some images are not square
   width 50px
   height @width
   background 'rgba(%s, 0.3)' % var(--divider-line-color)
-  flex-shrink 0
+  flex-shrink 0 // make it full width and height
 
 .image-container img
   width 100%
@@ -90,7 +101,6 @@ export default Vue.extend({
   padding 0 var(--space__small)
 
 .user-name, .track-name
-  box-sizing border-box
   overflow-x hidden // we don't want a horizontal scroll bar
   text-overflow ellipsis // replace too long text with "..." at the end
   user-select none // we don't want text to be selectable

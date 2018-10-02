@@ -1,8 +1,12 @@
 <template>
-  <form @submit.prevent="() => search($event.target.firstChild.value)">
+  <form
+    role="search"
+    @submit.prevent="() => search($event.target.firstChild.value)">
     <input
       type="search"
-      placeholder="search">
+      placeholder="search"
+      autocomplete="off"
+      aria-label="Search">
   </form>
 </template>
 
