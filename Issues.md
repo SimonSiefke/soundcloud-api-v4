@@ -36,3 +36,5 @@
 1. login form like npm or yeti
 1. progress loading bar on top
 1. lazyload keyboard navigation
+1. arrow navigation
+1. autoplay on tab focus change

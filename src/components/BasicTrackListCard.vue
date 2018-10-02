@@ -1,5 +1,6 @@
 <!-- this component cannot be functional component yet because of https://github.com/vuejs/vue-loader/issues/1136 -->
 <template>
+  <!-- using tabindex 0 on the div to make it focusable via keyboard -->
   <div
     :class="{active: active}"
     class="track"
@@ -14,6 +15,7 @@
     </div>
     <div class="info-container">
       <span class="user-name">{{ track ? track.userName : '' }}</span>
+
       <p
         tabindex="-1"
         class="track-name"
@@ -60,8 +62,8 @@ export default Vue.extend({
   // TODO: margin or padding?
   padding var(--space__small) calc(var(--space__small) + var(--simple-bar-width)) var(--space__small) var(--space__small)
 
-  &:focus
-    border-color var(--user-name-color)
+.navigation--tab .track:focus
+  border-color var(--user-name-color)
 
 .track:not(:last-of-type):after
   content ''
@@ -81,7 +83,7 @@ export default Vue.extend({
   )
 
 .track.active
-  // TODO: glass effect
+  // TODO: glass effect maybe?
 
 .image-container
   overflow hidden // some images are not square
@@ -101,7 +103,7 @@ export default Vue.extend({
   padding 0 var(--space__small)
 
 .user-name, .track-name
-  overflow-x hidden // we don't want a horizontal scroll bar
+  overflow-x hidden // we don't want a horizontal scrollbar
   text-overflow ellipsis // replace too long text with "..." at the end
   user-select none // we don't want text to be selectable
   white-space nowrap // force text to single line
@@ -116,14 +118,14 @@ export default Vue.extend({
   margin-bottom $margin-bottom + $half-line-height-extra-space
   color var(--user-name-color)
   font-size $font-size
-  line-height $font-size * 1.5 /* 50% larger than font-size */
+  line-height $font-size * 1.5 // 50% larger than font-size
 
   &:empty
     width 100px
     height @font-size
     margin-top $margin-top
     margin-bottom $margin-bottom
-    background-image linear-gradient(100deg, transparent, 'rgba(%s, 0.2)' % var(--divider-line-color) 50%, transparent 200px), linear-gradient('rgba(%s, 0.3)' % var(--divider-line-color), 'rgba(%s, 0.3)' % var(--divider-line-color)) /* placeholder color */
+    background-image linear-gradient(100deg, transparent, 'rgba(%s, 0.2)' % var(--divider-line-color) 50%, transparent 200px), linear-gradient('rgba(%s, 0.3)' % var(--divider-line-color), 'rgba(%s, 0.3)' % var(--divider-line-color)) // placeholder color
     background-size 30px 200px /* highlight */, 200px 200px /* placeholder content */
     background-repeat no-repeat
     animation shine 1s linear infinite
@@ -134,11 +136,12 @@ export default Vue.extend({
   $font-size = 1rem
   $half-line-height-extra-space = -1 * $font-size * 0.25
   $margin-top = 0.05rem // bring username more to center
-  margin-top $margin-top + $half-line-height-extra-space /* 50% of lineheight-padding */
+  margin-top $margin-top + $half-line-height-extra-space // 50% of lineheight-padding
   color var(--track-name-color)
   font-size $font-size
   line-height $font-size * 1.5
 
+  // show an animation when its empty/loading
   &:empty
     width 200px
     height @font-size
@@ -165,8 +168,8 @@ $equalizers = 4
 $equalizerSize = ($equalizers * $width) + (($equalizers - 1) * $margin)
 $bottom = (($size - $max) / 2)
 $left = (($size - $equalizerSize) / 2)
-$two = round(($max / 7), $precision)
 // Heights
+$two = round(($max / 7), $precision)
 $three = round(($max / 4.666666667), $precision)
 $four = round(($max / 3.5), $precision)
 $five = round(($max / 2.8), $precision)
