@@ -21,7 +21,10 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx",
+    "build.custom/build.custom.js",
+    "build.custom/build.custom-workbox.js",
+    "build.custom/build.custom-netlify-headers.js"
   ],
   "exclude": ["node_modules", "**/chromecast.ts"]
 }

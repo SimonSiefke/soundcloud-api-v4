@@ -4,13 +4,13 @@ const plugins = []
 
 // plugins.push(new BundleAnalyzerPlugin())
 
-const preCacheBlackList = [
-  /component-chromecast-wrapper/,
-  /audio-player-chrome-cast-wrapper/,
-  /store-module-audio/,
-  /audio-player-chromecast/,
-  /audio-player-local-device/,
-]
+// const preCacheBlackList = [
+//   /component-chromecast-wrapper/,
+//   /audio-player-chrome-cast-wrapper/,
+//   /store-module-audio/,
+//   /audio-player-chromecast/,
+//   /audio-player-local-device/,
+// ]
 
 module.exports = {
   devServer: {
@@ -21,15 +21,5 @@ module.exports = {
     return {
       plugins,
     }
-  },
-  chainWebpack: (config) => {
-    // config.plugins.delete('prefetch')
-    // modify prefetch options:
-    // eslint-disable-next-line
-    config.plugin('prefetch').tap(options => {
-      options[0].fileBlacklist = options[0].fileBlacklist || []
-      options[0].fileBlacklist.push(...preCacheBlackList)
-      return options
-    })
   },
 }
