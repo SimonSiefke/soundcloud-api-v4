@@ -39,3 +39,5 @@
 1. arrow navigation
 1. autoplay on tab focus change
 1. use polymer?
+1. ndjson endpoint (graphql ?)
+1. https://philipwalton.com/articles/idle-until-urgent/
