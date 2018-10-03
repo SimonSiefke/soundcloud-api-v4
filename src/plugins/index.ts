@@ -1,5 +1,6 @@
 import 'no-outline-on-click'
 import './events'
+import './VueAnalytics'
 
 export function beforeRequest(options: any) {
   options.q =
