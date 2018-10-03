@@ -41,3 +41,6 @@
 1. use polymer?
 1. ndjson endpoint (graphql ?)
 1. https://philipwalton.com/articles/idle-until-urgent/
+1. cookies
+1. image placeholders
+1. generate es6 bundles
