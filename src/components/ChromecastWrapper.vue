@@ -16,7 +16,7 @@ export default Vue.extend({
   data():Data {
     return {
       chromeCastAvailable: null,
-      castButton: '<button is="google-cast-button"></button>',
+      castButton: '<button is="google-cast-button" aria-label="Chromecast"></button>',
     }
   },
   async mounted() {
@@ -41,16 +41,15 @@ export default Vue.extend({
 
 
 <style lang="stylus" scoped>
-div {
-  position: fixed;
-  z-index: 4;
-  display: flex;
-  justify-content: center;
-  width: 55px;
-  bottom: 22.5px;
-  left: 22.5px;
-  height: 55px;
-  border-radius: 50%;
-  background: dodgerblue;
-}
+div
+  position fixed
+  z-index 4
+  display flex
+  justify-content center
+  width 55px
+  bottom 22.5px
+  left 22.5px
+  height 55px
+  border-radius 50%
+  background dodgerblue
 </style>

@@ -1,4 +1,5 @@
 <template>
+  <!-- we need a wrapper that has the full width, inside is the actual progress bar -->
   <div class="progress-wrapper">
     <div
       :style="{width: `${progressPercent}%`}"
