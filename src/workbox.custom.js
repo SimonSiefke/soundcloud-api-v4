@@ -1,6 +1,7 @@
 workbox.routing.registerRoute(
   ({ url }) => {
     console.log(url)
+    console.log(/\.(jpg|jpeg|svg|png)/.test(url.href))
     return /\.(jpg|jpeg|svg|png)/.test(url.href)
   },
   workbox.strategies.cacheFirst({
