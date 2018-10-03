@@ -44,3 +44,4 @@
 1. cookies
 1. image placeholders
 1. generate es6 bundles
+1. ignore netlify \_headers
