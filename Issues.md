@@ -45,3 +45,5 @@
 1. image placeholders
 1. generate es6 bundles
 1. ignore netlify \_headers
+1. elements like spotify
+1. double theme color
