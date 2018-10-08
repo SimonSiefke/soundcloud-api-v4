@@ -11,6 +11,7 @@
       <img
         v-if="track && track.cover"
         :src="track.cover"
+        crossorigin="anonymous"
         alt="">
     </div>
     <div class="info-container">
