@@ -1,6 +1,6 @@
 // cache images
 workbox.routing.registerRoute(
-  /\.(jpg|jpeg|svg|png)/,
+  ({ url }) => /\.(jpg|jpeg|svg|png)/.test(url),
   workbox.strategies.cacheFirst({
     cacheName: 'images-cache',
     plugins: [
@@ -14,7 +14,7 @@ workbox.routing.registerRoute(
 
 // cache api requests
 workbox.routing.registerRoute(
-  /tracks/,
+  ({ url }) => /tracks/.test(url),
   workbox.strategies.cacheFirst({
     cacheName: 'tracks-cache',
     plugins: [
@@ -28,7 +28,10 @@ workbox.routing.registerRoute(
 
 // cache audio files
 workbox.routing.registerRoute(
-  new RegExp('.*.mp3'),
+  ({ url }) => {
+    console.log('URL', url)
+    return new RegExp('.*.mp3').test(url)
+  },
   workbox.strategies.cacheFirst({
     cacheName: 'audio-cache',
     plugins: [
