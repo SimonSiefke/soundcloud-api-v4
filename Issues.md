@@ -47,3 +47,4 @@
 1. ignore netlify \_headers
 1. elements like spotify
 1. double theme color
+1. precache-manifest.json blacklist
