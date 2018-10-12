@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "vue-cli-service build --modern && node ./build.custom/index.js",
+    "lint": "vue-cli-service lint",
+    "test": "vue-cli-service test:e2e"
   },
   "dependencies": {
     "@types/fontfaceobserver": "0.0.6",
