@@ -1,0 +1,3 @@
+## Don't cache service worker
+/service-worker.js
+  Cache-Control: no-cache
