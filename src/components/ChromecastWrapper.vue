@@ -5,22 +5,28 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { Component, Vue, Prop } from 'vue-property-decorator'
 
 interface Data {
   chromeCastAvailable: null | boolean
   castButton: string
 }
 
-export default Vue.extend({
-  data(): Data {
-    return {
-      chromeCastAvailable: null,
-      castButton:
-        '<button is="google-cast-button" aria-label="Chromecast"></button>',
-    }
-  },
-  async mounted() {
+@Component({
+  name: 'ChromecastWrapper',
+})
+export default class ChromecastWrapper extends Vue {
+  /*********
+   * Data *
+   *********/
+  private chromeCastAvailable: boolean | null = null
+  private castButton =
+    '<button is="google-cast-button" aria-label="Chromecast"></button>'
+
+  /***********
+   * Mounted *
+   ***********/
+  private async mounted() {
     // @ts-ignore
     // eslint-disable-next-line
     window.__onGCastApiAvailable = async (isAvailable:boolean) => {
@@ -37,8 +43,8 @@ export default Vue.extend({
     chromecastSdkScript.src =
       'https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1'
     document.head.appendChild(chromecastSdkScript)
-  },
-})
+  }
+}
 </script>
 
 

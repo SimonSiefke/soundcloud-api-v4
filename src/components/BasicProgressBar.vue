@@ -9,46 +9,52 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { Component, Vue, Watch } from 'vue-property-decorator'
+import { Getter } from 'vuex-class'
 import { player } from '@/store/modules/audioModule/state'
-import { mapGetters } from 'vuex'
 import { AudioPlayer } from '@/store/modules/audioModule/types'
+import { Track } from '@/types'
 
-export default Vue.extend({
-  data() {
-    return {
-      progressPercent: 0,
-    }
-  },
-  computed: {
-    ...mapGetters('tracks', ['currentTrack']),
-    player() {
-      return player.player
-    },
-  },
-  watch: {
-    player: {
-      handler(newPlayer: AudioPlayer) {
-        newPlayer.progressEventEmitter.on(
-          'progress',
-          this.updateProgressPercent,
-        )
-      },
-      immediate: true,
-    },
-  },
-  beforeDestroy() {
-    this.player.progressEventEmitter.removeListener(this.updateProgressPercent)
-  },
-  methods: {
-    updateProgressPercent(progressInMilliseconds: number) {
-      // @ts-ignore
-      const trackDurationInMilliseconds = this.currentTrack.duration
-      this.progressPercent =
-        (progressInMilliseconds * 100000) / trackDurationInMilliseconds
-    },
-  },
+@Component({
+  name: 'BasicProgressBar',
 })
+export default class BasicProgressBar extends Vue {
+  /*********
+   * Data *
+   ********/
+  private progressPercent = 0
+
+  /************
+   * Computed *
+   ************/
+  @Getter('tracks/currentTrack')
+  private currentTrack!: Track
+
+  private get player() {
+    return player.player
+  }
+
+  /************
+   * Watchers *
+   ************/
+  @Watch('player', { immediate: true })
+  private onPlayerChanged(newPlayer: AudioPlayer) {
+    newPlayer.progressEventEmitter.on('progress', this.updateProgressPercent)
+  }
+
+  /***********
+   * Methods *
+   ***********/
+  private beforeDestroy() {
+    this.player.progressEventEmitter.removeListener(this.updateProgressPercent)
+  }
+
+  private updateProgressPercent(progressInMilliseconds: number) {
+    const trackDurationInMilliseconds = this.currentTrack.duration
+    this.progressPercent =
+      (progressInMilliseconds * 100000) / trackDurationInMilliseconds
+  }
+}
 </script>
 
 <style lang="stylus" scoped>

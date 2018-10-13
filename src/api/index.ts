@@ -7,7 +7,9 @@ import { beforeRequest, afterRequest } from '@/plugins/index'
  * retrieve necessary information about the tracks,
  * e.g. streamingUrl, track covers, track artists
  */
-export async function Api_GetTracks(options: object = {}): Promise<{ [key: string]: any }> {
+export async function Api_GetTracks(
+  options: object = {},
+): Promise<{ [key: string]: any }> {
   const defaultRequestOptions = {
     limit: 60, // max number of tracks per request
     linked_partitioning: 1, // send 1 link with the next bulk of tracks
@@ -16,26 +18,32 @@ export async function Api_GetTracks(options: object = {}): Promise<{ [key: strin
   const mergedOptions = { ...defaultRequestOptions, ...options }
   beforeRequest(mergedOptions)
   try {
-    const rawData = await axios.get(`https://api.soundcloud.com/tracks?${querystring.stringify(mergedOptions)}`)
+    const rawData = await axios.get(
+      `https://api.soundcloud.com/tracks?${querystring.stringify(
+        mergedOptions,
+      )}`,
+    )
 
     if (rawData) {
-      const newTracks = rawData.data.collection.map((track: any, index: number): Track => ({
-        id: track.id,
-        cover: track.artwork_url
-          ? track.artwork_url.replace('large', 'crop')
-          : '',
-        name: track.title,
-        duration: track.duration,
-        love: track.likes_count,
-        link: track.permalink_url,
-        genre: track.genre,
-        userAvatar: track.user.avatar_url,
-        userLink: track.user.permalink_url,
-        userName: track.user.username,
-        index,
-        audioState: 'IDLE',
-        audioShouldBeState: 'SHOULD_BE_IDLE',
-      }))
+      const newTracks = rawData.data.collection.map(
+        (track: any, index: number): Track => ({
+          id: track.id,
+          cover: track.artwork_url
+            ? track.artwork_url.replace('large', 'crop')
+            : '',
+          name: track.title,
+          duration: track.duration,
+          love: track.likes_count,
+          link: track.permalink_url,
+          genre: track.genre,
+          userAvatar: track.user.avatar_url,
+          userLink: track.user.permalink_url,
+          userName: track.user.username,
+          index,
+          audioState: 'IDLE',
+          audioShouldBeState: 'SHOULD_BE_IDLE',
+        }),
+      )
       afterRequest(mergedOptions)
       const nextTracksLink = rawData.data.next_href
       return { newTracks, nextTracksLink }

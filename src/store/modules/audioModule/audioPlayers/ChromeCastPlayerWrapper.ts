@@ -8,7 +8,9 @@ cast.framework.CastContext.getInstance().setOptions({
 export const remotePlayer = new cast.framework.RemotePlayer()
 remotePlayer.volumeLevel = 0.2
 
-export const remotePlayerController = new cast.framework.RemotePlayerController(remotePlayer)
+export const remotePlayerController = new cast.framework.RemotePlayerController(
+  remotePlayer,
+)
 
 console.log('chrome player wrapper initialized')
 remotePlayerController.addEventListener(

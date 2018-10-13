@@ -32,25 +32,35 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { mapActions, mapState } from 'vuex'
+import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Action } from 'vuex-class'
+import { Track } from '@/types'
 
-export default Vue.extend({
+@Component({
   name: 'BasicTrackListCard',
-  props: {
-    track: {
-      type: Object,
-      default: null,
-    },
-    active: {
-      type: Boolean,
-      required: true,
-    },
-  },
-  methods: {
-    ...mapActions('player', ['togglePlay', 'play', 'pause']),
-  },
 })
+export default class BasicTrackListCard extends Vue {
+  /*********
+   * Props *
+   *********/
+  @Prop({ default: null })
+  private track!: Track
+
+  @Prop({ required: true })
+  private active!: boolean
+
+  /***********
+   * Methods *
+   ***********/
+  @Action('player/togglePlay')
+  private togglePlay!: () => void
+
+  @Action('player/play')
+  private play!: () => void
+
+  @Action('player/pause')
+  private pause!: () => void
+}
 </script>
 
 <style scoped lang="stylus">

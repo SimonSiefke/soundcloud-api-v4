@@ -15,15 +15,26 @@
   </div>
 </template>
 
-<script>
-import { mapActions } from 'vuex'
+<script lang="ts">
+import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Action } from 'vuex-class'
+import { Track } from '@/types'
 
-export default {
+@Component({
   name: 'BasicToggleFullscreen',
-  props: ['track'],
-  methods: {
-    ...mapActions('player', ['togglePlay']),
-  },
+})
+export default class BasicToggleFullscreen extends Vue {
+  /********
+   * Props *
+   *********/
+  @Prop()
+  private track!: Track
+
+  /***********
+   * Methods *
+   ***********/
+  @Action('player/togglePlay')
+  private togglePlay!: () => void
 }
 </script>
 

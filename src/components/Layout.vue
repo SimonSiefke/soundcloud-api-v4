@@ -52,18 +52,29 @@ export default class Layout extends Vue {
   @State('progress', {
     namespace: 'player',
   })
-  progress!: number
+  private progress!: number
   @State('playingIndex', {
     namespace: 'tracks',
   })
-  playingIndex!: number
+  private playingIndex!: number
   @State('tracks', {
     namespace: 'tracks',
   })
-  tracks!: Track[]
+  private tracks!: Track[]
   @Getter('tracks/currentTrack')
-  currentTrack!: Track
+  private currentTrack!: Track
 
+  /***********
+   * Created *
+   ***********/
+  created() {
+    this.getTracks()
+    loadFonts()
+  }
+
+  /***********
+   * Mounted *
+   ***********/
   mounted() {
     // @ts-ignore
     // eslint-disable-next-line
@@ -75,18 +86,11 @@ export default class Layout extends Vue {
         console.log('cast not isAvailable')
       }
     }
-    // setTimeout(() => {
-    //   const el = new SimpleBar(document.querySelector('main'), {
-    //     autoHide: false,
-    //     minHeight: 150,
-    //   })
-    // }, 2500)
-  }
-  created() {
-    this.getTracks()
-    loadFonts()
   }
 
+  /***********
+   * Methods *
+   ***********/
   @Action('tracks/getTracks')
   getTracks!: () => void
 

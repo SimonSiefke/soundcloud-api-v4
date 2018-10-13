@@ -30,7 +30,9 @@ export const actions: ActionTree<AudioModuleState, RootState> = {
 
   async updateTrack({ dispatch }, newTrack: Track) {
     if (player.player === NoPlayer.instance) {
-      console.warn('cannot update player, because player is null, switching to local')
+      console.warn(
+        'cannot update player, because player is null, switching to local',
+      )
       const {
         LocalDevicePlayer,
       } = await import(/* webpackChunkName: 'audio-player-local-device' */ '@/store/modules/audioModule/audioPlayers/LocalDevicePlayer')

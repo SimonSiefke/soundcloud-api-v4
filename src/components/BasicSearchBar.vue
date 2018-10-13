@@ -11,18 +11,23 @@
 </template>
 
 <script lang="ts">
-import { mapActions } from 'vuex'
+import { Component, Vue } from 'vue-property-decorator'
+import { Action } from 'vuex-class'
 
-export default {
+@Component({
   name: 'BasicSearchBar',
-  methods: {
-    ...mapActions('tracks', ['getTracks']),
-    search(searchValue: string) {
-      const query = { q: searchValue }
-      // @ts-ignore
-      this.getTracks(query)
-    },
-  },
+})
+export default class BasicSearchBar extends Vue {
+  /***********
+   * Methods *
+   ***********/
+  @Action('tracks/getTracks')
+  private getTracks!: (query: { q: string }) => void
+
+  private search(searchValue: string) {
+    const query = { q: searchValue }
+    this.getTracks(query)
+  }
 }
 </script>
 
