@@ -3,7 +3,7 @@ import {
   AudioPlayer,
 } from '@/store/modules/audioModule/types'
 import Vue from 'vue'
-import { NoPlayer } from '@/store/modules/audioModule/audioPlayers/NoPlayer'
+import { NoPlayer } from '@/store/modules/audioModule/audioPlayers/NoPlayer/index'
 
 export const state: AudioModuleState = {
   audioState: 'IDLE',

@@ -33,7 +33,7 @@ export default class ChromecastWrapper extends Vue {
       this.chromeCastAvailable = isAvailable
       if (isAvailable) {
         console.log('cast is available')
-        import(/* webpackChunkName: 'audio-player-chrome-cast-wrapper' */ '@/store/modules/audioModule/audioPlayers/ChromeCastPlayerWrapper.ts')
+        import(/* webpackChunkName: 'audio-player-chrome-cast-wrapper' */ '@/store/modules/audioModule/audioPlayers/ChromeCastPlayer/ChromeCastPlayerWrapper.ts')
       } else {
         console.log('cast not isAvailable')
       }

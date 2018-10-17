@@ -35,7 +35,7 @@ export const actions: ActionTree<AudioModuleState, RootState> = {
       )
       const {
         LocalDevicePlayer,
-      } = await import(/* webpackChunkName: 'audio-player-local-device' */ '@/store/modules/audioModule/audioPlayers/LocalDevicePlayer')
+      } = await import(/* webpackChunkName: 'audio-player-local-device' */ '@/store/modules/audioModule/audioPlayers/LocalDevicePlayer/LocalDevicePlayer')
 
       player.player = new LocalDevicePlayer(store)
     }

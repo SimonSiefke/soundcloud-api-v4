@@ -15,12 +15,14 @@
         alt="">
     </div>
     <div class="info-container">
-      <span class="user-name">{{ track ? track.userName : '' }}</span>
-
+      <span class="user-name">
+        {{ track ? track.userName : '' }}
+      </span>
       <p
         tabindex="-1"
-        class="track-name"
-      >{{ track ? track.name : '' }}</p>
+        class="track-name">
+        {{ track ? track.name : '' }}
+      </p>
     </div>
     <div
       v-if="track && track.audioShouldBeState==='SHOULD_BE_PLAYING' && track.audioState!=='PLAYING'"
@@ -54,12 +56,6 @@ export default class BasicTrackListCard extends Vue {
    ***********/
   @Action('player/togglePlay')
   private togglePlay!: () => void
-
-  @Action('player/play')
-  private play!: () => void
-
-  @Action('player/pause')
-  private pause!: () => void
 }
 </script>
 

@@ -1,10 +1,10 @@
 import { AudioPlayer } from '@/store/modules/audioModule/types'
 import { Track } from '@/types'
-import SoundCloudAudio from 'soundcloud-audio'
 // @ts-ignore
 import * as Mitt from 'mitt/dist/mitt.umd'
 
 const SOUNDCLOUD_CLIENT_ID = process.env.VUE_APP_SOUNDCLOUD_CLIENT_ID
+let AudioFactory: typeof import('./AudioFactory').default | undefined
 
 export class LocalDevicePlayer implements AudioPlayer {
   private player: any
@@ -27,25 +27,35 @@ export class LocalDevicePlayer implements AudioPlayer {
   }
   public stop(track: Track) {
     this.player.pause()
-    this.player.setTime(0)
+    this.player.currentTime = 0
     this.store.dispatch('audio/AUDIO_STOPPED', track)
   }
   setTime(time: number) {
-    this.player.setTime(time)
+    this.player.currentTime = time
   }
   public async updateTrack(oldTrack: Track | null, newTrack: Track) {
     if (oldTrack) {
       this.pause(oldTrack)
     }
     try {
-      // @ts-ignore
-      const newPlayer = new SoundCloudAudio(SOUNDCLOUD_CLIENT_ID)
-      const audioUrl = `https://api.soundcloud.com/tracks/${newTrack.id}`
-      await new Promise((resolve, reject) => {
-        console.log(audioUrl, SOUNDCLOUD_CLIENT_ID)
-        newPlayer.resolve(audioUrl, resolve)
-      })
-      this.player = newPlayer
+      if (AudioFactory && AudioFactory.getItem(newTrack.id)) {
+        this.player = AudioFactory.getItem(newTrack.id)
+      } else {
+        // @ts-ignore
+        const audioUrl = `https://api.soundcloud.com/tracks/${
+          newTrack.id
+        }/stream?client_id=${SOUNDCLOUD_CLIENT_ID}`
+
+        const urlPromise = fetch(audioUrl).then(res => res.url)
+        const AudioFactoryPromise = import(/* webpackChunkName: 'audioPlayers__localDevicePlayer__AudioFactory' */ './AudioFactory')
+        const [url, { default: _AudioFactory }] = await Promise.all([
+          urlPromise,
+          AudioFactoryPromise,
+        ])
+        AudioFactory = _AudioFactory
+        this.player = AudioFactory.createAudioElement(url, newTrack.id)
+      }
+
       this.addEventListenersForPlayer(newTrack)
       this.play(newTrack)
     } catch (error) {
@@ -67,15 +77,15 @@ export class LocalDevicePlayer implements AudioPlayer {
   }
 
   private addEventListenersForPlayer(track: Track) {
-    this.player.on('ended', () => {
+    this.player.addEventListener('ended', () => {
       // @ts-ignore
       if (this.store.state.audio.loop) {
         this.setTime(0)
         this.play(track)
       }
     })
-    this.player.on('timeupdate', () => {
-      const progressInMilliseconds = this.player.audio.currentTime
+    this.player.addEventListener('timeupdate', () => {
+      const progressInMilliseconds = this.player.currentTime
       this.progressEventEmitter.emit('progress', progressInMilliseconds)
     })
   }

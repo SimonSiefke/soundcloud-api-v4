@@ -5,7 +5,7 @@ import * as Mitt from 'mitt/dist/mitt.umd'
 import {
   remotePlayer,
   remotePlayerController,
-} from '@/store/modules/audioModule/audioPlayers/ChromeCastPlayerWrapper'
+} from '@/store/modules/audioModule/audioPlayers/ChromeCastPlayer/ChromeCastPlayerWrapper'
 
 const SOUNDCLOUD_CLIENT_ID = process.env.VUE_APP_SOUNDCLOUD_CLIENT_ID
 

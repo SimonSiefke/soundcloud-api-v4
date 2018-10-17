@@ -23,7 +23,7 @@ remotePlayerController.addEventListener(
       console.log('chromecast connection lost')
       const {
         LocalDevicePlayer,
-      } = await import(/* webpackChunkName: 'audio-player-local-device' */ '@/store/modules/audioModule/audioPlayers/LocalDevicePlayer')
+      } = await import(/* webpackChunkName: 'audio-player-local-device' */ '@/store/modules/audioModule/audioPlayers/LocalDevicePlayer/LocalDevicePlayer')
 
       store.dispatch('audio/SET_AUDIO_PLAYER', new LocalDevicePlayer(store))
     } else {
@@ -33,7 +33,7 @@ remotePlayerController.addEventListener(
       // eslint-disable-next-line
       const {
         ChromeCastPlayer,
-      } = await import(/* webpackChunkName: 'audio-player-chromecast' */ '@/store/modules/audioModule/audioPlayers/ChromeCastPlayer')
+      } = await import(/* webpackChunkName: 'audio-player-chromecast' */ '@/store/modules/audioModule/audioPlayers/ChromeCastPlayer/ChromeCastPlayer')
       if (player.player !== ChromeCastPlayer.instance) {
         console.log(
           'player is diffeerent',

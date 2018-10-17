@@ -50,3 +50,5 @@
 1. precache-manifest.json blacklist
 1. play / pause with spacebar
 1. use arrow keys when in tab navigation modus?
+1. make a progress bar that move seamlessly
+1. progress bar bad visible in chrome
