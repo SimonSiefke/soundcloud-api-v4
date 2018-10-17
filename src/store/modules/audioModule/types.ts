@@ -32,16 +32,16 @@ export interface AudioPlayer {
   /**
    * the player should play the current track and update the state
    */
-  play: (track: Track) => void
+  play: () => void
   /**
-   *  the player anyould pause the current track and update the state
+   *  the player should pause the current track and update the state
    */
-  pause: (track: Track) => void
+  pause: () => void
 
   /**
    * the player should stop the current track and update the state
    */
-  stop: (track: Track) => void
+  stop: () => void
   /**
    *  the player should toggle the playing status and update the state
    */
@@ -55,12 +55,12 @@ export interface AudioPlayer {
   /**
    * the player should play the new track and update the state
    */
-  updateTrack: (oldTrack: Track | null, newTrack: Track) => Promise<void>
+  updateTrack: (newTrack: Track) => Promise<void>
 
   /**
    * this function gets called before the player will be deleted so that it can unbind event listeners etc.
    */
-  beforeDelete?: (oldTrack: Track | null) => void
+  beforeDelete?: () => void
 }
 
 export interface AudioModuleState {

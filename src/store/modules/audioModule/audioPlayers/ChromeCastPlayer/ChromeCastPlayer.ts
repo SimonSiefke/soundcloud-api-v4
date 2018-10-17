@@ -13,15 +13,13 @@ export class ChromeCastPlayer implements AudioPlayer {
   private castSession: any
   private incrementProgressTimer: any
   private store: any
-  // @ts-ignore
-  private lastTrack: Track | null
+  private track!: Track
   public progressEventEmitter = new Mitt()
   public static instance: ChromeCastPlayer
 
   constructor(store: any) {
     if (!ChromeCastPlayer.instance) {
       this.store = store
-      this.lastTrack = null
       this.addEventListenersForPlayer()
       ChromeCastPlayer.instance = this
     }
@@ -30,7 +28,7 @@ export class ChromeCastPlayer implements AudioPlayer {
     return ChromeCastPlayer.instance
   }
 
-  public play(track: Track) {
+  public play() {
     if (remotePlayer.isPaused) {
       remotePlayerController.playOrPause()
     } else {
@@ -39,33 +37,32 @@ export class ChromeCastPlayer implements AudioPlayer {
     this.setUpProgressTimer()
   }
 
-  public pause(track: Track | null) {
+  public pause() {
     if (!remotePlayer.isPaused && remotePlayer.canPause) {
       remotePlayerController.playOrPause()
     } else {
       throw new Error('chromecast cannot pause')
     }
-    this.store.dispatch('audio/AUDIO_PAUSED', track)
+    this.store.dispatch('audio/AUDIO_PAUSED', this.track)
     clearInterval(this.incrementProgressTimer)
   }
-  public stop(track: Track) {
+  public stop() {
     remotePlayerController.stop()
-    this.store.dispatch('audio/AUDIO_STOPPED', track)
+    this.store.dispatch('audio/AUDIO_STOPPED', this.track)
     this.progressEventEmitter.emit('progress', 0)
     clearInterval(this.incrementProgressTimer)
   }
-  // eslint-disable-next-line
+
   public setTime(time: number) {
     remotePlayer.currentTime = time
     remotePlayerController.seek()
   }
-  public async updateTrack(oldTrack: Track | null, newTrack: Track) {
+  public async updateTrack(newTrack: Track) {
     if (!this.castSession) {
       console.warn('no castsession')
       return
     }
-    console.log(oldTrack, newTrack)
-    this.lastTrack = newTrack
+    this.track = newTrack
     const audioUrl = `https://api.soundcloud.com/tracks/${
       newTrack.id
     }/stream?client_id=${SOUNDCLOUD_CLIENT_ID}`
@@ -120,13 +117,9 @@ export class ChromeCastPlayer implements AudioPlayer {
   }
 
   private onEnd() {
-    console.log('end')
-    // @ts-ignore
     if (this.store.state.audio.loop) {
       clearInterval(this.incrementProgressTimer)
-      console.log('restart with', this.lastTrack)
-      // @ts-ignore
-      this.updateTrack(this.lastTrack, this.lastTrack)
+      this.updateTrack(this.track)
     }
   }
 
@@ -135,9 +128,9 @@ export class ChromeCastPlayer implements AudioPlayer {
       cast.framework.RemotePlayerEventType.IS_PAUSED_CHANGED,
       () => {
         if (remotePlayer.isPaused) {
-          this.store.dispatch('audio/AUDIO_PAUSED', this.lastTrack)
+          this.store.dispatch('audio/AUDIO_PAUSED', this.track)
         } else {
-          this.store.dispatch('audio/AUDIO_PLAYING', this.lastTrack)
+          this.store.dispatch('audio/AUDIO_PLAYING', this.track)
         }
       },
     )
@@ -146,7 +139,7 @@ export class ChromeCastPlayer implements AudioPlayer {
       cast.framework.RemotePlayerEventType.PLAYER_STATE_CHANGED,
       (event: any) => {
         if (event.value === 'PLAYING') {
-          this.store.dispatch('audio/AUDIO_PLAYING', this.lastTrack)
+          this.store.dispatch('audio/AUDIO_PLAYING', this.track)
         }
       },
     )

@@ -8,34 +8,36 @@ let AudioFactory: typeof import('./AudioFactory').default | undefined
 
 export class LocalDevicePlayer implements AudioPlayer {
   private player: any
-  private store: any
-  public progressEventEmitter = new Mitt()
+  private readonly store: any
+  private track!: Track
+  public readonly progressEventEmitter = new Mitt()
 
   constructor(store: any) {
     this.store = store
+    this.onPlayerEnded = this.onPlayerEnded.bind(this)
+    this.onPlayerTimeUpdate = this.onPlayerTimeUpdate.bind(this)
   }
 
-  public play(track: Track) {
-    console.log('play')
-    console.log(this.store.dispatch)
+  public play(track: Track = this.track) {
+    this.track = track
     this.player.play()
-    this.store.dispatch('audio/AUDIO_PLAYING', track)
+    this.store.dispatch('audio/AUDIO_PLAYING', this.track)
   }
-  public pause(track: Track) {
+  public pause() {
     this.player.pause()
-    this.store.dispatch('audio/AUDIO_PAUSED', track)
+    this.store.dispatch('audio/AUDIO_PAUSED', this.track)
   }
-  public stop(track: Track) {
+  public stop() {
     this.player.pause()
     this.player.currentTime = 0
-    this.store.dispatch('audio/AUDIO_STOPPED', track)
+    this.store.dispatch('audio/AUDIO_STOPPED', this.track)
   }
   setTime(time: number) {
     this.player.currentTime = time
   }
-  public async updateTrack(oldTrack: Track | null, newTrack: Track) {
-    if (oldTrack) {
-      this.pause(oldTrack)
+  public async updateTrack(newTrack: Track) {
+    if (this.track) {
+      this.pause()
     }
     try {
       if (AudioFactory && AudioFactory.getItem(newTrack.id)) {
@@ -56,7 +58,7 @@ export class LocalDevicePlayer implements AudioPlayer {
         this.player = AudioFactory.createAudioElement(url, newTrack.id)
       }
 
-      this.addEventListenersForPlayer(newTrack)
+      this.addEventListenersForPlayer()
       this.play(newTrack)
     } catch (error) {
       if (error.status === 404) {
@@ -67,26 +69,32 @@ export class LocalDevicePlayer implements AudioPlayer {
     }
   }
 
-  public beforeDelete(oldTrack: Track | null) {
-    console.log('local before delete', oldTrack)
+  public beforeDelete() {
     if (this.player) {
       this.player.pause()
     }
-    this.player.unbindAll()
+    this.removeEventListenerForPlayer()
     this.player = null
   }
 
-  private addEventListenersForPlayer(track: Track) {
-    this.player.addEventListener('ended', () => {
-      // @ts-ignore
-      if (this.store.state.audio.loop) {
-        this.setTime(0)
-        this.play(track)
-      }
-    })
-    this.player.addEventListener('timeupdate', () => {
-      const progressInMilliseconds = this.player.currentTime
-      this.progressEventEmitter.emit('progress', progressInMilliseconds)
-    })
+  private onPlayerEnded() {
+    if (this.store.state.audio.loop) {
+      this.setTime(0)
+      this.play()
+    }
+  }
+
+  private onPlayerTimeUpdate() {
+    const progressInMilliseconds = this.player.currentTime
+    this.progressEventEmitter.emit('progress', progressInMilliseconds)
+  }
+
+  private addEventListenersForPlayer() {
+    this.player.addEventListener('ended', this.onPlayerEnded)
+    this.player.addEventListener('timeupdate', this.onPlayerTimeUpdate)
+  }
+  private removeEventListenerForPlayer() {
+    this.player.removeEventListener('ended', this.onPlayerEnded)
+    this.player.removeEventListener('timeupdate', this.onPlayerTimeUpdate)
   }
 }

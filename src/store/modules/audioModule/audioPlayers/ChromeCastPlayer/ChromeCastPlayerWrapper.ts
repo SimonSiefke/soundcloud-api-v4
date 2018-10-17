@@ -30,7 +30,6 @@ remotePlayerController.addEventListener(
       const castSession = cast.framework.CastContext.getInstance().getCurrentSession()
       console.log('chromecast now ready 2 play')
 
-      // eslint-disable-next-line
       const {
         ChromeCastPlayer,
       } = await import(/* webpackChunkName: 'audio-player-chromecast' */ '@/store/modules/audioModule/audioPlayers/ChromeCastPlayer/ChromeCastPlayer')
@@ -44,7 +43,7 @@ remotePlayerController.addEventListener(
         store.dispatch('audio/SET_AUDIO_PLAYER', chromeCastPlayer)
 
         window.addEventListener('beforeunload', () => {
-          chromeCastPlayer.pause(null)
+          chromeCastPlayer.pause()
         })
       }
 

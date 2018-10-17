@@ -14,19 +14,19 @@ export class NoPlayer implements AudioPlayer {
     }
     NoPlayer.instance = this
   }
-  public play(track: Track) {
+  public play() {
     console.error('null player cannot play track')
   }
-  public pause(track: Track) {
+  public pause() {
     console.error('null player cannot pause track')
   }
-  public stop(track: Track) {
+  public stop() {
     console.error('null player cannot stop track')
   }
   public setTime(time: number) {
     console.error('null player cannot set track')
   }
-  public async updateTrack(oldTrack: Track | null, newTrack: Track) {
+  public async updateTrack(newTrack: Track) {
     console.error('null player cannot update track')
   }
 }

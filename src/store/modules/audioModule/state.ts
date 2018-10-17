@@ -18,6 +18,3 @@ export const player = new Vue({
     player: new NoPlayer() as AudioPlayer,
   },
 })
-
-// @ts-ignore
-window.player = player

@@ -23,10 +23,8 @@ const store = new Vuex.Store({
 
 lazyLoadModules(store, dynamicModules)
 
-// @ts-ignore
 if (process.env === 'development' && module.hot !== undefined) {
   console.log('hot update')
-  // @ts-ignore
   module.hot.accept(
     [
       './modules/playerModule',
@@ -44,22 +42,5 @@ if (process.env === 'development' && module.hot !== undefined) {
     },
   )
 }
-
-// keep the audio state in sync with the current track inside the tracks array
-// store.subscribe((mutation, state) => {
-//   // if (
-//   //   mutation.type.startsWith('audio/') &&
-//   //   !mutation.type.startsWith('audio/SHOULD')
-//   // ) {
-//   //   console.log('sub')
-//   // const currentTrack = store.getters['tracks/currentTrack']
-//   // if (currentTrack !== null) {
-//   //   store.commit('tracks/setShouldBeState', {
-//   //     track:currentTrack,
-//   //     newShouldBeState: 'SHOULD_BE_IDLE',
-//   //   })
-//   // }
-//   // }
-// })
 
 export default store

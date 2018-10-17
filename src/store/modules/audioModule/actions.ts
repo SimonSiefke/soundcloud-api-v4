@@ -10,15 +10,13 @@ import { Track } from '@/types'
 import Vue from 'vue'
 import store from '@/store'
 
-const oldTrack: Track | null = null
-
 export const actions: ActionTree<AudioModuleState, RootState> = {
   SET_AUDIO_PLAYER({ rootGetters, dispatch }, newPlayer: AudioPlayer) {
     console.log('set audio player')
     const currentTrack = rootGetters['tracks/currentTrack']
     const oldPlayer = player.player
     if (oldPlayer.beforeDelete) {
-      oldPlayer.beforeDelete(currentTrack)
+      oldPlayer.beforeDelete()
     }
     console.log('deleted old')
     Vue.set(player, 'player', newPlayer)
@@ -39,11 +37,11 @@ export const actions: ActionTree<AudioModuleState, RootState> = {
 
       player.player = new LocalDevicePlayer(store)
     }
-    await player.player.updateTrack(oldTrack, newTrack)
+    await player.player.updateTrack(newTrack)
   },
-  play(state, track: Track) {
+  play() {
     if (player.player !== NoPlayer.instance) {
-      player.player.play(track)
+      player.player.play()
     } else {
       throw new Error('player is null, cannot play')
     }
@@ -51,22 +49,19 @@ export const actions: ActionTree<AudioModuleState, RootState> = {
   AUDIO_PLAYING({ commit }, track: Track) {
     commit('tracks/AUDIO_PLAYING', track, { root: true })
   },
-  pause(state, track: Track) {
+  pause() {
     if (player.player !== NoPlayer.instance) {
-      player.player.pause(track)
+      player.player.pause()
     } else {
       throw new Error('player is null, cannot pause')
     }
   },
   AUDIO_PAUSED({ commit }, track: Track) {
-    console.log(track)
-    if (track !== null) {
-      commit('tracks/AUDIO_PAUSED', track, { root: true })
-    }
+    commit('tracks/AUDIO_PAUSED', track, { root: true })
   },
   stop({ commit }, track: Track) {
     if (player.player !== NoPlayer.instance) {
-      player.player.stop(track)
+      player.player.stop()
     } else {
       throw new Error('player is null, cannot stop')
     }
