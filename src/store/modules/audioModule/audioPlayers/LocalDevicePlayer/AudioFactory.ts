@@ -5,7 +5,6 @@ interface ICachedItem {
 
 const maxCacheSize = 7
 let audioCache: ICachedItem[] = []
-window.a = audioCache
 
 /**
  * acts as a wrapper around the HTMLAudio tag, basically audio with caching
