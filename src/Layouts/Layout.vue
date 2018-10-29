@@ -24,7 +24,7 @@ import BasicSearchBar from '@/components/BasicSearchBar.vue'
 import { Track } from '@/types'
 
 const loadFonts = () =>
-  import(/* webpackChunkName: 'loadFonts' */ '@/loadFonts')
+  import(/* webpackChunkName: 'loadFonts' */ '@/styleUtils/loadFonts')
 
 const BasicNavigation = () =>
   import(/* webpackChunkName: 'component-navigation' */ '@/components/BasicNavigation.vue')

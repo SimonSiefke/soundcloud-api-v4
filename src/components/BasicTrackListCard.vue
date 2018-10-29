@@ -170,7 +170,7 @@ $max = ($size / 2.857142857)
 // When $size is 40px, $max is 14px, $width is 4px, $margin is 1px
 $width = ($max / 6)
 $margin = ($max / 14)
-$color = var(--equalizer-color)
+$color = var(--equalizer-background)
 $equalizers = 4
 $equalizerSize = ($equalizers * $width) + (($equalizers - 1) * $margin)
 $bottom = (($size - $max) / 2)
