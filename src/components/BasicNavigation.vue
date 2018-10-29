@@ -23,5 +23,5 @@ nav
   display flex
   width 100%
   height var(--navigation-height)
-  background black
+  background var(--controlbar-background)
 </style>

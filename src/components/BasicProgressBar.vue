@@ -66,5 +66,5 @@ export default class BasicProgressBar extends Vue {
 
 .progress
   height 100%
-  background var(--user-name-color)
+  background var(--progressbar-background)
 </style>

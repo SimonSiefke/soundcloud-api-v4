@@ -26,12 +26,21 @@ function themeToCSS(theme: Theme) {
       case 'username.foreground':
         styles.push(`--user-name-color: ${value};`)
         break
+      case 'controlbar.background':
+        styles.push(`--controlbar-background: ${value};`)
+        break
+      case 'progressbar.background':
+        styles.push(`--progressbar-background: ${value};`)
+        break
+      case 'controlbar.icon.foreground':
+        styles.push(`--controlbar-icon-color: ${value};`)
+        break
+      case 'controlbar.icon.background':
+        styles.push(`--controlbar-icon-background: ${value};`)
+        break
       case 'scrollbar.shadow':
         break
       case 'scrollbarSlider.activeBackground':
-        break
-      case 'equalizer.background':
-        styles.push(`--background: ${value};`)
         break
       // TODO divider line color is more complex
       case 'dividerline.background.primary':

@@ -59,5 +59,5 @@ div
   left 22.5px
   height 55px
   border-radius 50%
-  background dodgerblue
+  background var(--controlbar-icon-background)
 </style>

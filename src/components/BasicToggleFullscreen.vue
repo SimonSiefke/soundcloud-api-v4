@@ -4,10 +4,12 @@
     @click="togglePlay(track)">
     <img
       v-show="track && track.audioState==='PLAYING'"
+      svg-inline
       src="@/assets/icons/pause.svg"
       alt="pause">
     <img
       v-show="track && track.audioState==='PAUSED'"
+      svg-inline
       src="@/assets/icons/play.svg"
       alt="play">
   </div>
@@ -47,8 +49,9 @@ div
   bottom 22.5px
   height 55px
   border-radius 50%
-  background dodgerblue
+  background var(--controlbar-icon-background)
+  align-items center
 
-  img
-    width 44%
+  svg
+    fill var(--controlbar-icon-color)
 </style>
