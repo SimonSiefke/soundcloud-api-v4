@@ -101,6 +101,8 @@ export default class BasicTrackListCard extends Vue {
 
 .image-container img
   width 100%
+  height 100%
+  object-fit cover // make it full width and height and crop it
 
 .info-container
   overflow hidden // we don't want a scrollbar
