@@ -1,5 +1,6 @@
 <template >
   <div>
+    <BasicAddToHomeScreen/>
     <BasicSearchBar />
     <!-- using tabindex -1 to not focus the main element but the elements inside of it -->
     <main tabindex="-1">
@@ -34,6 +35,9 @@ const BasicToggleFullscreen = () =>
 const ChromecastWrapper = () =>
   import(/* webpackChunkName: 'component-chromecast-wrapper' */ '@/components/ChromecastWrapper.vue')
 
+const BasicAddToHomeScreen = () =>
+  import(/* webpackChunkName: 'component-chromecast-wrapper' */ '@/components/BasicAddToHomeScreen.vue')
+
 @Component({
   name: 'Layout',
   components: {
@@ -41,6 +45,7 @@ const ChromecastWrapper = () =>
     BasicSearchBar,
     BasicNavigation,
     BasicToggleFullscreen,
+    BasicAddToHomeScreen,
     ChromecastWrapper,
   },
 })
