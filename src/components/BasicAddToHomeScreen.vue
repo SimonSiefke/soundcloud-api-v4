@@ -12,8 +12,14 @@ import { Component, Vue } from 'vue-property-decorator'
   name: 'BasicAddToHomeScreen',
 })
 export default class BasicAddToHomeScreen extends Vue {
+  /********
+   * Data *
+   ********/
   private deferredPrompt: Event | null = null
 
+  /***********
+   * Mounted *
+   ***********/
   private mounted() {
     console.log('mounted')
     window.addEventListener('beforeinstallprompt', event => {
@@ -25,6 +31,9 @@ export default class BasicAddToHomeScreen extends Vue {
     })
   }
 
+  /***********
+   * Methods *
+   ***********/
   private addToHomeScreen() {
     // @ts-ignore
     this.deferredPrompt.prompt()
