@@ -1,6 +1,6 @@
 <template>
   <button
-    v-if="defferedPromp"
+    v-if="deferredPrompt"
     @click="addToHomeScreen">add to homescreen</button>
 </template>
 
