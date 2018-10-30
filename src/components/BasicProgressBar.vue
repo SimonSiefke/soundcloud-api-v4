@@ -46,7 +46,15 @@ export default class BasicProgressBar extends Vue {
    * Methods *
    ***********/
   private beforeDestroy() {
-    this.player.progressEventEmitter.removeListener(this.updateProgressPercent)
+    if (
+      this.player &&
+      this.player.progressEventEmitter &&
+      this.player.progressEventEmitter.removeListener
+    ) {
+      this.player.progressEventEmitter.removeListener(
+        this.updateProgressPercent,
+      )
+    }
   }
 
   private updateProgressPercent(progressInMilliseconds: number) {

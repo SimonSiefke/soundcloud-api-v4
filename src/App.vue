@@ -5,6 +5,8 @@
 <script lang="ts">
 import Layout from '@/Layouts/Layout.vue'
 import { applyTheme } from '@/styleUtils/loadTheme'
+const loadFonts = () =>
+  import(/* webpackChunkName: 'loadFonts' */ '@/styleUtils/loadFonts')
 
 export default {
   name: 'App',
@@ -12,6 +14,7 @@ export default {
     Layout,
   },
   created() {
+    loadFonts()
     applyTheme('blue')
   },
 }

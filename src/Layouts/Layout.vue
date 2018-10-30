@@ -1,5 +1,6 @@
 <template >
   <div>
+    <TestComponent/>
     <BasicAddToHomeScreen/>
     <BasicSearchBar />
     <!-- using tabindex -1 to not focus the main element but the elements inside of it -->
@@ -23,9 +24,10 @@ import { State, Getter, Action, Mutation, namespace } from 'vuex-class'
 import BasicTrackList from '@/components/BasicTrackList.vue'
 import BasicSearchBar from '@/components/BasicSearchBar.vue'
 import { Track } from '@/types'
+import IdleComponent from '@/components/BasicIdleComponent'
 
-const loadFonts = () =>
-  import(/* webpackChunkName: 'loadFonts' */ '@/styleUtils/loadFonts')
+// const loadFonts = () =>
+//   import(/* webpackChunkName: 'loadFonts' */ '@/styleUtils/loadFonts')
 
 const BasicNavigation = () =>
   import(/* webpackChunkName: 'component-navigation' */ '@/components/BasicNavigation.vue')
@@ -45,8 +47,8 @@ const BasicAddToHomeScreen = () =>
     BasicSearchBar,
     BasicNavigation,
     BasicToggleFullscreen,
-    BasicAddToHomeScreen,
-    ChromecastWrapper,
+    BasicAddToHomeScreen: IdleComponent(BasicAddToHomeScreen),
+    ChromecastWrapper: IdleComponent(ChromecastWrapper),
   },
 })
 export default class Layout extends Vue {
@@ -73,8 +75,8 @@ export default class Layout extends Vue {
    * Created *
    ***********/
   created() {
+    // loadFonts()
     this.getTracks()
-    loadFonts()
   }
 
   /***********

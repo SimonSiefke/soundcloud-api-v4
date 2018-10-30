@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
+import IdleComponent from '@/components/BasicIdleComponent'
 
 interface Data {
   chromeCastAvailable: null | boolean
@@ -33,7 +34,9 @@ export default class ChromecastWrapper extends Vue {
       this.chromeCastAvailable = isAvailable
       if (isAvailable) {
         console.log('cast is available')
-        import(/* webpackChunkName: 'audio-player-chrome-cast-wrapper' */ '@/store/modules/audioModule/audioPlayers/ChromeCastPlayer/ChromeCastPlayerWrapper.ts')
+        IdleComponent(
+          import(/* webpackChunkName: 'audio-player-chrome-cast-wrapper' */ '@/store/modules/audioModule/audioPlayers/ChromeCastPlayer/ChromeCastPlayerWrapper.ts'),
+        )
       } else {
         console.log('cast not isAvailable')
       }

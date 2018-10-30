@@ -2,12 +2,17 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import trackModule from '@/store/modules/trackModule'
 import { lazyLoadModules } from '@/store/util'
+import IdleComponent from '@/components/BasicIdleComponent'
+
+const playerModule = () =>
+  import(/* webpackChunkName: 'store-module-player' */ '@/store/modules/playerModule')
+
+const audioModule = () =>
+  import(/* webpackChunkName: 'store-module-audio' */ '@/store/modules/audioModule')
 
 const dynamicModules = {
-  player: () =>
-    import(/* webpackChunkName: 'store-module-player' */ '@/store/modules/playerModule'),
-  audio: () =>
-    import(/* webpackChunkName: 'store-module-audio' */ '@/store/modules/audioModule'),
+  player: IdleComponent(playerModule),
+  audio: IdleComponent(audioModule),
 }
 
 Vue.use(Vuex)
