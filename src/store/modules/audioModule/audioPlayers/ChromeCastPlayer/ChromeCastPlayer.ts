@@ -114,6 +114,7 @@ export class ChromeCastPlayer implements AudioPlayer {
     if (this.incrementProgressTimer) {
       clearInterval(this.incrementProgressTimer)
     }
+    window.removeEventListener('beforeunload', this.pause)
   }
 
   private onEnd() {
@@ -124,6 +125,10 @@ export class ChromeCastPlayer implements AudioPlayer {
   }
 
   private addEventListenersForPlayer() {
+    window.addEventListener('beforeunload', this.pause)
+    window.addEventListener('beforeunload', () => {
+      console.log('unload')
+    })
     remotePlayerController.addEventListener(
       cast.framework.RemotePlayerEventType.IS_PAUSED_CHANGED,
       () => {
