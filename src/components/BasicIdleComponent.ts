@@ -9,6 +9,7 @@ if ('requestIdleCallback' in window) {
     setTimeout(fn, timeoutFallbackInMilliseconds)
 }
 
+// based on https://philipwalton.com/articles/idle-until-urgent/
 const IdleComponent = (fn: any) => () =>
   new Promise(resolve => {
     handle(async () => resolve(await fn()))
