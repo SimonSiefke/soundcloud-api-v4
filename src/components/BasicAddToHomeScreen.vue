@@ -9,7 +9,7 @@
 export default {
   data() {
     return {
-      defferedPromp: null,
+      defferedPrompt: null,
     }
   },
   mounted() {
