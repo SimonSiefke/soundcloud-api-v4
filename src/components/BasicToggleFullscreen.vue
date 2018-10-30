@@ -2,16 +2,27 @@
   <div
     id="play"
     @click="togglePlay(track)">
-    <img
+
+    <svg
       v-show="track && track.audioState==='PLAYING'"
-      svg-inline
-      src="@/assets/icons/pause.svg"
-      alt="pause">
-    <img
+      role="img"
+      width="32"
+      height="32"
+      viewBox="0 0 32 32">
+      <title>pause</title>
+      <path d="M4 4h10v24h-10zM18 4h10v24h-10z"/>
+    </svg>
+
+    <svg
       v-show="track && track.audioState==='PAUSED'"
-      svg-inline
-      src="@/assets/icons/play.svg"
-      alt="play">
+      role="img"
+      alt="play"
+      width="32"
+      height="32"
+      viewBox="0 0 32 32">
+      <title>play</title>
+      <path d="M6 4l20 12-20 12z"/>
+    </svg>
   </div>
 </template>
 
