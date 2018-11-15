@@ -1,4 +1,5 @@
 <template>
+  <!--eslint-disable-next-line vue-a11y/click-events-have-key-events-->
   <button @click="login">sign in</button>
 </template>
 

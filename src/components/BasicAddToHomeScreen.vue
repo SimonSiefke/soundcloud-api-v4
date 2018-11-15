@@ -1,7 +1,8 @@
 <template>
   <button
     v-if="deferredPrompt"
-    @click="addToHomeScreen">add to homescreen</button>
+    @click="addToHomeScreen"
+    @keydown.enter="addToHomeScreen">add to homescreen</button>
 </template>
 
 

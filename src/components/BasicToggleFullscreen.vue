@@ -1,7 +1,8 @@
 <template>
   <div
     id="play"
-    @click="togglePlay(track)">
+    @click="togglePlay(track)"
+    @keydown.enter="togglePlay(track)">
 
     <svg
       v-show="track && track.audioState==='PLAYING'"
