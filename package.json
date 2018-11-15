@@ -34,6 +34,7 @@
     "@vue/eslint-config-prettier": "^3.0.5",
     "@vue/eslint-config-typescript": "^3.0.5",
     "bundlesize": "^0.17.0",
+    "eslint-plugin-vue-a11y": "0.0.28",
     "lint-staged": "^7.2.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
@@ -52,11 +53,28 @@
     ],
     "rules": {
       "no-console": "off",
-      "vue/require-prop-types": false
+      "vue/require-prop-types": false,
+      "vue-a11y/alt-text": 2,
+      "vue-a11y/accessible-emoji": 2,
+      "vue-a11y/anchor-has-content": 2,
+      "vue-a11y/click-events-have-key-events": 2,
+      "vue-a11y/mouse-events-have-key-events": 2,
+      "vue-a11y/no-autofocus": 2,
+      "vue-a11y/no-onchange": 2,
+      "vue-a11y/tabindex-no-positive": 2,
+      "vue-a11y/heading-has-content": 2,
+      "vue-a11y/form-has-label": 2,
+      "vue-a11y/aria-role": 2,
+      "vue-a11y/aria-props": 2,
+      "vue-a11y/aria-unsupported-elements": 2,
+      "vue-a11y/role-has-required-aria-props": 2
     },
     "parserOptions": {
       "parser": "typescript-eslint-parser"
-    }
+    },
+    "plugins": [
+      "vue-a11y"
+    ]
   },
   "postcss": {
     "plugins": {
