@@ -49,6 +49,15 @@ function themeToCSS(theme: Theme) {
       case 'dividerline.background':
         styles.push(`--divider-line-background: ${value};`)
         break
+      case 'scrollbar.thumb.background':
+        styles.push(`--scrollbar-thumb-background: ${value};`)
+        break
+      case 'scrollbar.thumb.background.hover':
+        styles.push(`--scrollbar-thumb-background-hover: ${value};`)
+        break
+      case 'scrollbar.thumb.background.dragging':
+        styles.push(`--scrollbar-thumb-background-dragging: ${value};`)
+        break
       default:
         throw new Error(`unknown theme variable ${name}`)
     }

@@ -1,18 +1,21 @@
 <template >
-  <div>
-    <BasicAddToHomeScreen/>
-    <BasicSearchBar />
-    <!-- using tabindex -1 to not focus the main element but the elements inside of it -->
-    <main tabindex="-1">
-      <BasicTrackList
-        :tracks="tracks"
-        :current-track="currentTrack"
-      />
+  <div class="layout-mobile">
+    <header>
+      <BasicSearchBar />
+    </header>
+    <main>
+      <basic-scroll-container>
+        <BasicTrackList
+          :tracks="tracks"
+          :current-track="currentTrack"
+        />
+      </basic-scroll-container>
     </main>
     <footer>
       <chromecast-wrapper />
       <BasicNavigation :track="currentTrack" />
       <BasicToggleFullscreen :track="currentTrack" />
+      <BasicAddToHomeScreen/>
     </footer>
   </div>
 </template>
@@ -25,8 +28,8 @@ import BasicSearchBar from '@/components/BasicSearchBar.vue'
 import { Track } from '@/types'
 import IdleComponent from '@/components/BasicIdleComponent'
 
-// const loadFonts = () =>
-//   import(/* webpackChunkName: 'loadFonts' */ '@/styleUtils/loadFonts')
+const BasicScrollContainer = () =>
+  import(/* webpackChunkName: 'component-scroll-container' */ '@/components/BasicScrollContainer.vue')
 
 const BasicNavigation = () =>
   import(/* webpackChunkName: 'component-navigation' */ '@/components/BasicNavigation.vue')
@@ -46,6 +49,7 @@ const BasicAddToHomeScreen = () =>
     BasicSearchBar,
     BasicNavigation,
     BasicToggleFullscreen,
+    BasicScrollContainer,
     BasicAddToHomeScreen: IdleComponent(BasicAddToHomeScreen),
     ChromecastWrapper: IdleComponent(ChromecastWrapper),
   },
@@ -106,10 +110,22 @@ export default class Layout extends Vue {
 </script>
 
 <style lang="stylus" scoped>
+.layout-mobile
+  display grid
+  grid-template-areas 'header' 'main' 'footer'
+  grid-template-rows auto 1fr auto
+
+header
+  grid-area header
+
 main
-  overflow-y auto
+  overflow hidden
+  position relative
+  display flex
   flex 1
+  grid-area main
 
 footer
   z-index 1
+  grid-area footer
 </style>

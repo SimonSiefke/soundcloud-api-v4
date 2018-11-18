@@ -12,6 +12,9 @@
     "controlbar.background": "#00173a",
     "controlbar.icon.background": "#00BCDE",
     "controlbar.icon.foreground": "#031F48",
-    "progressbar.background": "#00BCDE"
+    "progressbar.background": "#00BCDE",
+    "scrollbar.thumb.background": "#00BCDE",
+    "scrollbar.thumb.background.hover": "#3c93d6",
+    "scrollbar.thumb.background.dragging": "#3c93d6"
   }
 }
