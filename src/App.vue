@@ -6,7 +6,7 @@
 import Layout from '@/Layouts/Layout.vue'
 import { applyTheme } from '@/styleUtils/loadTheme'
 const loadFonts = () =>
-  import(/* webpackChunkName: 'loadFonts' */ '@/styleUtils/loadFonts')
+  import(/* webpackChunkName: 'UTIL__loadFonts' */ '@/styleUtils/loadFonts')
 
 export default {
   name: 'App',

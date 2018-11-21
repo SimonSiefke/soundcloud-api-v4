@@ -34,6 +34,7 @@ export default Vue.extend({
   .scrollbar-thumb
     border-radius 4px
     background var(--scrollbar-thumb-background)
+    transition background 0.14s
 
     &:hover
       background var(--scrollbar-thumb-background-hover)

@@ -29,18 +29,18 @@ import { Track } from '@/types'
 import IdleComponent from '@/components/BasicIdleComponent'
 
 const BasicScrollContainer = () =>
-  import(/* webpackChunkName: 'component-scroll-container' */ '@/components/BasicScrollContainer.vue')
+  import(/* webpackChunkName: 'COMPONENT__scroll-container' */ '@/components/BasicScrollContainer.vue')
 
 const BasicNavigation = () =>
-  import(/* webpackChunkName: 'component-navigation' */ '@/components/BasicNavigation.vue')
+  import(/* webpackChunkName: 'COMPONENT__navigation' */ '@/components/BasicNavigation.vue')
 const BasicToggleFullscreen = () =>
-  import(/* webpackChunkName: 'component-navigation' */ '@/components/BasicToggleFullscreen.vue')
+  import(/* webpackChunkName: 'COMPONENT__navigation' */ '@/components/BasicToggleFullscreen.vue')
 
 const ChromecastWrapper = () =>
-  import(/* webpackChunkName: 'component-chromecast-wrapper' */ '@/components/ChromecastWrapper.vue')
+  import(/* webpackChunkName: 'COMPONENT__chromecast-wrapper' */ '@/components/ChromecastWrapper.vue')
 
 const BasicAddToHomeScreen = () =>
-  import(/* webpackChunkName: 'component-chromecast-wrapper' */ '@/components/BasicAddToHomeScreen.vue')
+  import(/* webpackChunkName: 'COMPONENT__chromecast-wrapper' */ '@/components/BasicAddToHomeScreen.vue')
 
 @Component({
   name: 'Layout',

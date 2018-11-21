@@ -49,7 +49,7 @@ export class LocalDevicePlayer implements AudioPlayer {
         }/stream?client_id=${SOUNDCLOUD_CLIENT_ID}`
 
         const urlPromise = fetch(audioUrl).then(res => res.url)
-        const AudioFactoryPromise = import(/* webpackChunkName: 'audioPlayers__localDevicePlayer__AudioFactory' */ './AudioFactory')
+        const AudioFactoryPromise = import(/* webpackChunkName: 'AUDIO_PLAYER__audio-factory' */ './AudioFactory')
         const [url, { default: _AudioFactory }] = await Promise.all([
           urlPromise,
           AudioFactoryPromise,

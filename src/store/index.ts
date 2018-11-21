@@ -5,10 +5,10 @@ import { lazyLoadModules } from '@/store/util'
 import IdleComponent from '@/components/BasicIdleComponent'
 
 const playerModule = () =>
-  import(/* webpackChunkName: 'store-module-player' */ '@/store/modules/playerModule')
+  import(/* webpackChunkName: 'STORE_MODULE__player' */ '@/store/modules/playerModule')
 
 const audioModule = () =>
-  import(/* webpackChunkName: 'store-module-audio' */ '@/store/modules/audioModule')
+  import(/* webpackChunkName: 'STORE_MODULE__audio' */ '@/store/modules/audioModule')
 
 const dynamicModules = {
   player: IdleComponent(playerModule),
