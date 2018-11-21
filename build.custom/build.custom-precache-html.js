@@ -11,13 +11,13 @@ const distHTMLFile = fs.readFileSync(
 ) // ?
 
 const preCacheBlackList = [
-  'component-chromecast-wrapper',
-  'audio-player-chrome-cast-wrapper',
-  'store-module-audio',
-  'audio-player-chromecast',
-  'audio-player-local-device',
-  'about',
-  'signIn',
+  'COMPONENT__chromecast-wrapper',
+  'STORE_MODULE__audio',
+  'AUDIO_PLAYER__chromecast-wrapper',
+  'AUDIO_PLAYER__chromecast',
+  'AUDIO_PLAYER__local-device',
+  'PAGE__about',
+  'PAGE__signIn',
 ]
 
 const replacedDistHTMLFile = preCacheBlackList.reduce((acc, file) => {
