@@ -1,2 +1,3 @@
 User-agent: *
 Disallow:
+Sitemap: https://laughing-einstein-10b9fb.netlify.com/sitemap.xml
