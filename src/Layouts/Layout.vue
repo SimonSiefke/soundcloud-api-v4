@@ -26,7 +26,7 @@ import { State, Getter, Action, Mutation, namespace } from 'vuex-class'
 import BasicTrackList from '@/components/BasicTrackList.vue'
 import BasicSearchBar from '@/components/BasicSearchBar.vue'
 import { Track } from '@/types'
-import IdleComponent from '@/components/BasicIdleComponent'
+import IdleComponent from 'vue-idle-component'
 
 const BasicScrollContainer = () =>
   import(/* webpackChunkName: 'COMPONENT__scroll-container' */ '@/components/BasicScrollContainer.vue')

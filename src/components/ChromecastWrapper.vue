@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
-import IdleComponent from '@/components/BasicIdleComponent'
+import IdleComponent from 'vue-idle-component'
 
 interface Data {
   chromeCastAvailable: null | boolean

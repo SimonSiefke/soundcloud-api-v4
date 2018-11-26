@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import trackModule from '@/store/modules/trackModule'
 import { lazyLoadModules } from '@/store/util'
-import IdleComponent from '@/components/BasicIdleComponent'
+import IdleComponent from 'vue-idle-component'
 
 const playerModule = () =>
   import(/* webpackChunkName: 'STORE_MODULE__player' */ '@/store/modules/playerModule')
