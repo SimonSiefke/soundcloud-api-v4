@@ -2,7 +2,7 @@
 /service-worker.js
   Cache-Control: no-cache
 
-# rely on the content type header and not on the content for determining the content type
+# headers for better security
 /*
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
