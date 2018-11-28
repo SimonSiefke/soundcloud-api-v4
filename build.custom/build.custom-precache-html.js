@@ -17,7 +17,6 @@ const preCacheBlackList = [
   'AUDIO_PLAYER__chromecast',
   'AUDIO_PLAYER__local-device',
   'PAGE__about',
-  'PAGE__signIn',
 ]
 
 const replacedDistHTMLFile = preCacheBlackList.reduce((acc, file) => {
