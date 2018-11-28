@@ -4,10 +4,11 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 import '@/assets/style/global.styl'
-// import '@/assets/style/simplebar.styl'
-// import 'simplebar/dist/simplebar.css'
 import '@/assets/fonts/clear-sans.css'
 import '@/plugins/index'
+import ExternalLink from 'vue-external-link'
+
+Vue.component('external-link', ExternalLink)
 
 Vue.config.productionTip = false
 Vue.config.devtools = true

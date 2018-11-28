@@ -1,5 +1,6 @@
 <template>
-  <Layout/>
+  <!-- <Layout/> -->
+  <router-view/>
 </template>
 
 <script lang="ts">
