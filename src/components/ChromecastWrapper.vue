@@ -45,7 +45,7 @@ export default class ChromecastWrapper extends Vue {
     const chromecastSdkScript = document.createElement('script')
     chromecastSdkScript.src =
       'https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1'
-    document.head.appendChild(chromecastSdkScript)
+    ;(document.head as HTMLHeadElement).appendChild(chromecastSdkScript)
   }
 }
 </script>

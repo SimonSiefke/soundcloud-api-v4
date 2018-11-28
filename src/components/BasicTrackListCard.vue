@@ -54,8 +54,7 @@ export default class BasicTrackListCard extends Vue {
   /***********
    * Methods *
    ***********/
-  @Action('player/togglePlay')
-  private togglePlay!: () => void
+  @Action('player/togglePlay') private togglePlay!: () => void
 }
 </script>
 

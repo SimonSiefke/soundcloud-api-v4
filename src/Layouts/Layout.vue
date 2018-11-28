@@ -71,8 +71,7 @@ export default class Layout extends Vue {
     namespace: 'tracks',
   })
   private tracks!: Track[]
-  @Getter('tracks/currentTrack')
-  private currentTrack!: Track
+  @Getter('tracks/currentTrack') private currentTrack!: Track
 
   /***********
    * Created *
@@ -101,11 +100,9 @@ export default class Layout extends Vue {
   /***********
    * Methods *
    ***********/
-  @Action('tracks/getTracks')
-  getTracks!: () => void
+  @Action('tracks/getTracks') getTracks!: () => void
 
-  @Action('player/togglePlay')
-  togglePlay!: () => void
+  @Action('player/togglePlay') togglePlay!: () => void
 }
 </script>
 

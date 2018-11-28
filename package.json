@@ -13,7 +13,6 @@
     "@simon-siefke/vue-custom-scrollbar": "0.0.12",
     "@types/fontfaceobserver": "0.0.6",
     "axios": "^0.18.0",
-    "firebase": "^5.5.0",
     "fontfaceobserver": "^2.0.13",
     "mitt": "^1.1.3",
     "no-outline-on-click": "0.0.2",

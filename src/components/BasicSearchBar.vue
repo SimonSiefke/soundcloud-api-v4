@@ -21,8 +21,7 @@ export default class BasicSearchBar extends Vue {
   /***********
    * Methods *
    ***********/
-  @Action('tracks/getTracks')
-  private getTracks!: (query: { q: string }) => void
+  @Action('tracks/getTracks') private getTracks!: (query: { q: string }) => void
 
   private search(searchValue: string) {
     if (searchValue) {

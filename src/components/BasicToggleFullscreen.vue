@@ -39,14 +39,12 @@ export default class BasicToggleFullscreen extends Vue {
   /********
    * Props *
    *********/
-  @Prop()
-  private track!: Track
+  @Prop() private track!: Track
 
   /***********
    * Methods *
    ***********/
-  @Action('player/togglePlay')
-  private togglePlay!: () => void
+  @Action('player/togglePlay') private togglePlay!: () => void
 }
 </script>
 

@@ -27,8 +27,7 @@ export default class BasicProgressBar extends Vue {
   /************
    * Computed *
    ************/
-  @Getter('tracks/currentTrack')
-  private currentTrack!: Track
+  @Getter('tracks/currentTrack') private currentTrack!: Track
 
   private get player() {
     return player.player
