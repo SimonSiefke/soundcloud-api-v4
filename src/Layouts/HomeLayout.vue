@@ -16,7 +16,6 @@
       <BasicNavigation :track="currentTrack" />
       <BasicToggleFullscreen :track="currentTrack" />
       <BasicAddToHomeScreen/>
-      ko
     </footer>
   </div>
 </template>
