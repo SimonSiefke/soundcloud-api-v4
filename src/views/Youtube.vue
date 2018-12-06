@@ -1,15 +1,15 @@
 <template>
-  <home-layout />
+  <youtube-layout />
 </template>
 
 <script lang="ts">
-import HomeLayout from '@/Layouts/HomeLayout.vue'
 import Vue from 'vue'
+import YoutubeLayout from '@/Layouts/YoutubeLayout.vue'
 
 export default Vue.extend({
-  name: 'Home',
+  name: 'Youtube',
   components: {
-    HomeLayout,
+    YoutubeLayout,
   },
 })
 </script>

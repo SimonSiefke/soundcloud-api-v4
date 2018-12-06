@@ -1,21 +1,19 @@
 <template>
-  <Layout/>
+  <router-view/>
 </template>
 
 <script lang="ts">
-import Layout from '@/Layouts/Layout.vue'
 import { applyTheme } from '@/styleUtils/loadTheme'
-const loadFonts = () =>
-  import(/* webpackChunkName: 'UTIL__loadFonts' */ '@/styleUtils/loadFonts')
+import loadFonts from '@/styleUtils/loadFonts'
 
 export default {
   name: 'App',
-  components: {
-    Layout,
-  },
-  created() {
+  async created() {
     loadFonts()
     applyTheme('blue')
+    window.addEventListener('beforeinstallprompt', () => {
+      console.log('before install prompt')
+    })
   },
 }
 </script>

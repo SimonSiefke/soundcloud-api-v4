@@ -29,16 +29,13 @@ const typefaces: Typefaces = {
   ],
 }
 
-export default function loadFonts() {
-  Object.keys(typefaces).forEach(name => {
-    const variants = typefaces[name].map(variant => {
-      const loader = new FontFaceObserver(name, variant)
-      return loader.load()
-    })
+export default async function loadFonts() {
+  Object.keys(typefaces).forEach(async name => {
+    const variants = typefaces[name].map(variant =>
+      new FontFaceObserver(name, variant).load(),
+    )
 
-    Promise.all(variants).then(() => {
-      console.log(`All variants loaded for ${name}`)
-      ;(document.documentElement as HTMLElement).classList.add('fonts-loaded')
-    })
+    await Promise.all(variants)
+    ;(document.documentElement as HTMLElement).classList.add('fonts-loaded')
   })
 }

@@ -1,5 +1,5 @@
 <template >
-  <div class="layout-mobile">
+  <div class="layout--mobile">
     <header>
       <BasicSearchBar />
     </header>
@@ -16,6 +16,7 @@
       <BasicNavigation :track="currentTrack" />
       <BasicToggleFullscreen :track="currentTrack" />
       <BasicAddToHomeScreen/>
+      ko
     </footer>
   </div>
 </template>
@@ -107,7 +108,7 @@ export default class Layout extends Vue {
 </script>
 
 <style lang="stylus" scoped>
-.layout-mobile
+.layout--mobile
   display grid
   grid-template-areas 'header' 'main' 'footer'
   grid-template-rows auto 1fr auto
