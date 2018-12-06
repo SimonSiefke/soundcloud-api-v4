@@ -66,8 +66,17 @@ function themeToCSS(theme: Theme) {
 }
 
 export async function applyTheme(themeId: string) {
-  const theme = await fetch(`./themes/${themeId}.json`).then(res => res.json())
-  const css = themeToCSS(theme)
+  let css!: string
+  if (sessionStorage && sessionStorage.getItem('THEME')) {
+    css = sessionStorage.getItem('THEME') as string
+  } else {
+    const theme = await fetch(`./themes/${themeId}.json`).then(res =>
+      res.json(),
+    )
+    css = themeToCSS(theme)
+    sessionStorage && sessionStorage.setItem('THEME', css)
+  }
+
   ;(document.getElementById('theme') as HTMLStyleElement).innerHTML = css
   ;(document.documentElement as HTMLElement).classList.add('theme-loaded')
 }

@@ -30,12 +30,15 @@ const typefaces: Typefaces = {
 }
 
 export default async function loadFonts() {
-  Object.keys(typefaces).forEach(async name => {
-    const variants = typefaces[name].map(variant =>
-      new FontFaceObserver(name, variant).load(),
+  if (!sessionStorage || !sessionStorage.getItem('FONTS_LOADED')) {
+    const variants = Object.keys(typefaces).flatMap(name =>
+      typefaces[name].map(variant =>
+        new FontFaceObserver(name, variant).load(),
+      ),
     )
-
     await Promise.all(variants)
-    ;(document.documentElement as HTMLElement).classList.add('fonts-loaded')
-  })
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    sessionStorage && sessionStorage.setItem('FONTS_LOADED', 'true')
+  }
+  ;(document.documentElement as HTMLElement).classList.add('fonts-loaded')
 }
