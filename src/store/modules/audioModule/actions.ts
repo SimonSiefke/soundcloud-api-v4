@@ -25,8 +25,9 @@ export const actions: ActionTree<AudioModuleState, RootState> = {
       dispatch('updateTrack', currentTrack)
     }
   },
-
   async updateTrack({ dispatch }, newTrack: Track) {
+    console.log('NEW')
+    console.log(newTrack.audioShouldBeState)
     if (player.player === NoPlayer.instance) {
       console.warn(
         'cannot update player, because player is null, switching to local',
@@ -37,7 +38,9 @@ export const actions: ActionTree<AudioModuleState, RootState> = {
 
       player.player = new LocalDevicePlayer(store)
     }
-    await player.player.updateTrack(newTrack)
+    if (newTrack.audioShouldBeState === 'SHOULD_BE_PLAYING') {
+      await player.player.updateTrack(newTrack)
+    }
   },
   play() {
     if (player.player !== NoPlayer.instance) {

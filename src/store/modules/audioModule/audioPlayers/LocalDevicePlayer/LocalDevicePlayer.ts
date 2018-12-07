@@ -29,7 +29,7 @@ export class LocalDevicePlayer implements AudioPlayer {
   }
   public stop() {
     this.player.pause()
-    this.player.currentTime = 0
+    this.player.currentTime > 0 && (this.player.currentTime = 0)
     this.store.dispatch('audio/AUDIO_STOPPED', this.track)
   }
   setTime(time: number) {

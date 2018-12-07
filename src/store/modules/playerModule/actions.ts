@@ -7,6 +7,7 @@ import { NoPlayer } from '@/store/modules/audioModule/audioPlayers/NoPlayer'
 
 export const actions: ActionTree<null, RootState> = {
   async updatePlayer({ rootGetters, dispatch }) {
+    console.log('upadet player')
     const currentTrack = rootGetters['tracks/currentTrack']
     await dispatch('audio/updateTrack', currentTrack, { root: true })
   },
@@ -14,6 +15,7 @@ export const actions: ActionTree<null, RootState> = {
     { rootGetters, commit, dispatch, rootState },
     track: Track = rootGetters['tracks/currentTrack'],
   ) {
+    console.log('play')
     const oldTrack = rootGetters['tracks/currentTrack']
 
     commit('tracks/AUDIO_SHOULD_BE_PLAYING', track, { root: true })
@@ -24,9 +26,11 @@ export const actions: ActionTree<null, RootState> = {
       const isNewTrack = oldTrack === null || oldTrack.id !== track.id
       if (isNewTrack) {
         commit('tracks/setPlayingIndex', track.index, { root: true })
-        if (oldTrack !== null && oldTrack.audioState === 'PLAYING') {
+        if (oldTrack !== null) {
           commit('tracks/AUDIO_SHOULD_BE_STOPPED', oldTrack, { root: true })
-          dispatch('audio/stop', oldTrack, { root: true })
+          if (oldTrack.audioState === 'PLAYING') {
+            dispatch('audio/stop', oldTrack, { root: true })
+          }
         }
         await dispatch('updatePlayer')
         hooks.afterNext({ dispatch }, track)
@@ -40,6 +44,8 @@ export const actions: ActionTree<null, RootState> = {
     track: Track = rootGetters['tracks/currentTrack'],
   ) {
     const oldTrack = rootGetters['tracks/currentTrack']
+    console.log('toggle')
+    console.log(oldTrack)
     if (oldTrack === null || track.id !== oldTrack.id) {
       dispatch('play', track)
     } else if (track.audioState === 'PLAYING') {
