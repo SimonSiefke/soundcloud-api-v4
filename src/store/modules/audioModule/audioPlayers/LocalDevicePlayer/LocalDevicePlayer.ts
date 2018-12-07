@@ -2,9 +2,22 @@ import { AudioPlayer } from '@/store/modules/audioModule/types'
 import { Track } from '@/types'
 // @ts-ignore
 import * as Mitt from 'mitt/dist/mitt.umd'
+import axios, { AxiosAdapter, CancelToken, CancelTokenSource } from 'axios'
 
 const SOUNDCLOUD_CLIENT_ID = process.env.VUE_APP_SOUNDCLOUD_CLIENT_ID
 let AudioFactory: typeof import('./AudioFactory').default | undefined
+
+// only make one request at a time and cancel old requests
+const get = (() => {
+  let call: CancelTokenSource | undefined
+  return (url: string) => {
+    call && call.cancel()
+    call = axios.CancelToken.source()
+    return axios.get(url, {
+      cancelToken: call.token,
+    })
+  }
+})()
 
 export class LocalDevicePlayer implements AudioPlayer {
   private player: any
@@ -48,7 +61,7 @@ export class LocalDevicePlayer implements AudioPlayer {
           newTrack.id
         }/stream?client_id=${SOUNDCLOUD_CLIENT_ID}`
 
-        const urlPromise = fetch(audioUrl).then(res => res.url)
+        const urlPromise = get(audioUrl).then(res => res.config.url as string)
         const AudioFactoryPromise = import(/* webpackChunkName: 'AUDIO_PLAYER__audio-factory' */ './AudioFactory')
         const [url, { default: _AudioFactory }] = await Promise.all([
           urlPromise,
@@ -57,15 +70,20 @@ export class LocalDevicePlayer implements AudioPlayer {
         AudioFactory = _AudioFactory
         this.player = AudioFactory.createAudioElement(url, newTrack.id)
       }
-
-      this.addEventListenersForPlayer()
-      this.play(newTrack)
-    } catch (error) {
-      if (error.status === 404) {
-        // @ts-ignore
+      if (newTrack.audioShouldBeState === 'SHOULD_BE_PLAYING') {
+        this.addEventListenersForPlayer()
+        this.play(newTrack)
       }
-      console.warn(error)
-      alert('something went wrong')
+    } catch (error) {
+      if (axios.isCancel(error)) {
+        // ignore
+      } else if (error.status === 404) {
+        console.warn(error)
+        alert('something went wrong')
+      } else {
+        console.warn(error)
+        alert('something went wrong')
+      }
     }
   }
 
