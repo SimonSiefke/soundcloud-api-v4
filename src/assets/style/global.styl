@@ -69,6 +69,9 @@ img
 p
   margin 0
 
-// hide ugly outline of elements that should not have a focus
-[tabindex=-1]::-moz-focus-inner
+// hide ugly outline of elements, use something nicer instead for keyboard navigation
+:focus
+  outline none
+
+::-moz-focus-inner
   border none

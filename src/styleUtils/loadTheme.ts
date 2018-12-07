@@ -67,14 +67,14 @@ function themeToCSS(theme: Theme) {
 
 export async function applyTheme(themeId: string) {
   let css!: string
-  if (sessionStorage && sessionStorage.getItem('THEME')) {
+  if (window.sessionStorage && sessionStorage.getItem('THEME')) {
     css = sessionStorage.getItem('THEME') as string
   } else {
     const theme = await fetch(`./themes/${themeId}.json`).then(res =>
       res.json(),
     )
     css = themeToCSS(theme)
-    sessionStorage && sessionStorage.setItem('THEME', css)
+    window.sessionStorage && sessionStorage.setItem('THEME', css)
   }
 
   ;(document.getElementById('theme') as HTMLStyleElement).innerHTML = css

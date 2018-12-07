@@ -1,4 +1,3 @@
-import 'no-outline-on-click'
 import './events'
 // import './VueAnalytics'
 
