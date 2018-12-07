@@ -2,9 +2,12 @@ import { AudioPlayer } from '@/store/modules/audioModule/types'
 import { Track } from '@/types'
 // @ts-ignore
 import * as Mitt from 'mitt/dist/mitt.umd'
+import 'abortcontroller-polyfill/dist/polyfill-patch-fetch'
 
 const SOUNDCLOUD_CLIENT_ID = process.env.VUE_APP_SOUNDCLOUD_CLIENT_ID
 let AudioFactory: typeof import('./AudioFactory').default | undefined
+
+let controller = new AbortController()
 
 export class LocalDevicePlayer implements AudioPlayer {
   private player: any
@@ -43,12 +46,17 @@ export class LocalDevicePlayer implements AudioPlayer {
       if (AudioFactory && AudioFactory.getItem(newTrack.id)) {
         this.player = AudioFactory.getItem(newTrack.id)
       } else {
+        controller.abort()
+        controller = new AbortController()
+
         // @ts-ignore
         const audioUrl = `https://api.soundcloud.com/tracks/${
           newTrack.id
         }/stream?client_id=${SOUNDCLOUD_CLIENT_ID}`
 
-        const urlPromise = fetch(audioUrl).then(res => res.url)
+        const urlPromise = fetch(audioUrl, { signal: controller.signal }).then(
+          res => res.url,
+        )
         const AudioFactoryPromise = import(/* webpackChunkName: 'AUDIO_PLAYER__audio-factory' */ './AudioFactory')
         const [url, { default: _AudioFactory }] = await Promise.all([
           urlPromise,
@@ -57,15 +65,19 @@ export class LocalDevicePlayer implements AudioPlayer {
         AudioFactory = _AudioFactory
         this.player = AudioFactory.createAudioElement(url, newTrack.id)
       }
-
-      this.addEventListenersForPlayer()
-      this.play(newTrack)
-    } catch (error) {
-      if (error.status === 404) {
-        // @ts-ignore
+      if (newTrack.audioShouldBeState === 'SHOULD_BE_PLAYING') {
+        this.addEventListenersForPlayer()
+        this.play(newTrack)
       }
-      console.warn(error)
-      alert('something went wrong')
+    } catch (error) {
+      if (error.name === 'AbortError') {
+        console.info('request was aborted')
+        // ignore
+      } else {
+        // @ts-ignore
+        console.warn(error)
+        alert('something went wrong')
+      }
     }
   }
 
