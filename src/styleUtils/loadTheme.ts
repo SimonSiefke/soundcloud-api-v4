@@ -15,28 +15,28 @@ function themeToCSS(theme: Theme) {
   for (const [name, value] of Object.entries(theme.colors)) {
     switch (name) {
       case 'background':
-        styles.push(`--background: ${value};`)
+        styles.push(`--background:${value};`)
         break
       case 'equalizer.background':
-        styles.push(`--equalizer-background: ${value};`)
+        styles.push(`--equalizer-background:${value};`)
         break
       case 'trackname.foreground':
-        styles.push(`--track-name-color: ${value};`)
+        styles.push(`--track-name-color:${value};`)
         break
       case 'username.foreground':
-        styles.push(`--user-name-color: ${value};`)
+        styles.push(`--user-name-color:${value};`)
         break
       case 'controlbar.background':
-        styles.push(`--controlbar-background: ${value};`)
+        styles.push(`--controlbar-background:${value};`)
         break
       case 'progressbar.background':
-        styles.push(`--progressbar-background: ${value};`)
+        styles.push(`--progressbar-background:${value};`)
         break
       case 'controlbar.icon.foreground':
-        styles.push(`--controlbar-icon-color: ${value};`)
+        styles.push(`--controlbar-icon-color:${value};`)
         break
       case 'controlbar.icon.background':
-        styles.push(`--controlbar-icon-background: ${value};`)
+        styles.push(`--controlbar-icon-background:${value};`)
         break
       case 'scrollbar.shadow':
         break
@@ -44,25 +44,25 @@ function themeToCSS(theme: Theme) {
         break
       // TODO divider line color is more complex
       case 'dividerline.background.primary':
-        styles.push(`--divider-line-background-primary: ${value};`)
+        styles.push(`--divider-line-background-primary:${value};`)
         break
       case 'dividerline.background':
-        styles.push(`--divider-line-background: ${value};`)
+        styles.push(`--divider-line-background:${value};`)
         break
       case 'scrollbar.thumb.background':
-        styles.push(`--scrollbar-thumb-background: ${value};`)
+        styles.push(`--scrollbar-thumb-background:${value};`)
         break
       case 'scrollbar.thumb.background.hover':
-        styles.push(`--scrollbar-thumb-background-hover: ${value};`)
+        styles.push(`--scrollbar-thumb-background-hover ${value};`)
         break
       case 'scrollbar.thumb.background.dragging':
-        styles.push(`--scrollbar-thumb-background-dragging: ${value};`)
+        styles.push(`--scrollbar-thumb-background-dragging ${value};`)
         break
       default:
-        throw new Error(`unknown theme variable ${name}`)
+        throw new Error(`unknown theme variable${name}`)
     }
   }
-  return `:root {\n  ${styles.join('\n')}\n}`
+  return `:root {${styles.join('')}}`
 }
 
 export async function applyTheme(themeId: string) {
