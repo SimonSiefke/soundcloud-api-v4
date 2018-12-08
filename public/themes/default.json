@@ -1,0 +1,11 @@
+{
+  "name": "Night Owl",
+  "type": "dark",
+  "colors": {
+    "username.foreground": "#1db954",
+    "background": "#022A64",
+    "dividerline.background": "#052A65",
+    "scrollbar.shadow": "green",
+    "scrollbarSlider.activeBackground": "red"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Night Owl",
+  "type": "dark",
+  "colors": {
+    "username.foreground": "#3c93d6",
+    "trackname.foreground": "#e5eeff",
+    "background": "#022A64",
+    "dividerline.background": "#052A65",
+    "scrollbar.shadow": "green",
+    "scrollbarSlider.activeBackground": "red",
+    "equalizer.background": "#00BCDE",
+    "controlbar.background": "#00173a",
+    "controlbar.icon.background": "#00BCDE",
+    "controlbar.icon.foreground": "#031F48",
+    "progressbar.background": "#00BCDE",
+    "scrollbar.thumb.background": "#00BCDE",
+    "scrollbar.thumb.background.hover": "rgb(90, 229, 255)",
+    "scrollbar.thumb.background.dragging": "rgb(90, 229, 255)"
+  }
+}
