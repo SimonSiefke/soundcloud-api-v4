@@ -4,15 +4,12 @@
       <BasicSearchBar />
     </header>
     <main>
-      <basic-scroll-container>
-        <BasicTrackList
-          :tracks="tracks"
-          :current-track="currentTrack"
-        />
-      </basic-scroll-container>
+      <BasicScrollContainer>
+        <BasicTrackList :tracks="tracks" :current-track="currentTrack" />
+      </BasicScrollContainer>
     </main>
     <footer>
-      <chromecast-wrapper />
+      <ChromecastWrapper />
       <BasicNavigation :track="currentTrack" />
       <BasicToggleFullscreen :track="currentTrack" />
       <BasicAddToHomeScreen/>
@@ -21,7 +18,7 @@
 </template>
 
 <script lang="ts" >
-import { Component, Prop, Vue,  } from 'vue-property-decorator'
+import { Component, Prop, Vue } from 'vue-property-decorator'
 import { State, Getter, Action, Mutation, namespace } from 'vuex-class'
 import BasicTrackList from '@/components/BasicTrackList.vue'
 import BasicSearchBar from '@/components/BasicSearchBar.vue'
@@ -107,22 +104,27 @@ export default class Layout extends Vue {
 </script>
 
 <style lang="stylus" scoped>
-.layout--mobile
-  display grid
-  grid-template-areas 'header' 'main' 'footer'
-  grid-template-rows auto 1fr auto
+.layout--mobile {
+  display: grid;
+  grid-template: 'header' 'main' 'footer';
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+}
 
-header
-  grid-area header
+header {
+  grid-area: header;
+}
 
-main
-  display flex
-  flex 1
-  grid-area main
-  overflow hidden
-  position relative
+main {
+  display: flex;
+  flex: 1;
+  grid-area: main;
+  overflow: hidden;
+  position: relative;
+}
 
-footer
-  grid-area footer
-  z-index 1
+footer {
+  grid-area: footer;
+  z-index: 1;
+}
 </style>

@@ -1,3 +1,5 @@
+import { CSSVariablesPolyfill } from './../polyfills/index'
+
 type ColorSetting =
   | 'username.foreground'
   | 'dividerline.background'
@@ -53,16 +55,16 @@ function themeToCSS(theme: Theme) {
         styles.push(`--scrollbar-thumb-background:${value};`)
         break
       case 'scrollbar.thumb.background.hover':
-        styles.push(`--scrollbar-thumb-background-hover ${value};`)
+        styles.push(`--scrollbar-thumb-background-hover:${value};`)
         break
       case 'scrollbar.thumb.background.dragging':
-        styles.push(`--scrollbar-thumb-background-dragging ${value};`)
+        styles.push(`--scrollbar-thumb-background-dragging:${value};`)
         break
       default:
         throw new Error(`unknown theme variable${name}`)
     }
   }
-  return `:root {${styles.join('')}}`
+  return `:root {${styles.join('\n')}}`
 }
 
 export async function applyTheme(themeId: string) {
@@ -77,6 +79,9 @@ export async function applyTheme(themeId: string) {
     window.sessionStorage && sessionStorage.setItem('THEME', css)
   }
 
+  if (CSSVariablesPolyfill.needed()) {
+    CSSVariablesPolyfill.apply()
+  }
   ;(document.getElementById('theme') as HTMLStyleElement).innerHTML = css
   ;(document.documentElement as HTMLElement).classList.add('theme-loaded')
 }

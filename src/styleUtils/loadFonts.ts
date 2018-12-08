@@ -1,4 +1,5 @@
 import FontFaceObserver from 'fontfaceobserver'
+import 'core-js/fn/array/flat-map'
 
 interface Variant {
   weight: number
