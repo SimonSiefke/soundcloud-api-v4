@@ -32,10 +32,11 @@ export const actions: ActionTree<AudioModuleState, RootState> = {
       console.warn(
         'cannot update player, because player is null, switching to local',
       )
+      console.log('before')
       const {
         LocalDevicePlayer,
       } = await import(/* webpackChunkName: 'AUDIO_PLAYER__local-device' */ '@/store/modules/audioModule/audioPlayers/LocalDevicePlayer/LocalDevicePlayer')
-
+      console.log('finalyy switched')
       player.player = new LocalDevicePlayer(store)
     }
     if (newTrack.audioShouldBeState === 'SHOULD_BE_PLAYING') {

@@ -48,22 +48,12 @@ export class LocalDevicePlayer implements AudioPlayer {
       } else {
         controller.abort()
         controller = new AbortController()
-
-        // @ts-ignore
         const audioUrl = `https://api.soundcloud.com/tracks/${
           newTrack.id
         }/stream?client_id=${SOUNDCLOUD_CLIENT_ID}`
-
-        const urlPromise = fetch(audioUrl, { signal: controller.signal }).then(
-          res => res.url,
-        )
-        const AudioFactoryPromise = import(/* webpackChunkName: 'AUDIO_PLAYER__audio-factory' */ './AudioFactory')
-        const [url, { default: _AudioFactory }] = await Promise.all([
-          urlPromise,
-          AudioFactoryPromise,
-        ])
-        AudioFactory = _AudioFactory
-        this.player = AudioFactory.createAudioElement(url, newTrack.id)
+        AudioFactory = (await import(/* webpackChunkName: 'AUDIO_PLAYER__audio-factory' */ './AudioFactory'))
+          .default
+        this.player = AudioFactory.createAudioElement(audioUrl, newTrack.id)
       }
       if (newTrack.audioShouldBeState === 'SHOULD_BE_PLAYING') {
         this.addEventListenersForPlayer()
@@ -72,7 +62,6 @@ export class LocalDevicePlayer implements AudioPlayer {
     } catch (error) {
       if (error.name === 'AbortError') {
         console.info('request was aborted')
-        // ignore
       } else {
         // @ts-ignore
         console.warn(error)
