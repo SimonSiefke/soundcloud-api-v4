@@ -119,11 +119,11 @@
   "bundlesize": [
     {
       "path": "./dist/js/chunk-vendors.*.js",
-      "maxSize": "60 kB"
+      "maxSize": "600 kB"
     },
     {
       "path": "./dist/js/app.*.js",
-      "maxSize": "6 kB"
+      "maxSize": "60 kB"
     }
   ]
 }
