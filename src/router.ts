@@ -17,12 +17,12 @@ export default new Router({
       component: () =>
         import(/* webpackChunkName: "PAGE__about" */ './views/About.vue'),
     },
-    // {
-    //   path: '/youtube',
-    //   name: 'youtube',
-    //   component: () =>
-    //     import(/* webpackChunkName: "PAGE__youtube" */ './views/Youtube.vue'),
-    // },
+    {
+      path: '/youtube',
+      name: 'youtube',
+      component: () =>
+        import(/* webpackChunkName: "PAGE__youtube" */ './views/Youtube.vue'),
+    },
   ],
   mode: 'history',
 })

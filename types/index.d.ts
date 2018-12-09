@@ -7,6 +7,7 @@ declare module 'css-vars-ponyfill'
 
 interface Window {
   CSS?: any
+  gapi?: any
 }
 
 declare var window: Window

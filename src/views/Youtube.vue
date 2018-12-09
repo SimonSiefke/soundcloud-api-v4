@@ -1,5 +1,5 @@
 <template>
-  <youtube-layout />
+  <YoutubeLayout />
 </template>
 
 <script lang="ts">
