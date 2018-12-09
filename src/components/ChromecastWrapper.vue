@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable vue/no-v-html -->
   <div
     v-if="chromeCastAvailable"
     v-html="castButton" />
@@ -53,14 +54,14 @@ export default class ChromecastWrapper extends Vue {
 
 <style lang="stylus" scoped>
 div
-  position fixed
-  z-index 4
-  display flex
-  justify-content center
-  width 55px
-  bottom 22.5px
-  left 22.5px
-  height 55px
-  border-radius 50%
   background var(--controlbar-icon-background)
+  border-radius 50%
+  bottom 22.5px
+  display flex
+  height 55px
+  justify-content center
+  left 22.5px
+  position fixed
+  width 55px
+  z-index 4
 </style>
