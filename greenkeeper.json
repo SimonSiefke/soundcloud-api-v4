@@ -1,0 +1,11 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "experimentts/full-player-layout/package.json",
+        "experimentts/player-animation/package.json",
+        "package.json"
+      ]
+    }
+  }
+}
