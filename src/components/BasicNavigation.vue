@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <basic-progress-bar />
+    <BasicProgressBar />
   </nav>
 </template>
 
@@ -19,9 +19,9 @@ export default class BasicNavigation extends Vue {}
 
 <style lang="stylus" scoped>
 nav
+  background var(--controlbar-background)
   box-sizing border-box
   display flex
-  width 100%
   height var(--navigation-height)
-  background var(--controlbar-background)
+  width 100%
 </style>
