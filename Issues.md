@@ -1,6 +1,7 @@
 # Issues
 
 1. Cannot play first track
+1. larger hit area for buttons
 1. hide search when scrolling down like soundcloud (real estate is rare) and show when scrolling up (maybe?)
 1. playing animation is sometimes a little off in chrome
 1. have one player instead of multiple
