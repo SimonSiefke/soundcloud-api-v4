@@ -1,0 +1,16 @@
+.v-simplebar
+  flex 1
+
+  .scrollbar
+    width 8px
+
+  .scrollbar-thumb
+    background var(--scrollbar-thumb-background)
+    border-radius 4px
+    transition background 0.14s
+
+    &:hover
+      background var(--scrollbar-thumb-background-hover)
+
+    &.dragging
+      background var(--scrollbar-thumb-background-dragging)

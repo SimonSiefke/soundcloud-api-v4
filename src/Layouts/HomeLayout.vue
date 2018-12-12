@@ -26,7 +26,7 @@ import { Track } from '@/types'
 import IdleComponent from 'vue-idle-component'
 
 const BasicScrollContainer = () =>
-  import(/* webpackChunkName: 'COMPONENT__scroll-container' */ '@/components/BasicScrollContainer.vue')
+  import(/* webpackChunkName: 'COMPONENT__scroll-container' */ '@/components/BasicScrollContainer/Index.vue')
 
 const BasicNavigation = () =>
   import(/* webpackChunkName: 'COMPONENT__navigation' */ '@/components/BasicNavigation/Index.vue')
