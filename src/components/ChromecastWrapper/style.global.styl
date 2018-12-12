@@ -1,14 +1,18 @@
 html[data-audio-player='chromecast'] #chromecast
   background var(--controlbar-icon-enabled-background)
 
+// TODO combine with basic toggle play
+$offset = 22.5px
+$size = 55px
+
 #chromecast
   background var(--controlbar-icon-disabled-background)
   border-radius 50%
-  bottom 22.5px
+  bottom $offset
   display flex
-  height 55px
+  height $size
   justify-content center
-  left 22.5px
+  left $offset
   position fixed
-  width 55px
+  width $size
   z-index 4
