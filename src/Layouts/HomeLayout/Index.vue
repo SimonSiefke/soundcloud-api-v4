@@ -10,7 +10,7 @@
     </main>
     <footer>
       <ChromecastWrapper />
-      <BasicNavigation :track="currentTrack" />
+      <BasicNavigation />
       <BasicTogglePlay :track="currentTrack" />
       <BasicAddToHomeScreen/>
     </footer>
