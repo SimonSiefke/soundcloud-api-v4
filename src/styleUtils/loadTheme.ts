@@ -34,11 +34,17 @@ function themeToCSS(theme: Theme) {
       case 'progressbar.background':
         styles.push(`--progressbar-background:${value};`)
         break
-      case 'controlbar.icon.foreground':
-        styles.push(`--controlbar-icon-color:${value};`)
+      case 'controlbar.icon.enabled.foreground':
+        styles.push(`--controlbar-icon-enabled-color:${value};`)
         break
-      case 'controlbar.icon.background':
-        styles.push(`--controlbar-icon-background:${value};`)
+      case 'controlbar.icon.enabled.background':
+        styles.push(`--controlbar-icon-enabled-background:${value};`)
+        break
+      case 'controlbar.icon.disabled.foreground':
+        styles.push(`--controlbar-icon-disabled-color:${value};`)
+        break
+      case 'controlbar.icon.disabled.background':
+        styles.push(`--controlbar-icon-disabled-background:${value};`)
         break
       case 'scrollbar.shadow':
         break

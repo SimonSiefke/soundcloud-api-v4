@@ -51,7 +51,7 @@ export const actions: ActionTree<null, RootState> = {
     } else if (track.audioState === 'PLAYING') {
       commit('tracks/AUDIO_SHOULD_BE_PAUSED', track, { root: true })
       dispatch('audio/pause', track, { root: true })
-    } else if (track.audioState === 'PAUSED') {
+    } else if (['IDLE', 'PAUSED'].includes(track.audioState)) {
       commit('tracks/AUDIO_SHOULD_BE_PLAYING', oldTrack, { root: true })
       dispatch('audio/play', track, { root: true })
     } else {

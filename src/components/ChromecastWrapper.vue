@@ -2,7 +2,9 @@
   <!-- eslint-disable vue/no-v-html -->
   <div
     v-if="chromeCastAvailable"
-    v-html="castButton" />
+    id="chromecast" v-html="castButton"
+    >
+  </div>
 </template>
 
 <script lang="ts">
@@ -23,7 +25,7 @@ export default class ChromecastWrapper extends Vue {
    *********/
   private chromeCastAvailable: boolean | null = null
   private castButton =
-    '<button is="google-cast-button" aria-label="Chromecast"></button>'
+    '<button is="google-cast-button" aria-label="Chromecast" style="border:none;border-radius:50%;padding:10px;background:transparent;--disconnected-color:var(--controlbar-icon-disabled-color);--connected-color:var(--controlbar-icon-enabled-color);"></button>'
 
   /***********
    * Mounted *
@@ -52,9 +54,12 @@ export default class ChromecastWrapper extends Vue {
 </script>
 
 
-<style lang="stylus" scoped>
-div
-  background var(--controlbar-icon-background)
+<style lang="stylus">
+html[data-audio-player='chromecast'] #chromecast
+  background var(--controlbar-icon-enabled-background)
+
+#chromecast
+  background var(--controlbar-icon-disabled-background)
   border-radius 50%
   bottom 22.5px
   display flex

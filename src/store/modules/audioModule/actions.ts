@@ -43,7 +43,7 @@ export const actions: ActionTree<AudioModuleState, RootState> = {
       await player.player.updateTrack(newTrack)
     }
   },
-  play() {
+  async play() {
     if (player.player !== NoPlayer.instance) {
       player.player.play()
     } else {

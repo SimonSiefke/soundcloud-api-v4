@@ -28,6 +28,8 @@ remotePlayerController.addEventListener(
       store.dispatch('audio/SET_AUDIO_PLAYER', new LocalDevicePlayer(store))
     } else {
       const castSession = cast.framework.CastContext.getInstance().getCurrentSession()
+      ;(document.documentElement as HTMLElement).dataset.audioPlayer =
+        'chromecast'
       console.log('chromecast now ready 2 play')
 
       const {

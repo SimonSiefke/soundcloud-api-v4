@@ -8,6 +8,10 @@ import '@/assets/fonts/clear-sans.css'
 import '@/plugins/index'
 import { FetchPolyfill } from '@/polyfills'
 
+if (process.env.NODE_ENV === 'development') {
+  localStorage.clear()
+}
+
 Vue.config.productionTip = false
 Vue.config.devtools = true
 Vue.config.performance = true
