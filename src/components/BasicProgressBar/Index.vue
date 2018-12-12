@@ -64,14 +64,5 @@ export default class BasicProgressBar extends Vue {
 }
 </script>
 
-<style lang="stylus" scoped>
-.progress-wrapper
-  position absolute
-  width 100%
-  bottom 0
-  height 2px
-
-.progress
-  height 100%
-  background var(--progressbar-background)
+<style lang="stylus" scoped src="./style.scoped.styl">
 </style>

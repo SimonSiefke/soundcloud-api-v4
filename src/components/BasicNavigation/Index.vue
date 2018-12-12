@@ -6,7 +6,7 @@
 
 <script>
 import { Component, Vue } from 'vue-property-decorator'
-import BasicProgressBar from '@/components/BasicProgressBar.vue'
+import BasicProgressBar from '@/components/BasicProgressBar/Index.vue'
 
 @Component({
   name: 'BasicNavigation',
@@ -17,11 +17,5 @@ import BasicProgressBar from '@/components/BasicProgressBar.vue'
 export default class BasicNavigation extends Vue {}
 </script>
 
-<style lang="stylus" scoped>
-nav
-  background var(--controlbar-background)
-  box-sizing border-box
-  display flex
-  height var(--navigation-height)
-  width 100%
+<style lang="stylus" scoped src="./style.scoped.styl">
 </style>

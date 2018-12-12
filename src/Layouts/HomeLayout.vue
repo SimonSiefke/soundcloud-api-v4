@@ -29,7 +29,7 @@ const BasicScrollContainer = () =>
   import(/* webpackChunkName: 'COMPONENT__scroll-container' */ '@/components/BasicScrollContainer.vue')
 
 const BasicNavigation = () =>
-  import(/* webpackChunkName: 'COMPONENT__navigation' */ '@/components/BasicNavigation.vue')
+  import(/* webpackChunkName: 'COMPONENT__navigation' */ '@/components/BasicNavigation/Index.vue')
 const BasicToggleFullscreen = () =>
   import(/* webpackChunkName: 'COMPONENT__navigation' */ '@/components/BasicToggleFullscreen.vue')
 
@@ -37,7 +37,7 @@ const ChromecastWrapper = () =>
   import(/* webpackChunkName: 'COMPONENT__chromecast-wrapper' */ '@/components/ChromecastWrapper.vue')
 
 const BasicAddToHomeScreen = () =>
-  import(/* webpackChunkName: 'COMPONENT__chromecast-wrapper' */ '@/components/BasicAddToHomeScreen.vue')
+  import(/* webpackChunkName: 'COMPONENT__add-to-homescreen' */ '@/components/BasicAddToHomeScreen/Index.vue')
 
 @Component({
   name: 'Layout',

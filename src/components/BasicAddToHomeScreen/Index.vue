@@ -58,12 +58,5 @@ export default class BasicAddToHomeScreen extends Vue {
 }
 </script>
 
-<style lang="stylus" scoped>
-button
-  position absolute
-  z-index 2
-  width 100%
-  top 0
-  left 0
-  background green
+<style lang="stylus" scoped src="./style.scoped.styl">
 </style>
