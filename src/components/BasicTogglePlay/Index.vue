@@ -48,20 +48,5 @@ export default class BasicToggleFullscreen extends Vue {
 }
 </script>
 
-<style lang="stylus" scoped>
-div
-  align-items center
-  background var(--controlbar-icon-enabled-background)
-  border-radius 50%
-  bottom 22.5px
-  display flex
-  height 55px
-  justify-content center
-  position fixed
-  right 22.5px
-  width 55px
-  z-index 4
-
-  svg
-    fill var(--controlbar-icon-enabled-color)
+<style lang="stylus" scoped src="./style.scoped.styl">
 </style>

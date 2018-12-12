@@ -54,19 +54,5 @@ export default class ChromecastWrapper extends Vue {
 </script>
 
 
-<style lang="stylus">
-html[data-audio-player='chromecast'] #chromecast
-  background var(--controlbar-icon-enabled-background)
-
-#chromecast
-  background var(--controlbar-icon-disabled-background)
-  border-radius 50%
-  bottom 22.5px
-  display flex
-  height 55px
-  justify-content center
-  left 22.5px
-  position fixed
-  width 55px
-  z-index 4
+<style lang="stylus" src="./style.global.styl">
 </style>

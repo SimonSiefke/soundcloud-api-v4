@@ -32,14 +32,5 @@ export default class BasicSearchBar extends Vue {
 }
 </script>
 
-<style lang="stylus" scoped>
-form
-  z-index 1 // be always above tracks, even when scrolling
-
-input
-  width 100%
-  margin 0
-  border none
-  padding 10px
-  background snow
+<style lang="stylus" scoped src="./style.scoped.styl">
 </style>

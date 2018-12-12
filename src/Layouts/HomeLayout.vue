@@ -11,7 +11,7 @@
     <footer>
       <ChromecastWrapper />
       <BasicNavigation :track="currentTrack" />
-      <BasicToggleFullscreen :track="currentTrack" />
+      <BasicTogglePlay :track="currentTrack" />
       <BasicAddToHomeScreen/>
     </footer>
   </div>
@@ -21,7 +21,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { State, Getter, Action, Mutation, namespace } from 'vuex-class'
 import BasicTrackList from '@/components/BasicTrackList.vue'
-import BasicSearchBar from '@/components/BasicSearchBar.vue'
+import BasicSearchBar from '@/components/BasicSearchBar/Index.vue'
 import { Track } from '@/types'
 import IdleComponent from 'vue-idle-component'
 
@@ -30,11 +30,11 @@ const BasicScrollContainer = () =>
 
 const BasicNavigation = () =>
   import(/* webpackChunkName: 'COMPONENT__navigation' */ '@/components/BasicNavigation/Index.vue')
-const BasicToggleFullscreen = () =>
-  import(/* webpackChunkName: 'COMPONENT__navigation' */ '@/components/BasicToggleFullscreen.vue')
+const BasicTogglePlay = () =>
+  import(/* webpackChunkName: 'COMPONENT__navigation' */ '@/components/BasicTogglePlay/Index.vue')
 
 const ChromecastWrapper = () =>
-  import(/* webpackChunkName: 'COMPONENT__chromecast-wrapper' */ '@/components/ChromecastWrapper.vue')
+  import(/* webpackChunkName: 'COMPONENT__chromecast-wrapper' */ '@/components/ChromecastWrapper/Index.vue')
 
 const BasicAddToHomeScreen = () =>
   import(/* webpackChunkName: 'COMPONENT__add-to-homescreen' */ '@/components/BasicAddToHomeScreen/Index.vue')
@@ -45,7 +45,7 @@ const BasicAddToHomeScreen = () =>
     BasicTrackList,
     BasicSearchBar,
     BasicNavigation,
-    BasicToggleFullscreen,
+    BasicTogglePlay,
     BasicScrollContainer,
     BasicAddToHomeScreen: IdleComponent(BasicAddToHomeScreen),
     ChromecastWrapper: IdleComponent(ChromecastWrapper),
