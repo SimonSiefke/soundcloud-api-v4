@@ -1,0 +1,98 @@
+// TODO: lazyload images
+.track
+  border 2px solid transparent // use a transparent border so that the content doesn't jump when we focus and add a border
+  box-sizing border-box // on focus, the element shouldn't change its size
+  display flex
+  // TODO: margin or padding?
+  padding var(--space__small) var(--space__small) var(--space__small) var(--space__small)
+  position relative
+
+.track:not(:last-of-type):after
+  // create a gradient border as a divider between sections
+  background linear-gradient(
+    to right,
+    'rgba(%s, 0)' % var(--divider-line-color),
+    'rgba(%s, 0.2)' % var(--divider-line-color),
+    'rgba(%s, 0.2)' % var(--divider-line-color),
+    'rgba(%s, 0.4)' % var(--divider-line-color),
+    'rgba(%s, 0.2)' % var(--divider-line-color)
+  )
+  bottom 0
+  content ''
+  height 2px
+  position absolute
+  right 0
+  width 100%
+
+.image-container
+  background 'rgba(%s, 0.3)' % var(--divider-line-color)
+  flex-shrink 0 // make it full width and height
+  height 50px
+  overflow hidden // some images are not square
+  width 50px
+
+.image-container img
+  height 100%
+  object-fit cover // make it full width and height and crop it
+  width 100%
+
+.info-container
+  display flex
+  flex-direction column // wrap elements vertically
+  margin-right 1rem // space for equalizer
+  overflow hidden // we don't want a scrollbar
+  padding 0 var(--space__small)
+
+.user-name, .track-name
+  overflow-x hidden // we don't want a horizontal scrollbar
+  text-overflow ellipsis // replace too long text with "..." at the end
+  user-select none // we don't want text to be selectable
+  white-space nowrap // force text to single line
+
+.user-name
+  /* lineheight must be larger so that letters like y and g don't get cut, but that introduces extra space, with we take care of with a negative margin-top */
+  $font-size = 0.75rem
+  $half-line-height-extra-space = -1 * $font-size * 0.25
+  $margin-top = 0.3rem // bring username more to center
+  $margin-bottom = 0.11rem // less vertical space between texts
+  color var(--user-name-color)
+  font-size $font-size
+  line-height $font-size * 1.5 // 50% larger than font-size
+  margin-bottom $margin-bottom + $half-line-height-extra-space
+  margin-top $margin-top + $half-line-height-extra-space
+
+  &:empty
+    animation shine 1s linear infinite
+    background-image linear-gradient(100deg, transparent, 'rgba(%s, 0.2)' % var(--divider-line-color) 50%, transparent 200px), linear-gradient('rgba(%s, 0.3)' % var(--divider-line-color), 'rgba(%s, 0.3)' % var(--divider-line-color)) // placeholder color
+    background-position -200px 0 /* highlight */, 0 0 /* placeholder content */
+    background-repeat no-repeat
+    background-size 30px 200px /* highlight */, 200px 200px /* placeholder content */
+    height @font-size
+    margin-bottom $margin-bottom
+    margin-top $margin-top
+    width 100px
+
+.track-name
+  /* lineheight must be larger so that letters like y and g don't get cut, but that introduces extra space, with we take care of with a negative margin-top */
+  $font-size = 1rem
+  $half-line-height-extra-space = -1 * $font-size * 0.25
+  $margin-top = 0.05rem // bring username more to center
+  color var(--track-name-color)
+  font-size $font-size
+  line-height $font-size * 1.5
+  margin-top $margin-top + $half-line-height-extra-space // 50% of lineheight-padding
+
+  // show an animation when its empty/loading
+  &:empty
+    animation shine 1s linear infinite
+    background-image linear-gradient(100deg, transparent, 'rgba(%s, 0.2)' % var(--divider-line-color) 50%, transparent 200px), linear-gradient('rgba(%s, 0.3)' % var(--divider-line-color), 'rgba(%s, 0.3)' % var(--divider-line-color)) /* placeholder color */
+    background-position -200px 0 /* highlight */, 0 0 /* placeholder content */
+    background-repeat no-repeat
+    background-size 30px 200px /* highlight */, 200px 200px /* placeholder content */
+    height @font-size
+    margin-top $margin-top
+    width 200px
+
+@keyframes shine
+  to
+    background-position 200px 0 /* highlight */, 0 0 /* placeholder content */

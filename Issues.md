@@ -1,6 +1,7 @@
 # Issues
 
-1. hide search when scrolling down like soundcloud (real estate is rare)
+1. Cannot play first track
+1. hide search when scrolling down like soundcloud (real estate is rare) and show when scrolling up (maybe?)
 1. playing animation is sometimes a little off in chrome
 1. have one player instead of multiple
 1. select songs and add to playlist
@@ -40,7 +41,6 @@
 1. autoplay on tab focus change?
 1. use polymer?
 1. ndjson endpoint (graphql ?)
-1. https://philipwalton.com/articles/idle-until-urgent/
 1. cookies
 1. image placeholders
 1. generate es6 bundles

@@ -20,7 +20,7 @@
 <script lang="ts" >
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { State, Getter, Action, Mutation, namespace } from 'vuex-class'
-import BasicTrackList from '@/components/BasicTrackList.vue'
+import BasicTrackList from '@/components/BasicTrackList/Index.vue'
 import BasicSearchBar from '@/components/BasicSearchBar/Index.vue'
 import { Track } from '@/types'
 import IdleComponent from 'vue-idle-component'
@@ -103,24 +103,5 @@ export default class Layout extends Vue {
 }
 </script>
 
-<style lang="stylus" scoped>
-.layout--mobile
-  display grid
-  grid-template 'header' 'main' 'footer'
-  grid-template-columns 1fr
-  grid-template-rows auto 1fr auto
-
-header
-  grid-area header
-
-main
-  display flex
-  flex 1
-  grid-area main
-  overflow hidden
-  position relative
-
-footer
-  grid-area footer
-  z-index 1
+<style lang="stylus" scoped src="./style.scoped.styl">
 </style>
