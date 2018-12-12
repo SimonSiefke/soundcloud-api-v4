@@ -23,7 +23,7 @@ const dynamicModules = {
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-  plugins: [logrocketPlugin],
+  plugins: process.env.NODE_ENV === 'production' ? [logrocketPlugin] : [],
   modules: {
     tracks: trackModule,
   },

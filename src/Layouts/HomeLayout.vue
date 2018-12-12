@@ -104,27 +104,23 @@ export default class Layout extends Vue {
 </script>
 
 <style lang="stylus" scoped>
-.layout--mobile {
-  display: grid;
-  grid-template: 'header' 'main' 'footer';
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr auto;
-}
+.layout--mobile
+  display grid
+  grid-template 'header' 'main' 'footer'
+  grid-template-columns 1fr
+  grid-template-rows auto 1fr auto
 
-header {
-  grid-area: header;
-}
+header
+  grid-area header
 
-main {
-  display: flex;
-  flex: 1;
-  grid-area: main;
-  overflow: hidden;
-  position: relative;
-}
+main
+  display flex
+  flex 1
+  grid-area main
+  overflow hidden
+  position relative
 
-footer {
-  grid-area: footer;
-  z-index: 1;
-}
+footer
+  grid-area footer
+  z-index 1
 </style>

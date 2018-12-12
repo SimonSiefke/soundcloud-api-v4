@@ -2,8 +2,6 @@
 
 // Variables
 :root
-  --space__small 0.5rem
-  --navigation-height 50px
   // color scheme red
   // --bg #db2323
   // --user-name-color #fff1d0
@@ -32,6 +30,8 @@
   // --divider-line-color 29, 185, 84
   --divider-line-color 29, 29, 29
   --divider-line-color-darker 15, 15, 15
+  --navigation-height 50px
+  --space__small 0.5rem
   // --track-name-color #fff // enable
 
 html
@@ -46,15 +46,14 @@ html.fonts-loaded
   letter-spacing 0
 
 body
-  overflow-y hidden
   margin 0
-  // background black
+  overflow-y hidden
 
 body>div
+  background var(--background)
   box-sizing border-box
   display flex
   flex-direction column
-  background var(--background)
 
 html, body, body>div
   height 100%
@@ -62,16 +61,6 @@ html, body, body>div
 [v-cloak]
   display none
 
-// Resets
-img
-  user-select none
-
+// reset
 p
   margin 0
-
-// hide ugly outline of elements, use something nicer instead for keyboard navigation
-:focus
-  outline none
-
-::-moz-focus-inner
-  border none
