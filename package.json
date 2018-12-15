@@ -12,7 +12,7 @@
     "@types/fontfaceobserver": "0.0.6",
     "abortcontroller-polyfill": "^1.2.1",
     "axios": "^0.18.0",
-    "css-vars-ponyfill": "^1.15.3",
+    "css-vars-ponyfill": "1.15.3",
     "fontfaceobserver": "^2.1.0",
     "googleapis": "^36.0.0",
     "logrocket": "^0.6.17",
