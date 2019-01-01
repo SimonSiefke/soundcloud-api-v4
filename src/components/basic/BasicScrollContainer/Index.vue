@@ -1,6 +1,6 @@
 <script>
 import { Component, Vue } from 'vue-property-decorator'
-import ScrollContainer from '../../../node_modules/@simon-siefke/vue-custom-scrollbar/dist/vue-custom-scrollbar.common.js'
+import ScrollContainer from 'vue-styled-scrollbar'
 
 export default Vue.extend({
   name: 'BasicScrollContainer',
@@ -22,7 +22,7 @@ export default Vue.extend({
 })
 </script>
 
-<style src="../../../node_modules/@simon-siefke/vue-custom-scrollbar/dist/vue-custom-scrollbar.css">
+<style src="vue-styled-scrollbar/dist/vue-styled-scrollbar.css">
 </style>
 
 <style lang="stylus" src="./style.global.styl">
