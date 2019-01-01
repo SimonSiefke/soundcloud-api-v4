@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build && vue-cli-service build --modern && node build.custom/index.js",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test:bundlesize": "bundlesize"
   },
   "dependencies": {
     "@simon-siefke/vue-custom-scrollbar": "0.0.12",
