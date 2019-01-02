@@ -13,3 +13,8 @@ interface Window {
 declare var window: Window
 
 declare module '*.styl'
+
+declare module '*.json' {
+  const value: any
+  export default value
+}

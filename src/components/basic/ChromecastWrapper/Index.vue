@@ -8,13 +8,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 import IdleComponent from 'vue-idle-component'
-
-interface Data {
-  chromeCastAvailable: null | boolean
-  castButton: string
-}
 
 @Component({
   name: 'ChromecastWrapper',
@@ -23,14 +18,14 @@ export default class ChromecastWrapper extends Vue {
   /*********
    * Data *
    *********/
-  private chromeCastAvailable: boolean | null = null
-  private castButton =
+  chromeCastAvailable: boolean | null = null
+  castButton =
     '<button is="google-cast-button" aria-label="Chromecast" style="border:none;border-radius:50%;padding:10px;background:transparent;--disconnected-color:var(--controlbar-icon-disabled-color);--connected-color:var(--controlbar-icon-enabled-color);"></button>'
 
   /***********
    * Mounted *
    ***********/
-  private async mounted() {
+  async mounted() {
     // @ts-ignore
     // eslint-disable-next-line
     window.__onGCastApiAvailable = async (isAvailable:boolean) => {

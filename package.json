@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "@types/fontfaceobserver": "0.0.6",
+    "@types/lodash": "^4.14.119",
     "abortcontroller-polyfill": "^1.2.1",
     "axios": "^0.18.0",
     "css-vars-ponyfill": "^1.16.2",
     "fontfaceobserver": "^2.1.0",
     "googleapis": "^36.0.0",
+    "lodash": "^4.17.11",
     "logrocket": "^0.6.19",
     "logrocket-vuex": "0.0.3",
     "mitt": "^1.1.3",

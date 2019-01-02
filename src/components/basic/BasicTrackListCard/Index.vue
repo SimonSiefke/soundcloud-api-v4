@@ -46,10 +46,10 @@ export default class BasicTrackListCard extends Vue {
    * Props *
    *********/
   @Prop({ default: null })
-  private track!: Track
+  track!: Track
 
   @Prop({ required: true })
-  private active!: boolean
+  active!: boolean
 
   /***********
    * Mounted *
@@ -61,7 +61,7 @@ export default class BasicTrackListCard extends Vue {
   /***********
    * Methods *
    ***********/
-  @Action('player/togglePlay') private togglePlay!: () => void
+  @Action('player/togglePlay') togglePlay!: () => void
 }
 </script>
 

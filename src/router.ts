@@ -23,6 +23,24 @@ export default new Router({
       component: () =>
         import(/* webpackChunkName: "PAGE__youtube" */ './views/Youtube.vue'),
     },
+    {
+      path: '/layouts/youtube',
+      name: 'youtube2',
+      component: () =>
+        import(/* webpackChunkName: "PAGE__LAYOUT__experimental" */ './views/layouts/Youtube.vue'),
+    },
+    {
+      path: '/layouts/triangle',
+      name: 'triangle',
+      component: () =>
+        import(/* webpackChunkName: "PAGE__LAYOUT__experimental" */ './views/layouts/Triangle/Index.vue'),
+    },
+    {
+      path: '/layouts/rectangle',
+      name: 'rectangle',
+      component: () =>
+        import(/* webpackChunkName: "PAGE__LAYOUT__experimental" */ './views/layouts/Rectangle/Index.vue'),
+    },
   ],
   mode: 'history',
 })

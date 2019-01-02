@@ -23,7 +23,7 @@ export default class BasicSearchBar extends Vue {
    ***********/
   @Action('tracks/getTracks') private getTracks!: (query: { q: string }) => void
 
-  private search(searchValue: string) {
+  search(searchValue: string) {
     if (searchValue) {
       const query = { q: searchValue }
       this.getTracks(query)

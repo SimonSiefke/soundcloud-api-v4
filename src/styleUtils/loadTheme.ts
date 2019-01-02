@@ -13,7 +13,7 @@ interface Theme {
 }
 
 function themeToCSS(theme: Theme) {
-  const styles = []
+  const styles = [] as string[]
   for (const [name, value] of Object.entries(theme.colors)) {
     switch (name) {
       case 'background':
@@ -78,9 +78,7 @@ export async function applyTheme(themeId: string) {
   if (window.sessionStorage && sessionStorage.getItem('THEME')) {
     css = sessionStorage.getItem('THEME') as string
   } else {
-    const theme = await fetch(`./themes/${themeId}.json`).then(res =>
-      res.json(),
-    )
+    const theme = await fetch(`/themes/${themeId}.json`).then(res => res.json())
     css = themeToCSS(theme)
     window.sessionStorage && sessionStorage.setItem('THEME', css)
   }

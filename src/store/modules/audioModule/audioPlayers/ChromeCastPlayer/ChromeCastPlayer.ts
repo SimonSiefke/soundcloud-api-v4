@@ -1,4 +1,4 @@
-import { AudioPlayer, audioState } from '@/store/modules/audioModule/types'
+import { AudioPlayer } from '@/store/modules/audioModule/types'
 import { Track } from '@/types'
 // @ts-ignore
 import * as Mitt from 'mitt/dist/mitt.umd'
@@ -71,7 +71,7 @@ export class ChromeCastPlayer implements AudioPlayer {
     // const queueItem = new chrome.cast.media.QueueItem(mediaInfo)
     // queueItem.preloadTime = 20
     // queueItem.queueId = 7
-    const queueLoadRequest = new chrome.cast.media.QueueLoadRequest([])
+    // const queueLoadRequest = new chrome.cast.media.QueueLoadRequest([])
     // queueLoadRequest.repeatMode = chrome.cast.media.SINGLE
 
     const request = new chrome.cast.media.LoadRequest(mediaInfo)

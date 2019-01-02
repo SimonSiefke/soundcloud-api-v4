@@ -9,7 +9,7 @@ import { FetchPolyfill } from '@/polyfills'
 import '@/assets/style/global.styl'
 
 if (process.env.NODE_ENV === 'development') {
-  localStorage.clear()
+  // localStorage.removeItem
 }
 
 Vue.config.productionTip = false

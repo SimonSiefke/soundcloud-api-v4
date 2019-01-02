@@ -1,5 +1,4 @@
 import { Track } from '@/types'
-import rootStore from '@/store'
 
 // the different states an audio player can have (e.g. for a local device or chromecast)
 export type audioState =

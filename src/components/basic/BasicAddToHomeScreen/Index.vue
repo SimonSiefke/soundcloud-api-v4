@@ -16,24 +16,24 @@ export default class BasicAddToHomeScreen extends Vue {
   /********
    * Data *
    ********/
-  private deferredPrompt: Event | null = null
+  deferredPrompt: Event | null = null
 
   /***********
    * Mounted *
    ***********/
-  private mounted() {
+  mounted() {
     console.log('mounted')
     window.addEventListener('beforeinstallprompt', this.onBeforeInstall)
   }
 
-  private beforeDestroy() {
+  beforeDestroy() {
     window.removeEventListener('beforeinstallprompt', this.onBeforeInstall)
   }
 
   /***********
    * Methods *
    ***********/
-  private onBeforeInstall(event: Event) {
+  onBeforeInstall(event: Event) {
     console.log('before install')
     // Prevent Chrome 67 and earlier from automatically showing the prompt
     event.preventDefault()
@@ -41,7 +41,7 @@ export default class BasicAddToHomeScreen extends Vue {
     this.deferredPrompt = event
   }
 
-  private addToHomeScreen() {
+  addToHomeScreen() {
     // @ts-ignore
     this.deferredPrompt.prompt()
     // Wait for the user to respond to the prompt

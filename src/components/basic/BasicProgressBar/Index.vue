@@ -22,14 +22,14 @@ export default class BasicProgressBar extends Vue {
   /*********
    * Data *
    ********/
-  private progressPercent = 0
+  progressPercent = 0
 
   /************
    * Computed *
    ************/
-  @Getter('tracks/currentTrack') private currentTrack!: Track
+  @Getter('tracks/currentTrack') currentTrack!: Track
 
-  private get player() {
+  get player() {
     return player.player
   }
 
@@ -37,14 +37,14 @@ export default class BasicProgressBar extends Vue {
    * Watchers *
    ************/
   @Watch('player', { immediate: true })
-  private onPlayerChanged(newPlayer: AudioPlayer) {
+  onPlayerChanged(newPlayer: AudioPlayer) {
     newPlayer.progressEventEmitter.on('progress', this.updateProgressPercent)
   }
 
   /***********
    * Methods *
    ***********/
-  private beforeDestroy() {
+  beforeDestroy() {
     if (
       this.player &&
       this.player.progressEventEmitter &&
@@ -56,7 +56,7 @@ export default class BasicProgressBar extends Vue {
     }
   }
 
-  private updateProgressPercent(progressInMilliseconds: number) {
+  updateProgressPercent(progressInMilliseconds: number) {
     const trackDurationInMilliseconds = this.currentTrack.duration
     this.progressPercent =
       (progressInMilliseconds * 100000) / trackDurationInMilliseconds

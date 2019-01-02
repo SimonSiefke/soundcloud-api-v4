@@ -18,11 +18,10 @@
 </template>
 
 <script lang="ts" >
-import { Component, Prop, Vue } from 'vue-property-decorator'
-import { State, Getter, Action, Mutation, namespace } from 'vuex-class'
+import { Component, Vue } from 'vue-property-decorator'
+import { State, Action } from 'vuex-class'
 import BasicTrackList from '@/components/basic/BasicTrackList/Index.vue'
 import BasicSearchBar from '@/components/basic/BasicSearchBar/Index.vue'
-import { Track } from '@/types'
 import IdleComponent from 'vue-idle-component'
 
 const BasicScrollContainer = () =>
@@ -59,16 +58,6 @@ export default class Layout extends Vue {
   @State('progress', {
     namespace: 'player',
   })
-  private progress!: number
-  @State('playingIndex', {
-    namespace: 'tracks',
-  })
-  private playingIndex!: number
-  @State('tracks', {
-    namespace: 'tracks',
-  })
-  private tracks!: Track[]
-  @Getter('tracks/currentTrack') private currentTrack!: Track
 
   /***********
    * Created *
