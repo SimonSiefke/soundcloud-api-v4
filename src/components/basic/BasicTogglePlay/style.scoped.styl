@@ -5,8 +5,10 @@ $size = 55px
 div
   align-items center
   background var(--controlbar-icon-enabled-background)
+  border 2px solid transparent
   border-radius 50%
   bottom $offset
+  box-sizing border-box
   display flex
   height $size
   justify-content center
@@ -17,3 +19,6 @@ div
 
   svg
     fill var(--controlbar-icon-enabled-color)
+
+div:focus
+  border-color var(--element-focus-outline-color)

@@ -3,6 +3,7 @@
   "type": "dark",
   "colors": {
     "username.foreground": "#3c93d6",
+    "element.focus.outline.foreground": "#3c93d6",
     "trackname.foreground": "#e5eeff",
     "background": "#022A64",
     "dividerline.background": "#052A65",

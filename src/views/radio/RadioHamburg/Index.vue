@@ -1,28 +1,42 @@
 <template>
 <div >
+  <BasicTogglePlay :track="'l'"/>
     <button @click="playing=!playing" @keydown.enter="playing=!playing">{{playing?'pause':'play'}}</button>
 </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { Component, Watch, Vue } from 'vue-property-decorator'
+import BasicTogglePlay from '@/components/basic/BasicTogglePlay/Index.vue'
 
-export default Vue.extend({
-  data() {
-    return {
-      playing: false,
-      audio: document.createElement('audio'),
+@Component({
+  name: 'RadioHamburg',
+  components: {
+    BasicTogglePlay,
+  },
+})
+export default class RadioHamburg extends Vue {
+  /********
+   * Data *
+   ********/
+  playing = false
+  audio = document.createElement('audio')
+
+  /************
+   * Watchers *
+   ************/
+  @Watch('playing')
+  async togglePlay(value) {
+    if (value && this.audio.paused) {
+      await this.audio.play()
+    } else if (!value && !this.audio.paused) {
+      await this.audio.pause()
     }
-  },
-  watch: {
-    async playing(value) {
-      if (value && this.audio.paused) {
-        await this.audio.play()
-      } else if (!value && !this.audio.paused) {
-        await this.audio.pause()
-      }
-    },
-  },
+  }
+
+  /***********
+   * Mounted *
+   ***********/
   async mounted() {
     this.audio.setAttribute('preload', 'none')
     this.audio.setAttribute('autoplay', '')
@@ -37,6 +51,6 @@ export default Vue.extend({
       this.audio,
       null,
     )
-  },
-})
+  }
+}
 </script>

@@ -66,11 +66,14 @@ function themeToCSS(theme: Theme) {
       case 'scrollbar.thumb.background.dragging':
         styles.push(`--scrollbar-thumb-background-dragging:${value};`)
         break
+      case 'element.focus.outline.foreground':
+        styles.push(`--element-focus-outline-color:${value};`)
+        break
       default:
-        throw new Error(`unknown theme variable${name}`)
+        throw new Error(`unknown theme variable ${name}`)
     }
   }
-  return `:root {${styles.join('\n')}}`
+  return `:root {\n${styles.join('\n')}\n}`
 }
 
 export async function applyTheme(themeId: string) {

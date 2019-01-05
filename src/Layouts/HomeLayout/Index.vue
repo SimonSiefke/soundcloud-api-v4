@@ -11,7 +11,7 @@
     <footer>
       <ChromecastWrapper />
       <BasicNavigation />
-      <BasicTogglePlay :track="currentTrack" />
+      <BasicTogglePlay :state="state" :pause="_togglePlay" :play="_togglePlay" />
       <BasicAddToHomeScreen/>
     </footer>
   </div>
@@ -71,6 +71,17 @@ export default class Layout extends Vue {
   tracks!: Track[]
   @Getter('tracks/currentTrack') currentTrack!: Track
 
+  get state() {
+    if (!this.currentTrack) {
+      return 'loading'
+    } else if (['IDLE', 'PAUSED'].includes(this.currentTrack.audioState)) {
+      return 'paused'
+    } else if (this.currentTrack.audioState === 'PLAYING') {
+      return 'playing'
+    }
+    return 'loading'
+  }
+
   /***********
    * Created *
    ***********/
@@ -100,7 +111,11 @@ export default class Layout extends Vue {
    ***********/
   @Action('tracks/getTracks') getTracks!: () => void
 
-  @Action('player/togglePlay') togglePlay!: () => void
+  @Action('player/togglePlay') togglePlay!: (track: Track) => void
+
+  _togglePlay() {
+    this.togglePlay(this.currentTrack)
+  }
 }
 </script>
 

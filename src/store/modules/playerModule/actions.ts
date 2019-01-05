@@ -44,8 +44,6 @@ export const actions: ActionTree<null, RootState> = {
     track: Track = rootGetters['tracks/currentTrack'],
   ) {
     const oldTrack = rootGetters['tracks/currentTrack']
-    console.log('toggle')
-    console.log(oldTrack)
     if (oldTrack === null || track.id !== oldTrack.id) {
       dispatch('play', track)
     } else if (track.audioState === 'PLAYING') {

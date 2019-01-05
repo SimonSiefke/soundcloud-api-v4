@@ -1,11 +1,13 @@
 <template>
   <div
     id="play"
-    @click="togglePlay(track)"
-    @keydown.enter="togglePlay(track)">
+    tabindex="0"
+    @click="togglePlay()"
+    @keydown.enter="togglePlay()"
+    >
 
     <svg
-      v-show="track && track.audioState==='PLAYING'"
+      v-show="state==='playing'"
       role="img"
       width="32"
       height="32"
@@ -15,7 +17,7 @@
     </svg>
 
     <svg
-      v-show="track && (['IDLE', 'PAUSED'].includes(track.audioState))"
+      v-show="state==='paused'"
       role="img"
       alt="play"
       width="32"
@@ -29,22 +31,46 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
-import { Action } from 'vuex-class'
-import { Track } from '@/types'
 
 @Component({
-  name: 'BasicToggleFullscreen',
+  name: 'BasicTogglePlay',
 })
 export default class BasicToggleFullscreen extends Vue {
+  hasCalledPlay = false
+  hasCalledPause = false
   /********
    * Props *
    *********/
-  @Prop() track!: Track
+  @Prop({ required: true, type: String })
+  state!: 'playing' | 'paused' | 'loading'
+  @Prop({ required: true, type: Function })
+  play!: () => void
+  @Prop({ required: true, type: Function })
+  pause!: () => void
 
-  /***********
-   * Methods *
-   ***********/
-  @Action('player/togglePlay') togglePlay!: () => void
+  async playTrack() {
+    if (!this.hasCalledPlay) {
+      this.hasCalledPlay = true
+      await this.play()
+      this.hasCalledPlay = false
+    }
+  }
+
+  async pauseTrack() {
+    if (!this.hasCalledPause) {
+      this.hasCalledPause = true
+      await this.pause()
+      this.hasCalledPause = false
+    }
+  }
+
+  togglePlay() {
+    if (this.state === 'playing') {
+      this.pauseTrack()
+    } else if (this.state === 'paused') {
+      this.playTrack()
+    }
+  }
 }
 </script>
 
