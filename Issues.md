@@ -53,3 +53,4 @@
 1. use arrow keys when in tab navigation modus?
 1. make a progress bar that move seamlessly
 1. progress bar bad visible in chrome
+1. function that creates `routes.ts` file from `views` folder
