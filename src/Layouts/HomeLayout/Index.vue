@@ -19,10 +19,11 @@
 
 <script lang="ts" >
 import { Component, Vue } from 'vue-property-decorator'
-import { State, Action } from 'vuex-class'
+import { State, Action, Getter } from 'vuex-class'
 import BasicTrackList from '@/components/basic/BasicTrackList/Index.vue'
 import BasicSearchBar from '@/components/basic/BasicSearchBar/Index.vue'
 import IdleComponent from 'vue-idle-component'
+import { Track } from '@/types'
 
 const BasicScrollContainer = () =>
   import(/* webpackChunkName: 'COMPONENT__scroll-container' */ '@/components/basic/BasicScrollContainer/Index.vue')
@@ -58,6 +59,17 @@ export default class Layout extends Vue {
   @State('progress', {
     namespace: 'player',
   })
+  progress!: number
+
+  @State('playingIndex', {
+    namespace: 'tracks',
+  })
+  playingIndex!: number
+  @State('tracks', {
+    namespace: 'tracks',
+  })
+  tracks!: Track[]
+  @Getter('tracks/currentTrack') currentTrack!: Track
 
   /***********
    * Created *
