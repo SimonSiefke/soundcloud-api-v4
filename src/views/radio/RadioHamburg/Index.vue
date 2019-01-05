@@ -29,7 +29,7 @@ export default Vue.extend({
     this.audio.setAttribute('controls', '')
     this.audio.setAttribute(
       'src',
-      `https://stream.radiohamburg.de/rhh-live/mp3-128/webplayer/8407e3d96ab3/?sabcsid=8407e3d96ab3&amp;0.5578027590384411&amp;context=fHA6LTE=?nocache=${Math.random()}`,
+      `https://sec-radiohamburg.hoerradar.de/radiohamburg-live-mp3-128?nocache=${Math.random()}`,
     )
     this.audio.addEventListener('playing', () => (this.playing = true))
     this.audio.addEventListener('paused', () => (this.playing = false))
