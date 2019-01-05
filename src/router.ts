@@ -36,7 +36,7 @@ export default new Router({
         import(/* webpackChunkName: "PAGE__LAYOUT__experimental" */ './views/layouts/Rectangle/Index.vue'),
     },
     {
-      path: '/radio',
+      path: '/radio/radiohamburg',
       component: () =>
         import(/* webpackChunkName: "PAGE__RADIO__RADIOHAMBURG" */ './views/radio/RadioHamburg/Index.vue'),
     },
