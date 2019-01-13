@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import BasicTrackList from '@/components/basic/BasicTrackList/Index.vue'
+import BasicTrackList from '@/components/basic/BasicTrackList/BasicTrackList.vue'
 import tracks from './tracks.json'
 // const tracks = []
 

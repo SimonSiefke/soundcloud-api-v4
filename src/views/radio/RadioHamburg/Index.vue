@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { Component, Watch, Vue } from 'vue-property-decorator'
-import BasicTogglePlay from '@/components/basic/BasicTogglePlay/Index.vue'
+import BasicTogglePlay from '@/components/basic/BasicTogglePlay/BasicTogglePlay.vue'
 
 @Component({
   name: 'RadioHamburg',

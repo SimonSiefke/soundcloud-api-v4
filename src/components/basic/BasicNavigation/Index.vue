@@ -6,7 +6,7 @@
 
 <script>
 import { Component, Vue } from 'vue-property-decorator'
-import BasicProgressBar from '@/components/basic/BasicProgressBar/Index.vue'
+import BasicProgressBar from '@/components/basic/BasicProgressBar/BasicProgressBar.vue'
 
 @Component({
   name: 'BasicNavigation',

@@ -20,24 +20,24 @@
 <script lang="ts" >
 import { Component, Vue } from 'vue-property-decorator'
 import { State, Action, Getter } from 'vuex-class'
-import BasicTrackList from '@/components/basic/BasicTrackList/Index.vue'
-import BasicSearchBar from '@/components/basic/BasicSearchBar/Index.vue'
+import BasicTrackList from '@/components/basic/BasicTrackList/BasicTrackList.vue'
+import BasicSearchBar from '@/components/basic/BasicSearchBar/BasicSearchBar.vue'
 import IdleComponent from 'vue-idle-component'
 import { Track } from '@/types'
 
 const BasicScrollContainer = () =>
-  import(/* webpackChunkName: 'COMPONENT__scroll-container' */ '@/components/basic/BasicScrollContainer/Index.vue')
+  import(/* webpackChunkName: 'COMPONENT__scroll-container' */ '@/components/basic/BasicScrollContainer/BasicScrollContainer.vue')
 
 const BasicNavigation = () =>
   import(/* webpackChunkName: 'COMPONENT__navigation' */ '@/components/basic/BasicNavigation/Index.vue')
 const BasicTogglePlay = () =>
-  import(/* webpackChunkName: 'COMPONENT__navigation' */ '@/components/basic/BasicTogglePlay/Index.vue')
+  import(/* webpackChunkName: 'COMPONENT__navigation' */ '@/components/basic/BasicTogglePlay/BasicTogglePlay.vue')
 
 const ChromecastWrapper = () =>
   import(/* webpackChunkName: 'COMPONENT__chromecast-wrapper' */ '@/components/basic/ChromecastWrapper/Index.vue')
 
 const BasicAddToHomeScreen = () =>
-  import(/* webpackChunkName: 'COMPONENT__add-to-homescreen' */ '@/components/basic/BasicAddToHomeScreen/Index.vue')
+  import(/* webpackChunkName: 'COMPONENT__add-to-homescreen' */ '@/components/basic/BasicAddToHomeScreen/BasicAddToHomeScreen.vue')
 
 @Component({
   name: 'Layout',

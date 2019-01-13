@@ -1,6 +1,6 @@
 <script lang="ts">
 import Vue, { CreateElement } from 'vue'
-import BasicTrackListCard from '@/components/basic/BasicTrackListCard/Index.vue'
+import BasicTrackListCard from '@/components/basic/BasicTrackListCard/BasicTrackListCard.vue'
 
 export default Vue.extend({
   name: 'BasicTrackList',
