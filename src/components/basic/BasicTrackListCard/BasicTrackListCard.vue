@@ -5,21 +5,22 @@
     :class="{active: active}"
     class="track"
     tabindex="0"
+    :aria-label="track? `${accessibleTrackName} - by user ${track.userName}`:''"
     @click="togglePlay(track)"
-    @keydown.enter="togglePlay(track)">
-    <div class="image-container">
+    @keydown.enter="togglePlay(track)"
+    >
+    <div class="image-container" aria-hidden="true">
       <img
         v-if="track && track.cover"
         :src="track.cover"
         crossorigin="anonymous"
         alt="">
     </div>
-    <div class="info-container">
+    <div class="info-container" aria-hidden="true">
       <span class="user-name">
         {{ track ? track.userName : '' }}
       </span>
       <p
-        tabindex="-1"
         class="track-name">
         {{ track ? track.name : '' }}
       </p>
@@ -56,6 +57,15 @@ export default class BasicTrackListCard extends Vue {
    ***********/
   mounted() {
     import(/* webpackChunkName: 'LAZY_STYLE__basic-track-list-card' */ './style.scoped.lazy.styl')
+  }
+
+  get accessibleTrackName() {
+    if (!this.track) {
+      return ''
+    }
+    return this.track.name
+      .replace('ft. ', 'featuring') // expand abbreviation
+      .replace('//', '') // remove useless things
   }
 
   /***********

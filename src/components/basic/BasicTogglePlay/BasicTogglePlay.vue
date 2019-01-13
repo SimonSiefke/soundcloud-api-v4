@@ -1,7 +1,8 @@
 <template>
-  <div
+  <button
     id="play"
     tabindex="0"
+    aria-label="Toggle Play"
     @click="togglePlay()"
     @keydown.enter="togglePlay()"
     >
@@ -26,7 +27,7 @@
       <title>play</title>
       <path d="M6 4l20 12-20 12z"/>
     </svg>
-  </div>
+  </button>
 </template>
 
 <script lang="ts">
