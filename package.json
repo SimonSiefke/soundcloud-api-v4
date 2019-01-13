@@ -23,20 +23,20 @@
     "querystring": "^0.2.0",
     "register-service-worker": "^1.5.2",
     "unfetch": "^4.0.1",
-    "vue": "^2.5.21",
+    "vue": "^2.5.22",
     "vue-class-component": "^6.3.2",
     "vue-idle-component": "0.0.1",
-    "vue-property-decorator": "^7.2.0",
+    "vue-property-decorator": "^7.3.0",
     "vue-router": "^3.0.2",
     "vue-styled-scrollbar": "0.0.2",
     "vuex": "^3.0.1",
     "vuex-class": "^0.3.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.2.2",
-    "@vue/cli-plugin-eslint": "^3.2.2",
+    "@vue/cli-plugin-babel": "^3.3.0",
+    "@vue/cli-plugin-eslint": "^3.3.0",
     "@vue/cli-plugin-pwa": "^3.2.2",
-    "@vue/cli-plugin-typescript": "^3.2.2",
+    "@vue/cli-plugin-typescript": "^3.3.0",
     "@vue/cli-service": "^3.3.0",
     "@vue/eslint-config-prettier": "^4.0.1",
     "@vue/eslint-config-typescript": "^3.2.0",
@@ -49,7 +49,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "typescript": "^3.2.2",
-    "vue-template-compiler": "^2.5.21"
+    "vue-template-compiler": "^2.5.22"
   },
   "eslintConfig": {
     "root": true,
