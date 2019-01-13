@@ -12,6 +12,9 @@ interface Theme {
   colors: { [key in ColorSetting]: string }
 }
 
+/**
+ * transforms a json theme into its corresponding css
+ */
 function themeToCSS(theme: Theme) {
   const styles = [] as string[]
   for (const [name, value] of Object.entries(theme.colors)) {
@@ -69,6 +72,12 @@ function themeToCSS(theme: Theme) {
       case 'element.focus.outline.foreground':
         styles.push(`--element-focus-outline-color:${value};`)
         break
+      case '--activity-bar-background':
+        styles.push(`--activity-bar-background:${value};`)
+        break
+      case '--activity-bar-icon-color':
+        styles.push(`--activity-bar-icon-color:${value};`)
+        break
       default:
         throw new Error(`unknown theme variable ${name}`)
     }
@@ -78,17 +87,26 @@ function themeToCSS(theme: Theme) {
 
 export async function applyTheme(themeId: string) {
   let css!: string
-  if (window.sessionStorage && sessionStorage.getItem('THEME')) {
-    css = sessionStorage.getItem('THEME') as string
+  const $theme = document.getElementById('theme') as HTMLStyleElement
+
+  // check if the theme is already in the cache
+  if (sessionStorage.getItem('THEME_CSS')) {
+    css = sessionStorage.getItem('THEME_CSS') as string
   } else {
+    // if its not in the cache, fetch it and put it in the cache
     const theme = await fetch(`/themes/${themeId}.json`).then(res => res.json())
     css = themeToCSS(theme)
-    window.sessionStorage && sessionStorage.setItem('THEME', css)
+    sessionStorage.setItem('THEME_CSS', css)
+    sessionStorage.setItem(
+      'THEME_VERSION',
+      theme['ontario-player-theme-version'],
+    )
   }
 
   if (CSSVariablesPolyfill.needed()) {
     CSSVariablesPolyfill.apply()
   }
-  ;(document.getElementById('theme') as HTMLStyleElement).innerHTML = css
+  // apply the css
+  $theme.innerHTML = css
   ;(document.documentElement as HTMLElement).classList.add('theme-loaded')
 }

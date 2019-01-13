@@ -1,6 +1,7 @@
 {
-  "name": "Night Owl",
+  "name": "blue",
   "type": "dark",
+  "ontario-player-theme-version": "0.0.1",
   "colors": {
     "username.foreground": "#3c93d6",
     "element.focus.outline.foreground": "#3c93d6",
@@ -18,6 +19,8 @@
     "progressbar.background": "#00BCDE",
     "scrollbar.thumb.background": "#00BCDE",
     "scrollbar.thumb.background.hover": "rgb(90, 229, 255)",
-    "scrollbar.thumb.background.dragging": "rgb(90, 229, 255)"
+    "scrollbar.thumb.background.dragging": "rgb(90, 229, 255)",
+    "--activity-bar-background": "#00173A",
+    "--activity-bar-icon-color": "#094aa7"
   }
 }

@@ -40,6 +40,11 @@ export default new Router({
       component: () =>
         import(/* webpackChunkName: "PAGE__RADIO__RADIOHAMBURG" */ './views/radio/RadioHamburg/Index.vue'),
     },
+    {
+      path: '/desktop',
+      component: () =>
+        import(/* webpackChunkName: "PAGE__DESKTOP" */ './views/Desktop.vue'),
+    },
   ],
   mode: 'history',
 })

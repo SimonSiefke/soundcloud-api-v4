@@ -1,0 +1,28 @@
+$activity-bar-width = 50px
+$activity-bar-padding = 5px
+$icon-size = $activity-bar-width - 2 * $activity-bar-padding
+
+ul
+  background var(--activity-bar-background)
+  margin 0 auto
+  padding 0
+  width $activity-bar-width
+
+li
+  cursor pointer
+  display inline-block // remove bullet
+  padding $activity-bar-padding 0
+
+a
+  display block
+  height $icon-size
+  overflow hidden // hide icons that are too large (should not happen usually)
+  width $activity-bar-width
+
+// use deep selector because svg is generated dynamically with v-html
+>>>svg
+  color var(--activity-bar-icon-color)
+  display block
+  height $icon-size
+  margin 0 auto
+  width $icon-size
