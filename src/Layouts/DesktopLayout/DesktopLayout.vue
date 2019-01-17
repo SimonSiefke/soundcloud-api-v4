@@ -26,7 +26,7 @@ const BasicTogglePlay = () =>
   import(/* webpackChunkName: 'COMPONENT__navigation' */ '@/components/basic/BasicTogglePlay/BasicTogglePlay.vue')
 
 const ChromecastWrapper = () =>
-  import(/* webpackChunkName: 'COMPONENT__chromecast-wrapper' */ '@/components/basic/ChromecastWrapper/Index.vue')
+  import(/* webpackChunkName: 'COMPONENT__chromecast-wrapper' */ '@/components/basic/ChromecastWrapper/ChromecastWrapper.vue')
 
 const BasicAddToHomeScreen = () =>
   import(/* webpackChunkName: 'COMPONENT__add-to-homescreen' */ '@/components/basic/BasicAddToHomeScreen/BasicAddToHomeScreen.vue')

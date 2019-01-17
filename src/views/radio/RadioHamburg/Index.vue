@@ -2,17 +2,21 @@
 <div >
   <BasicTogglePlay :track="'l'"/>
     <button @click="playing=!playing" @keydown.enter="playing=!playing">{{playing?'pause':'play'}}</button>
+    <ChromecastWrapper/>
 </div>
 </template>
 
 <script lang="ts">
 import { Component, Watch, Vue } from 'vue-property-decorator'
 import BasicTogglePlay from '@/components/basic/BasicTogglePlay/BasicTogglePlay.vue'
+const ChromecastWrapper = () =>
+  import(/* webpackChunkName: 'COMPONENT__chromecast-wrapper' */ '@/components/basic/ChromecastWrapper/ChromecastWrapper.vue')
 
 @Component({
   name: 'RadioHamburg',
   components: {
     BasicTogglePlay,
+    ChromecastWrapper,
   },
 })
 export default class RadioHamburg extends Vue {
