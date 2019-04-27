@@ -14,6 +14,7 @@
         v-if="track && track.cover"
         :src="track.cover"
         crossorigin="anonymous"
+        loading=”lazy”
         alt="">
     </div>
     <div class="info-container" aria-hidden="true">
@@ -75,5 +76,4 @@ export default class BasicTrackListCard extends Vue {
 }
 </script>
 
-<style scoped lang="stylus" src="./style.scoped.styl">
-</style>
+<style scoped lang="stylus" src="./style.scoped.styl"></style>
